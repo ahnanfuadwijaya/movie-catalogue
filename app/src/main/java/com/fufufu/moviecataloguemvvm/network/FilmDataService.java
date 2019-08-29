@@ -1,6 +1,5 @@
 package com.fufufu.moviecataloguemvvm.network;
 
-import com.fufufu.moviecataloguemvvm.models.Film;
 import com.fufufu.moviecataloguemvvm.models.FilmDBResponse;
 
 import retrofit2.Call;

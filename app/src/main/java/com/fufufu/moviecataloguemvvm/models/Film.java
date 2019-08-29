@@ -146,8 +146,8 @@ public class Film implements Parcelable {
     @BindingAdapter({ "poster" })
     public static void loadImage(ImageView imageView, String imageURL) {
         Glide.with(imageView.getContext())
-                .setDefaultRequestOptions(new RequestOptions()
-                        .circleCrop())
+                //.setDefaultRequestOptions(new RequestOptions().circleCrop())
+                .setDefaultRequestOptions(new RequestOptions().centerInside())
                 .load(imageURL)
                 .placeholder(R.drawable.loading)
                 .into(imageView);

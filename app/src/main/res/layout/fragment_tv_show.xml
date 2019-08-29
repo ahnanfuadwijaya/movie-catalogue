@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:orientation="vertical">
         <ProgressBar
-            android:id="@+id/progress_bar_film"
+            android:id="@+id/progress_bar_tv_show"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -15,9 +15,9 @@
             android:indeterminate="true"
             android:visibility="visible"/>
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_daftar_film"
+            android:id="@+id/rv_daftar_tv_show"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/film_list_item" />
+            tools:listitem="@layout/tv_show_list_item" />
     </LinearLayout>
 </layout>

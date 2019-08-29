@@ -20,9 +20,12 @@ import android.widget.ProgressBar;
 
 import com.fufufu.moviecataloguemvvm.R;
 import com.fufufu.moviecataloguemvvm.adapters.FilmAdapter;
+import com.fufufu.moviecataloguemvvm.adapters.TvShowAdapter;
 import com.fufufu.moviecataloguemvvm.databinding.FragmentFilmBinding;
+import com.fufufu.moviecataloguemvvm.databinding.FragmentTvShowBinding;
 import com.fufufu.moviecataloguemvvm.models.Film;
-import com.fufufu.moviecataloguemvvm.viewmodels.FilmViewModel;
+import com.fufufu.moviecataloguemvvm.models.TvShow;
+import com.fufufu.moviecataloguemvvm.viewmodels.TvShowViewModel;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -31,13 +34,13 @@ import java.util.Objects;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FilmFragment extends Fragment implements LifecycleOwner {
-    private FilmViewModel filmViewModel;
-    private FilmAdapter filmAdapter;
+public class TvShowFragment extends Fragment implements LifecycleOwner {
+    private TvShowViewModel tvViewModel;
+    private TvShowAdapter tvShowAdapter;
     private ProgressBar progressBar;
 
 
-    public FilmFragment() {
+    public TvShowFragment() {
         // Required empty public constructor
     }
 
@@ -46,32 +49,32 @@ public class FilmFragment extends Fragment implements LifecycleOwner {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_film, container, false);
+        View view = inflater.inflate(R.layout.fragment_tv_show, container, false);
 
-        progressBar = view.findViewById(R.id.progress_bar_film);
+        progressBar = view.findViewById(R.id.progress_bar_tv_show);
 
-        FragmentFilmBinding fragmentFilmBinding = DataBindingUtil.setContentView(requireActivity(), R.layout.fragment_film);
+        FragmentTvShowBinding fragmentTvShowBinding = DataBindingUtil.setContentView(requireActivity(), R.layout.fragment_tv_show);
 
         // bind RecyclerView
-        RecyclerView recyclerView = fragmentFilmBinding.rvDaftarFilm;
+        RecyclerView recyclerView = fragmentTvShowBinding.rvDaftarTvShow;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
 
-        filmViewModel = ViewModelProviders.of(this).get(FilmViewModel.class);
-        filmAdapter = new FilmAdapter();
-        recyclerView.setAdapter(filmAdapter);
+        tvViewModel = ViewModelProviders.of(this).get(TvShowViewModel.class);
+        tvShowAdapter = new TvShowAdapter();
+        recyclerView.setAdapter(tvShowAdapter);
 
-        getFilms();
+        getTvShows();
         // Inflate the layout for this fragment
         Log.d("FilmFragment", "onCreateView");
         return view;
     }
 
-    private void getFilms() {
-        filmViewModel.getFilmList().observe(this, new Observer<ArrayList<Film>>() {
+    private void getTvShows() {
+        tvViewModel.getTvShowList().observe(this, new Observer<ArrayList<TvShow>>() {
             @Override
-            public void onChanged(@Nullable ArrayList<Film> films) {
-                filmAdapter.setFilms(films);
+            public void onChanged(@Nullable ArrayList<TvShow> tvShows) {
+                tvShowAdapter.setTvShows(tvShows);
             }
         });
     }
