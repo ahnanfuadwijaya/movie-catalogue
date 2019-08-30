@@ -6,6 +6,6 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface TvShowDataService {
-    @GET("discover/tv?api_key=f240487696509310687e5998a34a405f&sort_by=popularity.desc&page=1")
+    @GET("discover/tv?api_key=f240487696509310687e5998a34a405f&sort_by=popularity.desc")
     Call<TvShowDBResponse> getTvShows();
 }

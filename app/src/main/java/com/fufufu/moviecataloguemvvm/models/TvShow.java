@@ -23,9 +23,9 @@ public class TvShow implements Parcelable {
     @SerializedName("overview")
     @Expose
     private String overview;
-    @SerializedName("release_date")
+    @SerializedName("first_air_date")
     @Expose
-    private String releaseDate;
+    private String firstAirDate;
     @SerializedName("title")
     @Expose
     private String title;
@@ -60,12 +60,12 @@ public class TvShow implements Parcelable {
         this.overview = overview;
     }
 
-    public String getReleaseDate() {
-        return releaseDate;
+    public String getFirstAirDate() {
+        return firstAirDate;
     }
 
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
+    public void setFirstAirDate(String firstAirDate) {
+        this.firstAirDate = firstAirDate;
     }
 
     public String getTitle() {
@@ -101,7 +101,7 @@ public class TvShow implements Parcelable {
         id = in.readInt();
         posterPath = in.readString();
         overview = in.readString();
-        releaseDate = in.readString();
+        firstAirDate = in.readString();
         title = in.readString();
         if (in.readByte() == 0) {
             popularity = null;
@@ -133,7 +133,7 @@ public class TvShow implements Parcelable {
         parcel.writeInt(id);
         parcel.writeString(posterPath);
         parcel.writeString(overview);
-        parcel.writeString(releaseDate);
+        parcel.writeString(firstAirDate);
         parcel.writeString(title);
         if (popularity == null) {
             parcel.writeByte((byte) 0);
@@ -143,7 +143,7 @@ public class TvShow implements Parcelable {
         }
         parcel.writeIntArray(genreIds);
     }
-    @BindingAdapter({ "poster" })
+    @BindingAdapter({ "tvShowPoster" })
     public static void loadImage(ImageView imageView, String imageURL) {
         Glide.with(imageView.getContext())
                 //.setDefaultRequestOptions(new RequestOptions().circleCrop())

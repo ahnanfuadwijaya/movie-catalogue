@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class TvShowViewModel extends ViewModel{
     // Create a LiveData with a String
     private MutableLiveData<ArrayList<TvShow>> currentTvShowList;
+    private MutableLiveData<Boolean> isLoading;
     private Repository repository;
 
     public TvShowViewModel() {
@@ -25,5 +26,10 @@ public class TvShowViewModel extends ViewModel{
             currentTvShowList = repository.getTvShowListFromApi();
         }
         return currentTvShowList;
+    }
+
+    public LiveData<Boolean> isLoading(){
+        isLoading = repository.getLoading();
+        return isLoading;
     }
 }

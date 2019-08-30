@@ -22,7 +22,7 @@
 
             <ImageView
                 android:id="@+id/iv_tv_show_poster"
-                bind:poster="@{tvShow.posterPath}"
+                bind:tvShowPoster="@{tvShow.posterPath}"
                 android:layout_width="160dp"
                 android:layout_height="200dp"
                 android:contentDescription="@string/poster_film_description" />

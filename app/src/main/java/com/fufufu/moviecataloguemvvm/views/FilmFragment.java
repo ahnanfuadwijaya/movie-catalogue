@@ -21,6 +21,7 @@ import android.widget.ProgressBar;
 import com.fufufu.moviecataloguemvvm.R;
 import com.fufufu.moviecataloguemvvm.adapters.FilmAdapter;
 import com.fufufu.moviecataloguemvvm.databinding.FragmentFilmBinding;
+import com.fufufu.moviecataloguemvvm.databinding.FragmentHomeBinding;
 import com.fufufu.moviecataloguemvvm.models.Film;
 import com.fufufu.moviecataloguemvvm.viewmodels.FilmViewModel;
 
@@ -31,10 +32,9 @@ import java.util.Objects;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FilmFragment extends Fragment implements LifecycleOwner {
+public class FilmFragment extends Fragment{
     private FilmViewModel filmViewModel;
     private FilmAdapter filmAdapter;
-    private ProgressBar progressBar;
 
 
     public FilmFragment() {
@@ -46,26 +46,39 @@ public class FilmFragment extends Fragment implements LifecycleOwner {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_film, container, false);
-
-        progressBar = view.findViewById(R.id.progress_bar_film);
-
-        FragmentFilmBinding fragmentFilmBinding = DataBindingUtil.setContentView(requireActivity(), R.layout.fragment_film);
+        //FragmentFilmBinding fragmentFilmBinding = DataBindingUtil.setContentView(requireActivity(), R.layout.fragment_film);
+        final FragmentFilmBinding fragmentFilmBinding = FragmentFilmBinding.inflate(inflater, container, false);
 
         // bind RecyclerView
         RecyclerView recyclerView = fragmentFilmBinding.rvDaftarFilm;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
 
+        final ProgressBar progressBar = fragmentFilmBinding.progressBarFilm;
+
         filmViewModel = ViewModelProviders.of(this).get(FilmViewModel.class);
+
+        filmViewModel.isLoading().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if(aBoolean){
+                    progressBar.setVisibility(View.GONE);
+                }
+                else {
+                    progressBar.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
         filmAdapter = new FilmAdapter();
         recyclerView.setAdapter(filmAdapter);
-
         getFilms();
-        // Inflate the layout for this fragment
+
         Log.d("FilmFragment", "onCreateView");
-        return view;
+
+        return fragmentFilmBinding.getRoot();
     }
+
 
     private void getFilms() {
         filmViewModel.getFilmList().observe(this, new Observer<ArrayList<Film>>() {
@@ -76,9 +89,5 @@ public class FilmFragment extends Fragment implements LifecycleOwner {
         });
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        progressBar.setVisibility(View.INVISIBLE);
-    }
+
 }

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class FilmViewModel extends ViewModel{
     // Create a LiveData with a String
     private MutableLiveData<ArrayList<Film>> currentFilmList;
+    private MutableLiveData<Boolean> isLoading;
     private Repository repository;
 
     public FilmViewModel() {
@@ -24,5 +25,10 @@ public class FilmViewModel extends ViewModel{
             currentFilmList = repository.getFilmListFromApi();
         }
         return currentFilmList;
+    }
+
+    public LiveData<Boolean> isLoading() {
+        isLoading = repository.getLoading();
+        return isLoading;
     }
 }

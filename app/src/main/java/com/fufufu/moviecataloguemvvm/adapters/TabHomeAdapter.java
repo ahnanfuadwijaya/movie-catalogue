@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import com.fufufu.moviecataloguemvvm.R;
 import com.fufufu.moviecataloguemvvm.views.FilmFragment;
+import com.fufufu.moviecataloguemvvm.views.HomeFragment;
 import com.fufufu.moviecataloguemvvm.views.TvShowFragment;
 
 public class TabHomeAdapter extends androidx.fragment.app.FragmentStatePagerAdapter {
@@ -16,6 +17,7 @@ public class TabHomeAdapter extends androidx.fragment.app.FragmentStatePagerAdap
     public TabHomeAdapter(FragmentManager fragmentManager, Context context) {
         super(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         tabTitles = context.getResources().getStringArray(R.array.tab_title);
+        Log.d("Home Fragment", "constructor");
     }
 
     @Override
@@ -25,7 +27,9 @@ public class TabHomeAdapter extends androidx.fragment.app.FragmentStatePagerAdap
 
     @Override
     public Fragment getItem(int position) {
-        Fragment fragment = new Fragment();
+        Fragment fragment;
+        String fragmentDebug;
+
         if(position == 0){
             //Show Film Fragment
             fragment = new FilmFragment();
@@ -35,6 +39,7 @@ public class TabHomeAdapter extends androidx.fragment.app.FragmentStatePagerAdap
             fragment = new TvShowFragment();
         }
         Log.d("Tab", "Tab Layout");
+
         return fragment;
     }
 

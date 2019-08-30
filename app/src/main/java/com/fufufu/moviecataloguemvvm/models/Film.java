@@ -143,7 +143,7 @@ public class Film implements Parcelable {
         }
         parcel.writeIntArray(genreIds);
     }
-    @BindingAdapter({ "poster" })
+    @BindingAdapter({ "filmPoster" })
     public static void loadImage(ImageView imageView, String imageURL) {
         Glide.with(imageView.getContext())
                 //.setDefaultRequestOptions(new RequestOptions().circleCrop())

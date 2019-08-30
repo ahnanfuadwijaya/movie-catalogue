@@ -52,9 +52,10 @@ public class MainActivity extends AppCompatActivity {
         }
         else{
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            FilmFragment filmFragment = new FilmFragment();
-            fragmentTransaction.replace(R.id.fragment_container, filmFragment);
+            HomeFragment homeFragment = new HomeFragment();
+            fragmentTransaction.replace(R.id.fragment_container, homeFragment);
             fragmentTransaction.commit();
+            Log.d("Create Fragment", "Home Fragment");
         }
         Log.d("MainActivity", "onCreate");
     }

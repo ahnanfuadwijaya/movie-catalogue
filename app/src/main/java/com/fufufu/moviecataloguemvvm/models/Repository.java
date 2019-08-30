@@ -2,6 +2,7 @@ package com.fufufu.moviecataloguemvvm.models;
 
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.fufufu.moviecataloguemvvm.network.FilmDataService;
@@ -19,9 +20,14 @@ public class Repository {
     private ArrayList<TvShow> tvShows = new ArrayList<>();
     private MutableLiveData<ArrayList<Film>> mutableFilmLiveData = new MutableLiveData<>();
     private MutableLiveData<ArrayList<TvShow>> mutableTvShowLiveData = new MutableLiveData<>();
+    private MutableLiveData<Boolean> mutableIsLoading=new MutableLiveData<>();
 
     public Repository(){
 
+    }
+
+    public MutableLiveData<Boolean> getLoading(){
+        return mutableIsLoading;
     }
 
     public MutableLiveData<ArrayList<Film>> getFilmListFromApi(){
@@ -32,6 +38,7 @@ public class Repository {
             @Override
             public void onResponse(Call<FilmDBResponse> call, Response<FilmDBResponse> response) {
                 FilmDBResponse filmDBResponse = response.body();
+                mutableIsLoading.setValue(true);
                 if (filmDBResponse != null && filmDBResponse.getFilm() != null) {
                     films = filmDBResponse.getFilm();
 
@@ -54,6 +61,7 @@ public class Repository {
             }
         });
         Log.d("getFromAPI", "Tes");
+        mutableIsLoading.setValue(false);
         return mutableFilmLiveData;
     }
 
@@ -64,6 +72,7 @@ public class Repository {
         call.enqueue(new Callback<TvShowDBResponse>() {
             @Override
             public void onResponse(Call<TvShowDBResponse> call, Response<TvShowDBResponse> response) {
+                mutableIsLoading.setValue(true);
                 TvShowDBResponse tvShowDBResponse = response.body();
                 if (tvShowDBResponse != null && tvShowDBResponse.getTvShow() != null) {
                     tvShows = tvShowDBResponse.getTvShow();
@@ -85,7 +94,10 @@ public class Repository {
             public void onFailure(Call<TvShowDBResponse> call, Throwable t) {
                 Log.d("call.enqueue", "Failed");
             }
+
         });
+
+        mutableIsLoading.setValue(false);
         Log.d("getFromAPI", "Tes");
         return mutableTvShowLiveData;
     }

@@ -25,6 +25,7 @@ import com.fufufu.moviecataloguemvvm.databinding.FragmentFilmBinding;
 import com.fufufu.moviecataloguemvvm.databinding.FragmentTvShowBinding;
 import com.fufufu.moviecataloguemvvm.models.Film;
 import com.fufufu.moviecataloguemvvm.models.TvShow;
+import com.fufufu.moviecataloguemvvm.viewmodels.FilmViewModel;
 import com.fufufu.moviecataloguemvvm.viewmodels.TvShowViewModel;
 
 import java.util.ArrayList;
@@ -34,10 +35,9 @@ import java.util.Objects;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TvShowFragment extends Fragment implements LifecycleOwner {
+public class TvShowFragment extends Fragment{
     private TvShowViewModel tvViewModel;
     private TvShowAdapter tvShowAdapter;
-    private ProgressBar progressBar;
 
 
     public TvShowFragment() {
@@ -49,25 +49,36 @@ public class TvShowFragment extends Fragment implements LifecycleOwner {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_tv_show, container, false);
+        //FragmentTvShowBinding fragmentTvShowBinding = DataBindingUtil.setContentView(requireActivity(), R.layout.fragment_tv_show);
+        FragmentTvShowBinding fragmentTvShowBinding = FragmentTvShowBinding.inflate(inflater, container, false);
 
-        progressBar = view.findViewById(R.id.progress_bar_tv_show);
-
-        FragmentTvShowBinding fragmentTvShowBinding = DataBindingUtil.setContentView(requireActivity(), R.layout.fragment_tv_show);
-
-        // bind RecyclerView
+        //bind RecyclerView
         RecyclerView recyclerView = fragmentTvShowBinding.rvDaftarTvShow;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
+        //bind ProgressBar
+        final ProgressBar progressBar = fragmentTvShowBinding.progressBarTvShow;
 
         tvViewModel = ViewModelProviders.of(this).get(TvShowViewModel.class);
         tvShowAdapter = new TvShowAdapter();
         recyclerView.setAdapter(tvShowAdapter);
 
+        tvViewModel.isLoading().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if(aBoolean){
+                    progressBar.setVisibility(View.GONE);
+                }
+                else {
+                    progressBar.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
         getTvShows();
         // Inflate the layout for this fragment
         Log.d("FilmFragment", "onCreateView");
-        return view;
+        return fragmentTvShowBinding.getRoot();
     }
 
     private void getTvShows() {
@@ -77,11 +88,5 @@ public class TvShowFragment extends Fragment implements LifecycleOwner {
                 tvShowAdapter.setTvShows(tvShows);
             }
         });
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        progressBar.setVisibility(View.INVISIBLE);
     }
 }
