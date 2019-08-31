@@ -1,6 +1,8 @@
 package com.fufufu.moviecataloguemvvm.adapters;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -9,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.fufufu.moviecataloguemvvm.R;
 import com.fufufu.moviecataloguemvvm.databinding.FilmListItemBinding;
 import com.fufufu.moviecataloguemvvm.models.Film;
+import com.fufufu.moviecataloguemvvm.views.DetailFilmActivity;
 
 import java.util.ArrayList;
 
@@ -26,7 +29,17 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull FilmHolder holder, int position) {
-        Film film = films.get(position);
+        final Film film = films.get(position);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent moveWithDataIntent = new Intent(view.getContext(), DetailFilmActivity.class);
+                moveWithDataIntent.putExtra("film", film);
+                view.getContext().startActivity(moveWithDataIntent);
+            }
+        });
+
         holder.filmListItemBinding.setFilm(film);
     }
 

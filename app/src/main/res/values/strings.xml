@@ -4,6 +4,10 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="poster_film_description">Poster Film</string>
+    <string name="genre_tag">Genre</string>
+    <string name="overview_tag">Overview</string>
+    <string name="film_poster">Film Poster</string>
+    <string name="tv_show_poster_description">TV Show Poster</string>
     <string-array name="tab_title">
         <item>Film</item>
         <item>TV Show</item>

@@ -42,11 +42,11 @@
                     tools:text="Judul Filem" />
 
                 <TextView
-                    android:id="@+id/tv_genre_film_title"
+                    android:id="@+id/tv_genre_film_tag"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:paddingTop="10dp"
-                    android:text="{film.genreIds}"
+                    android:text="Genre"
                     android:textColor="@android:color/black"
                     android:textSize="16sp" />
 

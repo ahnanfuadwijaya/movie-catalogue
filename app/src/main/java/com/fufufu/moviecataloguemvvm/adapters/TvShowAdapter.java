@@ -1,6 +1,8 @@
 package com.fufufu.moviecataloguemvvm.adapters;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -11,6 +13,8 @@ import com.fufufu.moviecataloguemvvm.databinding.FilmListItemBinding;
 import com.fufufu.moviecataloguemvvm.databinding.TvShowListItemBinding;
 import com.fufufu.moviecataloguemvvm.models.Film;
 import com.fufufu.moviecataloguemvvm.models.TvShow;
+import com.fufufu.moviecataloguemvvm.views.DetailFilmActivity;
+import com.fufufu.moviecataloguemvvm.views.DetailTvShowActivity;
 
 import java.util.ArrayList;
 
@@ -27,7 +31,17 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.TvShowHold
 
     @Override
     public void onBindViewHolder(@NonNull TvShowHolder holder, int position) {
-        TvShow tvShow = tvShows.get(position);
+        final TvShow tvShow = tvShows.get(position);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent moveWithDataIntent = new Intent(view.getContext(), DetailTvShowActivity.class);
+                moveWithDataIntent.putExtra("tvShow", tvShow);
+                view.getContext().startActivity(moveWithDataIntent);
+            }
+        });
+
         holder.tvShowListItemBinding.setTvShow(tvShow);
     }
 

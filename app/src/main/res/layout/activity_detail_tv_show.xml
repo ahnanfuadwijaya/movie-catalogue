@@ -1,0 +1,115 @@
+<layout
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="tvShow"
+            type="com.fufufu.moviecataloguemvvm.models.TvShow" />
+    </data>
+
+    <ScrollView
+        android:id="@+id/activity_detail_film"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="289dp"
+                android:layout_height="421dp"
+                android:layout_marginStart="133dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="151dp"
+                android:contentDescription="@string/tv_show_poster_description"
+                bind:tvShowPoster="@{tvShow.posterPath}"
+                bind:layout_constraintEnd_toEndOf="parent"
+                bind:layout_constraintStart_toStartOf="parent"
+                bind:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars[1]" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="24dp"
+                android:text="@{tvShow.name}"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                app:layout_constrainedWidth="true"
+                bind:layout_constraintEnd_toEndOf="parent"
+                bind:layout_constraintHorizontal_bias="0.003"
+                bind:layout_constraintStart_toStartOf="parent"
+                bind:layout_constraintTop_toBottomOf="@+id/imageView"
+                tools:text="Title" />
+
+            <TextView
+                android:id="@+id/tv_genre_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/genre_tag"
+                android:textSize="14sp"
+                android:textColor="@android:color/black"
+                app:layout_constrainedWidth="true"
+                bind:layout_constraintStart_toStartOf="parent"
+                bind:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+            <TextView
+                android:id="@+id/tv_genre_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:text="@{tvShow.genreIds}"
+                android:textSize="14sp"
+                app:layout_constrainedWidth="true"
+                bind:layout_constraintEnd_toEndOf="parent"
+                bind:layout_constraintHorizontal_bias="0.29"
+                bind:layout_constraintStart_toEndOf="@+id/tv_genre_tag"
+                bind:layout_constraintTop_toBottomOf="@+id/tv_title"
+                tools:text="Genre Value" />
+
+            <TextView
+                android:id="@+id/tv_overview_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/overview_tag"
+                android:textSize="14sp"
+                android:textColor="@android:color/black"
+                app:layout_constrainedWidth="true"
+                bind:layout_constraintStart_toStartOf="parent"
+                bind:layout_constraintTop_toBottomOf="@+id/tv_genre_value" />
+
+            <TextView
+                android:id="@+id/tv_overview_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="32dp"
+                android:text="@{tvShow.overview}"
+                android:textSize="14sp"
+                app:layout_constrainedWidth="true"
+                bind:layout_constraintBottom_toBottomOf="parent"
+                bind:layout_constraintEnd_toEndOf="parent"
+                bind:layout_constraintHorizontal_bias="0.0"
+                bind:layout_constraintStart_toStartOf="@+id/tv_genre_value"
+                bind:layout_constraintTop_toBottomOf="@+id/tv_genre_value"
+                bind:layout_constraintVertical_bias="1.0"
+                tools:text="Overview Value" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</layout>

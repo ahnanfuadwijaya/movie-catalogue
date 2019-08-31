@@ -26,9 +26,9 @@ public class TvShow implements Parcelable {
     @SerializedName("first_air_date")
     @Expose
     private String firstAirDate;
-    @SerializedName("title")
+    @SerializedName("name")
     @Expose
-    private String title;
+    private String name;
     @SerializedName("popularity")
     @Expose
     private Float popularity;
@@ -68,12 +68,12 @@ public class TvShow implements Parcelable {
         this.firstAirDate = firstAirDate;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Float getPopularity() {
@@ -102,7 +102,7 @@ public class TvShow implements Parcelable {
         posterPath = in.readString();
         overview = in.readString();
         firstAirDate = in.readString();
-        title = in.readString();
+        name = in.readString();
         if (in.readByte() == 0) {
             popularity = null;
         } else {
@@ -134,7 +134,7 @@ public class TvShow implements Parcelable {
         parcel.writeString(posterPath);
         parcel.writeString(overview);
         parcel.writeString(firstAirDate);
-        parcel.writeString(title);
+        parcel.writeString(name);
         if (popularity == null) {
             parcel.writeByte((byte) 0);
         } else {

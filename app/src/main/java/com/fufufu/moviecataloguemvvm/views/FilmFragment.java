@@ -48,7 +48,6 @@ public class FilmFragment extends Fragment{
 
         //FragmentFilmBinding fragmentFilmBinding = DataBindingUtil.setContentView(requireActivity(), R.layout.fragment_film);
         final FragmentFilmBinding fragmentFilmBinding = FragmentFilmBinding.inflate(inflater, container, false);
-
         // bind RecyclerView
         RecyclerView recyclerView = fragmentFilmBinding.rvDaftarFilm;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

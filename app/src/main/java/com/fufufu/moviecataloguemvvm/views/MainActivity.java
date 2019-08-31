@@ -29,11 +29,11 @@ public class MainActivity extends AppCompatActivity {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 switch (item.getItemId()) {
                     case R.id.nav_home:
-                        //fragment = new HomeFragment();
+                        fragment = new HomeFragment();
                         break;
                     case R.id.nav_account:
                         Log.d("BottomNav", "Account di klik");
-                        //fragment = new AboutFragment();
+                        fragment = new AboutFragment();
                         break;
                     default:
                         //
