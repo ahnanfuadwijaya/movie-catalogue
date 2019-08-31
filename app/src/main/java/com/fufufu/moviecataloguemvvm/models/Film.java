@@ -29,12 +29,15 @@ public class Film implements Parcelable {
     @SerializedName("title")
     @Expose
     private String title;
-    @SerializedName("popularity")
+    @SerializedName("original_title")
     @Expose
-    private Float popularity;
+    private String originalTitle;
     @SerializedName("genre_ids")
     @Expose
     private int[] genreIds;
+    @SerializedName("vote_average")
+    @Expose
+    private Float voteAverage;
 
     public int getId() {
         return id;
@@ -46,6 +49,21 @@ public class Film implements Parcelable {
 
     public String getPosterPath() {
         return posterBaseUrl+posterPath;
+    }
+    public String getOriginalTitle() {
+        return originalTitle;
+    }
+
+    public void setOriginalTitle(String originalTitle) {
+        this.originalTitle = originalTitle;
+    }
+
+    public String getVoteAverage() {
+        return voteAverage.toString();
+    }
+
+    public void setVoteAverage(Float voteAverage) {
+        this.voteAverage = voteAverage;
     }
 
     public void setPosterPath(String posterPath) {
@@ -76,16 +94,9 @@ public class Film implements Parcelable {
         this.title = title;
     }
 
-    public Float getPopularity() {
-        return popularity;
-    }
-
-    public void setPopularity(Float popularity) {
-        this.popularity = popularity;
-    }
 
     public String getGenreIds() {
-        String strGenreIds= genreIds.toString();
+        String strGenreIds= this.genreIds.toString();
         return strGenreIds;
     }
 
@@ -103,10 +114,11 @@ public class Film implements Parcelable {
         overview = in.readString();
         releaseDate = in.readString();
         title = in.readString();
+        originalTitle = in.readString();
         if (in.readByte() == 0) {
-            popularity = null;
+            voteAverage = null;
         } else {
-            popularity = in.readFloat();
+            voteAverage = in.readFloat();
         }
         genreIds = in.createIntArray();
     }
@@ -135,11 +147,12 @@ public class Film implements Parcelable {
         parcel.writeString(overview);
         parcel.writeString(releaseDate);
         parcel.writeString(title);
-        if (popularity == null) {
+        parcel.writeString(originalTitle);
+        if (voteAverage == null) {
             parcel.writeByte((byte) 0);
         } else {
             parcel.writeByte((byte) 1);
-            parcel.writeFloat(popularity);
+            parcel.writeFloat(voteAverage);
         }
         parcel.writeIntArray(genreIds);
     }

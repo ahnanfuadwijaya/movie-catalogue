@@ -48,6 +48,7 @@ public class TvShowFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setRetainInstance(true);
 
         //FragmentTvShowBinding fragmentTvShowBinding = DataBindingUtil.setContentView(requireActivity(), R.layout.fragment_tv_show);
         FragmentTvShowBinding fragmentTvShowBinding = FragmentTvShowBinding.inflate(inflater, container, false);

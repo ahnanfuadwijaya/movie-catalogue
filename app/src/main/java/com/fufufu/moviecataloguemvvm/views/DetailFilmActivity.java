@@ -5,35 +5,33 @@ import androidx.databinding.DataBindingUtil;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.fufufu.moviecataloguemvvm.R;
 import com.fufufu.moviecataloguemvvm.databinding.ActivityDetailFilmBinding;
 import com.fufufu.moviecataloguemvvm.models.Film;
+import com.fufufu.moviecataloguemvvm.viewmodels.DetailFilmViewModel;
+
+import java.util.Objects;
 
 public class DetailFilmActivity extends AppCompatActivity {
-
-    TextView tvJudul, tvSinopsis, tvGenre;
-    ImageView imgPoster;
-    String judul, genre, sinopsis, poster;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         ActivityDetailFilmBinding activityDetailFilmBinding = DataBindingUtil.setContentView(this, R.layout.activity_detail_film);
-
         Film film = getIntent().getParcelableExtra("film");
-        activityDetailFilmBinding.setFilm(film);
-
-        String title = film.getTitle();
+        DetailFilmViewModel detailFilmViewModel = new DetailFilmViewModel();
+        detailFilmViewModel.setFilm(film);
+        activityDetailFilmBinding.setFilm(detailFilmViewModel.getFilm());
+        setTitle(detailFilmViewModel.getFilm().getTitle());
+        activityDetailFilmBinding.executePendingBindings();
+        String title = detailFilmViewModel.getFilm().getTitle();
         Log.d("DetailFilmActivity", "Title-"+title);
-
-        //setContentView(R.layout.activity_detail_film);
-
     }
+
+
     @Override
     public boolean onSupportNavigateUp() {
         finish();

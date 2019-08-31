@@ -29,12 +29,32 @@ public class TvShow implements Parcelable {
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("popularity")
+    @SerializedName("original_name")
     @Expose
-    private Float popularity;
+    private String originalName;
+
+    public String getOriginalName() {
+        return originalName;
+    }
+
+    public void setOriginalName(String originalName) {
+        this.originalName = originalName;
+    }
+
+    public String getVoteAverage() {
+        return voteAverage.toString();
+    }
+
+    public void setVoteAverage(Float voteAverage) {
+        this.voteAverage = voteAverage;
+    }
+
     @SerializedName("genre_ids")
     @Expose
     private int[] genreIds;
+    @SerializedName("vote_average")
+    @Expose
+    private Float voteAverage;
 
     public int getId() {
         return id;
@@ -76,14 +96,6 @@ public class TvShow implements Parcelable {
         this.name = name;
     }
 
-    public Float getPopularity() {
-        return popularity;
-    }
-
-    public void setPopularity(Float popularity) {
-        this.popularity = popularity;
-    }
-
     public String getGenreIds() {
         String strGenreIds= genreIds.toString();
         return strGenreIds;
@@ -103,10 +115,11 @@ public class TvShow implements Parcelable {
         overview = in.readString();
         firstAirDate = in.readString();
         name = in.readString();
+        originalName = in.readString();
         if (in.readByte() == 0) {
-            popularity = null;
+            voteAverage = null;
         } else {
-            popularity = in.readFloat();
+            voteAverage = in.readFloat();
         }
         genreIds = in.createIntArray();
     }
@@ -135,11 +148,12 @@ public class TvShow implements Parcelable {
         parcel.writeString(overview);
         parcel.writeString(firstAirDate);
         parcel.writeString(name);
-        if (popularity == null) {
+        parcel.writeString(originalName);
+        if (voteAverage == null) {
             parcel.writeByte((byte) 0);
         } else {
             parcel.writeByte((byte) 1);
-            parcel.writeFloat(popularity);
+            parcel.writeFloat(voteAverage);
         }
         parcel.writeIntArray(genreIds);
     }

@@ -46,16 +46,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:paddingTop="10dp"
-                    android:text="Genre"
+                    android:text="@string/overview_tag"
                     android:textColor="@android:color/black"
                     android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/tv_genre_film"
-                    android:text="@{film.genreIds}"
+                    android:text="@{film.overview}"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="2dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:minLines="3"
+                    android:maxLines="4"
+                    android:lineSpacingMultiplier="1.2"
+                    android:paddingTop="3dp"
                     android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>

@@ -1,13 +1,18 @@
 <resources>
     <string name="app_name">MovieCatalogueMvvm</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="poster_film_description">Poster Film</string>
     <string name="genre_tag">Genre</string>
     <string name="overview_tag">Overview</string>
     <string name="film_poster">Film Poster</string>
     <string name="tv_show_poster_description">TV Show Poster</string>
+    <string name="original_title_tag">Original Title</string>
+    <string name="release_date_tag">Release Date</string>
+    <string name="score_tag">Score</string>
+    <string name="first_air_date_tag">First Air Date</string>
+    <string name="home_bott_nav_title">Home</string>
+    <string name="about_me_bottom_nav_title">About Me</string>
+    <string name="english_lang">English</string>
+    <string name="indonesia_lang">Indonesia</string>
     <string-array name="tab_title">
         <item>Film</item>
         <item>TV Show</item>

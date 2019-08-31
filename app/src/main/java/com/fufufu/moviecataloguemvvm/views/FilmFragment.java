@@ -45,6 +45,7 @@ public class FilmFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setRetainInstance(true);
 
         //FragmentFilmBinding fragmentFilmBinding = DataBindingUtil.setContentView(requireActivity(), R.layout.fragment_film);
         final FragmentFilmBinding fragmentFilmBinding = FragmentFilmBinding.inflate(inflater, container, false);

@@ -30,6 +30,8 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setRetainInstance(true);
+
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         TabLayout tabLayout = view.findViewById(R.id.tab_home);
         final ViewPager viewPager = view.findViewById(R.id.viewpager);

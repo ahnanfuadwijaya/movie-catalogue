@@ -6,11 +6,13 @@
         android:enabled="true"
         android:name="Home"
         android:icon="@drawable/ic_home_black_24dp"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom"
+        android:title="@string/home_bott_nav_title"/>
     <item
         android:id="@+id/nav_account"
         android:enabled="true"
         android:name="About"
         android:icon="@drawable/ic_person_outline_black_24dp"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom"
+        android:title="@string/about_me_bottom_nav_title" />
 </menu>

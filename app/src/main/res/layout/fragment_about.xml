@@ -1,4 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:bind="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="about"
+            type="com.fufufu.moviecataloguemvvm.models.About" />
+    </data>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -19,7 +24,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="75dp"
             android:layout_marginBottom="30dp"
-            android:src="@drawable/profile_photo"
+            bind:avatar="@{about.photo}"
             tools:src="@drawable/profile_photo" />
 
         <LinearLayout
@@ -35,7 +40,7 @@
                 android:layout_marginBottom="8dp"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:text="Ahnan Fuadwijaya"
+                android:text="@{about.name}"
                 tools:text="Ahnan Fuadwijaya" />
             <TextView
                 android:id="@+id/tv_email"
@@ -44,8 +49,9 @@
                 android:gravity="center"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:text="ahnanfuadwijaya@gmail.com"
+                android:text="@{about.email}"
                 tools:text="ahnanfuadwijaya@gmail.com"/>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
+</layout>
