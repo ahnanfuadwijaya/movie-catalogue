@@ -3,27 +3,26 @@ package com.fufufu.moviecataloguemvvm.views;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-
 import com.fufufu.moviecataloguemvvm.R;
+import com.fufufu.moviecataloguemvvm.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-    private Locale locale;
 
     public void loadLocale() {
         String langPref = "Language";
@@ -35,13 +34,12 @@ public class MainActivity extends AppCompatActivity {
     public void changeLang(String lang) {
         if (lang.equalsIgnoreCase(""))
             return;
-        locale = new Locale(lang);
+        Locale locale = new Locale(lang);
         saveLocale(lang);
         Locale.setDefault(locale);
-        android.content.res.Configuration config = new android.content.res.Configuration();
+        Configuration config = new Configuration();
         config.locale = locale;
-        getBaseContext().getResources().updateConfiguration(config,getBaseContext().getResources().getDisplayMetrics());
-
+        this.getResources().updateConfiguration(config,getBaseContext().getResources().getDisplayMetrics());
     }
 
     public void saveLocale(String lang) {
@@ -49,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("CommonPrefs", Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(langPref, lang);
-        editor.commit();
+        editor.apply();
     }
 
     @Override
@@ -69,12 +67,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 if(item.getItemId() == R.id.menu_en){
-                    Log.d("Bendera", "English");
                     changeLang("en");
                     saveLocale("en");
                 }
                 else if(item.getItemId() == R.id.menu_indonesia){
-                    Log.d("Bendera", "Indonesia");
                     changeLang("in");
                     saveLocale("in");
                 }
@@ -91,12 +87,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_main);
         loadLocale();
-
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        ActivityMainBinding activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        activityMainBinding.bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment fragment = new Fragment();
@@ -107,31 +100,21 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new HomeFragment();
                         break;
                     case R.id.nav_account:
-                        Log.d("BottomNav", "Account di klik");
                         fragment = new AboutFragment();
                         break;
                     default:
-                        //
                 }
                 fragmentTransaction.replace(R.id.fragment_container, fragment);
                 fragmentTransaction.commit();
                 return true;
             }
         });
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-
-        if(savedInstanceState != null){
-            fragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-            fragmentManager.beginTransaction().commit();
-        }
-        else{
+        if(savedInstanceState == null){
+            FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             HomeFragment homeFragment = new HomeFragment();
             fragmentTransaction.replace(R.id.fragment_container, homeFragment);
             fragmentTransaction.commit();
-            Log.d("Create Fragment", "Home Fragment");
         }
-        Log.d("MainActivity", "onCreate");
     }
 }

@@ -13,6 +13,7 @@
     <string name="about_me_bottom_nav_title">About Me</string>
     <string name="english_lang">English</string>
     <string name="indonesia_lang">Indonesia</string>
+    <string name="language">Language</string>
     <string-array name="tab_title">
         <item>Film</item>
         <item>TV Show</item>

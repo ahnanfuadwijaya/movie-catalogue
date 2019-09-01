@@ -7,15 +7,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.fufufu.moviecataloguemvvm.R;
-import com.fufufu.moviecataloguemvvm.databinding.FilmListItemBinding;
 import com.fufufu.moviecataloguemvvm.databinding.TvShowListItemBinding;
-import com.fufufu.moviecataloguemvvm.models.Film;
 import com.fufufu.moviecataloguemvvm.models.TvShow;
-import com.fufufu.moviecataloguemvvm.views.DetailFilmActivity;
 import com.fufufu.moviecataloguemvvm.views.DetailTvShowActivity;
-
 import java.util.ArrayList;
 
 public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.TvShowHolder> {
@@ -32,7 +27,6 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.TvShowHold
     @Override
     public void onBindViewHolder(@NonNull TvShowHolder holder, int position) {
         final TvShow tvShow = tvShows.get(position);
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,7 +35,6 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.TvShowHold
                 view.getContext().startActivity(moveWithDataIntent);
             }
         });
-
         holder.tvShowListItemBinding.setTvShow(tvShow);
     }
 
@@ -60,10 +53,8 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.TvShowHold
 
     class TvShowHolder extends RecyclerView.ViewHolder {
         TvShowListItemBinding tvShowListItemBinding;
-
-        public TvShowHolder(@NonNull TvShowListItemBinding tvShowListItemBinding) {
+        TvShowHolder(@NonNull TvShowListItemBinding tvShowListItemBinding) {
             super(tvShowListItemBinding.getRoot());
-
             this.tvShowListItemBinding = tvShowListItemBinding;
         }
     }

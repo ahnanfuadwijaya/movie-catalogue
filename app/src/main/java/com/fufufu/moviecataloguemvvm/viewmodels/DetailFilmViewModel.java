@@ -1,7 +1,5 @@
 package com.fufufu.moviecataloguemvvm.viewmodels;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import com.fufufu.moviecataloguemvvm.models.Film;
 

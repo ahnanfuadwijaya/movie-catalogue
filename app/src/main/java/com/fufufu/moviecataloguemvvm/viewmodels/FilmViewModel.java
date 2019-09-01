@@ -1,34 +1,43 @@
 package com.fufufu.moviecataloguemvvm.viewmodels;
 
+import android.app.Activity;
+import android.app.Application;
+import android.content.SharedPreferences;
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
-
 import com.fufufu.moviecataloguemvvm.models.Repository;
 import com.fufufu.moviecataloguemvvm.models.Film;
-
 import java.util.ArrayList;
 
-public class FilmViewModel extends ViewModel{
-    // Create a LiveData with a String
+public class FilmViewModel extends AndroidViewModel {
     private MutableLiveData<ArrayList<Film>> currentFilmList;
-    private MutableLiveData<Boolean> isLoading;
-    private Repository repository;
+    private Repository repository = new Repository();
 
-    public FilmViewModel() {
-        super();
-        repository = new Repository();
+    public FilmViewModel(@NonNull Application application) {
+        super(application);
     }
 
+
     public LiveData<ArrayList<Film>> getFilmList() {
+        String langPref = "Language";
+        SharedPreferences prefs = getApplication().getSharedPreferences("CommonPrefs", Activity.MODE_PRIVATE);
+        String language = prefs.getString(langPref, "");
+        String lang = "en";
+        if(language.equalsIgnoreCase("en")){
+            lang = "en-US";
+        }
+        else if(language.equalsIgnoreCase("in")){
+            lang = "id-ID";
+        }
         if (currentFilmList == null) {
-            currentFilmList = repository.getFilmListFromApi();
+            currentFilmList = repository.getFilmListFromApi("f240487696509310687e5998a34a405f", lang, "popularity.desc");
         }
         return currentFilmList;
     }
 
     public LiveData<Boolean> isLoading() {
-        isLoading = repository.getLoading();
-        return isLoading;
+        return repository.getLoading();
     }
 }

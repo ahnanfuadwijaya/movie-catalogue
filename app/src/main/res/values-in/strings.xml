@@ -13,6 +13,7 @@
     <string name="about_me_bottom_nav_title">Tentang Saya</string>
     <string name="english_lang">English</string>
     <string name="indonesia_lang">Bahasa Indonesia</string>
+    <string name="language">Bahasa</string>
     <string-array name="tab_title">
         <item>Film</item>
         <item>Serial TV</item>

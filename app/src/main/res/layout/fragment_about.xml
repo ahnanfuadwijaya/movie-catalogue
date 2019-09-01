@@ -16,9 +16,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp">
-
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/img_profil"
+            android:id="@+id/img_profile"
             android:layout_width="125dp"
             android:layout_height="125dp"
             android:layout_gravity="center"
@@ -26,14 +25,13 @@
             android:layout_marginBottom="30dp"
             bind:avatar="@{about.photo}"
             tools:src="@drawable/profile_photo" />
-
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="16dp">
             <TextView
-                android:id="@+id/tv_nama"
+                android:id="@+id/tv_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"

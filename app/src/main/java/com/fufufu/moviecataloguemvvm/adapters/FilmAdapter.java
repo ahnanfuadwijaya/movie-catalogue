@@ -7,12 +7,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.fufufu.moviecataloguemvvm.R;
 import com.fufufu.moviecataloguemvvm.databinding.FilmListItemBinding;
 import com.fufufu.moviecataloguemvvm.models.Film;
 import com.fufufu.moviecataloguemvvm.views.DetailFilmActivity;
-
 import java.util.ArrayList;
 
 public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
@@ -30,7 +28,6 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
     @Override
     public void onBindViewHolder(@NonNull FilmHolder holder, int position) {
         final Film film = films.get(position);
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -39,7 +36,6 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
                 view.getContext().startActivity(moveWithDataIntent);
             }
         });
-
         holder.filmListItemBinding.setFilm(film);
     }
 
@@ -59,9 +55,8 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
     class FilmHolder extends RecyclerView.ViewHolder {
         private FilmListItemBinding filmListItemBinding;
 
-        public FilmHolder(@NonNull FilmListItemBinding filmListItemBinding) {
+        FilmHolder(@NonNull FilmListItemBinding filmListItemBinding) {
             super(filmListItemBinding.getRoot());
-
             this.filmListItemBinding = filmListItemBinding;
         }
     }

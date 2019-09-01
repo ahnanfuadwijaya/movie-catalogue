@@ -1,14 +1,12 @@
 package com.fufufu.moviecataloguemvvm.viewmodels;
 
 import androidx.lifecycle.ViewModel;
-
 import com.fufufu.moviecataloguemvvm.models.About;
 
 public class AboutViewModel extends ViewModel {
-    About about = new About();
+    private About about = new About();
 
     public AboutViewModel(){
-
     }
 
     public void setData(){

@@ -1,15 +1,13 @@
 package com.fufufu.moviecataloguemvvm.models;
 
 import android.widget.ImageView;
-
 import androidx.databinding.BindingAdapter;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.fufufu.moviecataloguemvvm.R;
 
 public class About {
-    String name, email, photo;
+    private String name, email, photo;
 
     public String getName() {
         return name;
@@ -38,7 +36,6 @@ public class About {
     public static void loadImage(ImageView imageView, String imageURL) {
         int resourceId = imageView.getContext().getResources().getIdentifier(imageURL, "drawable", imageView.getContext().getPackageName());
         Glide.with(imageView.getContext())
-                //.setDefaultRequestOptions(new RequestOptions().circleCrop())
                 .setDefaultRequestOptions(new RequestOptions().circleCrop())
                 .load(resourceId)
                 .placeholder(R.drawable.loading)

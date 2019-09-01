@@ -12,26 +12,22 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:radius="8dp">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:orientation="horizontal"
             android:padding="16dp">
-
             <ImageView
                 android:id="@+id/iv_tv_show_poster"
                 bind:tvShowPoster="@{tvShow.posterPath}"
                 android:layout_width="160dp"
                 android:layout_height="200dp"
                 android:contentDescription="@string/tv_show_poster_description" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
                 <TextView
                     android:id="@+id/tv_tv_show_title"
                     android:text="@{tvShow.name}"
@@ -39,8 +35,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/black"
                     android:textSize="20sp"
-                    tools:text="Judul Filem" />
-
+                    tools:text="Judul Film" />
                 <TextView
                     android:id="@+id/tv_genre_tv_show_tag"
                     android:layout_width="wrap_content"
@@ -49,7 +44,6 @@
                     android:text="@string/overview_tag"
                     android:textColor="@android:color/black"
                     android:textSize="16sp" />
-
                 <TextView
                     android:id="@+id/tv_genre_film"
                     android:text="@{tvShow.overview}"

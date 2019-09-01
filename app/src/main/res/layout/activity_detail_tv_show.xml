@@ -8,17 +8,14 @@
             name="tvShow"
             type="com.fufufu.moviecataloguemvvm.models.TvShow" />
     </data>
-
     <ScrollView
         android:id="@+id/activity_detail_tv_show"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white">
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="289dp"
@@ -32,7 +29,6 @@
                 bind:layout_constraintStart_toStartOf="parent"
                 bind:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/avatars[1]" />
-
             <TextView
                 android:id="@+id/tv__title"
                 android:layout_width="wrap_content"
@@ -49,7 +45,6 @@
                 bind:layout_constraintStart_toStartOf="parent"
                 bind:layout_constraintTop_toBottomOf="@+id/imageView"
                 tools:text="Title" />
-
             <TextView
                 android:id="@+id/tv_original_title_tag"
                 android:layout_width="wrap_content"
@@ -62,7 +57,6 @@
                 app:layout_constrainedWidth="true"
                 bind:layout_constraintStart_toStartOf="parent"
                 bind:layout_constraintTop_toBottomOf="@+id/tv__title" />
-
             <TextView
                 android:id="@+id/tv_original_title_value"
                 android:layout_width="76dp"
@@ -78,7 +72,6 @@
                 bind:layout_constraintStart_toEndOf="@+id/tv_original_title_tag"
                 bind:layout_constraintTop_toBottomOf="@+id/tv__title"
                 tools:text="Genre Value" />
-
             <TextView
                 android:id="@+id/tv_release_date"
                 android:layout_width="wrap_content"
@@ -90,7 +83,6 @@
                 app:layout_constrainedWidth="true"
                 bind:layout_constraintStart_toStartOf="@+id/tv_original_title_tag"
                 bind:layout_constraintTop_toBottomOf="@+id/tv_original_title_value" />
-
             <TextView
                 android:id="@+id/tv_first_air_date_value"
                 android:layout_width="wrap_content"
@@ -104,7 +96,6 @@
                 bind:layout_constraintStart_toStartOf="@+id/tv_original_title_value"
                 bind:layout_constraintTop_toBottomOf="@+id/tv_original_title_value"
                 tools:text="Release Date" />
-
             <TextView
                 android:id="@+id/tv_score_tag"
                 android:layout_width="wrap_content"
@@ -117,7 +108,6 @@
                 bind:layout_constraintStart_toStartOf="@+id/tv_release_date"
                 bind:layout_constraintTop_toBottomOf="@+id/tv_first_air_date_value"
                 tools:text="Score" />
-
             <TextView
                 android:id="@+id/tv_score_value"
                 android:layout_width="wrap_content"
@@ -131,7 +121,6 @@
                 bind:layout_constraintStart_toStartOf="@+id/tv_first_air_date_value"
                 bind:layout_constraintTop_toBottomOf="@+id/tv_first_air_date_value"
                 tools:text="8.0" />
-
             <TextView
                 android:id="@+id/tv_overview_tag"
                 android:layout_width="wrap_content"
@@ -143,7 +132,6 @@
                 app:layout_constrainedWidth="true"
                 bind:layout_constraintStart_toStartOf="@+id/tv_score_tag"
                 bind:layout_constraintTop_toBottomOf="@+id/tv_score_value" />
-
             <TextView
                 android:id="@+id/tv_overview_value"
                 android:layout_width="wrap_content"
@@ -161,8 +149,6 @@
                 bind:layout_constraintTop_toBottomOf="@+id/tv_score_value"
                 bind:layout_constraintVertical_bias="0.0"
                 tools:text="Overview Value" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-
 </layout>

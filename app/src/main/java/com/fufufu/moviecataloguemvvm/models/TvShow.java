@@ -3,9 +3,7 @@ package com.fufufu.moviecataloguemvvm.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.widget.ImageView;
-
 import androidx.databinding.BindingAdapter;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.fufufu.moviecataloguemvvm.R;
@@ -32,6 +30,9 @@ public class TvShow implements Parcelable {
     @SerializedName("original_name")
     @Expose
     private String originalName;
+    @SerializedName("vote_average")
+    @Expose
+    private Float voteAverage;
 
     public String getOriginalName() {
         return originalName;
@@ -48,13 +49,6 @@ public class TvShow implements Parcelable {
     public void setVoteAverage(Float voteAverage) {
         this.voteAverage = voteAverage;
     }
-
-    @SerializedName("genre_ids")
-    @Expose
-    private int[] genreIds;
-    @SerializedName("vote_average")
-    @Expose
-    private Float voteAverage;
 
     public int getId() {
         return id;
@@ -96,15 +90,6 @@ public class TvShow implements Parcelable {
         this.name = name;
     }
 
-    public String getGenreIds() {
-        String strGenreIds= genreIds.toString();
-        return strGenreIds;
-    }
-
-    public void setGenreIds(int[] genreIds) {
-        this.genreIds = genreIds;
-    }
-
     public static Creator<TvShow> getCREATOR() {
         return CREATOR;
     }
@@ -121,7 +106,6 @@ public class TvShow implements Parcelable {
         } else {
             voteAverage = in.readFloat();
         }
-        genreIds = in.createIntArray();
     }
 
     public static final Creator<TvShow> CREATOR = new Creator<TvShow>() {
@@ -155,12 +139,10 @@ public class TvShow implements Parcelable {
             parcel.writeByte((byte) 1);
             parcel.writeFloat(voteAverage);
         }
-        parcel.writeIntArray(genreIds);
     }
     @BindingAdapter({ "tvShowPoster" })
     public static void loadImage(ImageView imageView, String imageURL) {
         Glide.with(imageView.getContext())
-                //.setDefaultRequestOptions(new RequestOptions().circleCrop())
                 .setDefaultRequestOptions(new RequestOptions().centerInside())
                 .load(imageURL)
                 .placeholder(R.drawable.loading)
