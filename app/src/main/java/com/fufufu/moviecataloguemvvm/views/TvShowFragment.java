@@ -34,6 +34,7 @@ public class TvShowFragment extends Fragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         FragmentTvShowBinding fragmentTvShowBinding = FragmentTvShowBinding.inflate(inflater, container, false);
         RecyclerView recyclerView = fragmentTvShowBinding.rvTvShowList;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

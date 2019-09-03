@@ -9,6 +9,13 @@
         app:showAsAction="ifRoom"
         android:title="@string/home_bott_nav_title"/>
     <item
+        android:id="@+id/nav_favorite"
+        android:enabled="true"
+        android:name="Favorite"
+        android:icon="@drawable/ic_favorite_border_black_24dp"
+        app:showAsAction="ifRoom"
+        android:title="Favorite"/>
+    <item
         android:id="@+id/nav_account"
         android:enabled="true"
         android:name="About"

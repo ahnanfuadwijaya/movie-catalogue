@@ -18,4 +18,10 @@
         <item>Film</item>
         <item>TV Show</item>
     </string-array>
+    <string-array name="tab_favorite_title">
+        <item>Favorite Film</item>
+        <item>Favorite TV Show</item>
+    </string-array>
+    <string name="fragment_home_title">Home</string>
+    <string name="fragment_favorite_title">Favorite</string>
 </resources>

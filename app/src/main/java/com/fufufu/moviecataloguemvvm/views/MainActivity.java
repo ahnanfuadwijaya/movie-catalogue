@@ -99,6 +99,9 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_home:
                         fragment = new HomeFragment();
                         break;
+                    case R.id.nav_favorite:
+                        fragment = new FavoriteFragment();
+                        break;
                     case R.id.nav_account:
                         fragment = new AboutFragment();
                         break;
