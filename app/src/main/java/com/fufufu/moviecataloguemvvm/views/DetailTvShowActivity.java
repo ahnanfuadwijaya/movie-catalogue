@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.fufufu.moviecataloguemvvm.R;
 import com.fufufu.moviecataloguemvvm.databinding.ActivityDetailTvShowBinding;
@@ -25,6 +26,7 @@ public class DetailTvShowActivity extends AppCompatActivity {
         detailTvShowViewModel.setTvShow(tvShow);
         activityDetailTvShowBinding.setTvShow(detailTvShowViewModel.getTvShow());
         setTitle(detailTvShowViewModel.getTvShow().getName());
+        activityDetailTvShowBinding.progressBarDetailTvShow.setVisibility(View.GONE);
         activityDetailTvShowBinding.executePendingBindings();
     }
     @Override

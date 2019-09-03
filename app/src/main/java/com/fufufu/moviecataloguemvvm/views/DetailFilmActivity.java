@@ -3,6 +3,8 @@ package com.fufufu.moviecataloguemvvm.views;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.view.View;
+
 import com.fufufu.moviecataloguemvvm.R;
 import com.fufufu.moviecataloguemvvm.databinding.ActivityDetailFilmBinding;
 import com.fufufu.moviecataloguemvvm.models.Film;
@@ -20,6 +22,7 @@ public class DetailFilmActivity extends AppCompatActivity {
         detailFilmViewModel.setFilm(film);
         activityDetailFilmBinding.setFilm(detailFilmViewModel.getFilm());
         setTitle(detailFilmViewModel.getFilm().getTitle());
+        activityDetailFilmBinding.progressBarDetailFilm.setVisibility(View.GONE);
         activityDetailFilmBinding.executePendingBindings();
     }
     @Override
