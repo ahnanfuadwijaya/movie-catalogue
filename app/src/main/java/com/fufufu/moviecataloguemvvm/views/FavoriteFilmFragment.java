@@ -15,12 +15,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.fufufu.moviecataloguemvvm.adapters.FavoriteFilmAdapter;
 import com.fufufu.moviecataloguemvvm.databinding.FragmentFavoriteFilmBinding;
+import com.fufufu.moviecataloguemvvm.models.FavoriteFilm;
 import com.fufufu.moviecataloguemvvm.viewmodels.FavoriteFilmViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -46,23 +49,17 @@ public class FavoriteFilmFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         final ProgressBar progressBar = fragmentFavoriteFilmBinding.progressBarFavoriteFilm;
         favoriteFilmViewModel = ViewModelProviders.of(this).get(FavoriteFilmViewModel.class);
-//        favoriteFilmViewModel.isLoading().observe(this, new Observer<Boolean>() {
-//            @Override
-//            public void onChanged(Boolean aBoolean) {
-//                if(aBoolean){
-//                    progressBar.setVisibility(View.GONE);
-//                }
-//                else {
-//                    progressBar.setVisibility(View.VISIBLE);
-//                }
-//            }
-//        });
+        favoriteFilmViewModel.getAllFavoriteFilms().observe(this, new Observer<List<FavoriteFilm>>() {
+            @Override
+            public void onChanged(List<FavoriteFilm> favoriteFilms) {
+                favoriteFilmAdapter.setFavoriteFilms(favoriteFilms);
+                Toast.makeText(getContext(), "Favorite Film Fragment onChanged", Toast.LENGTH_LONG).show();
+            }
+        });
+
+
         favoriteFilmAdapter = new FavoriteFilmAdapter();
         recyclerView.setAdapter(favoriteFilmAdapter);
-        getFilms();
         return fragmentFavoriteFilmBinding.getRoot();
-    }
-
-    private void getFilms() {
     }
 }

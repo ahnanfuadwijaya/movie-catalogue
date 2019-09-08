@@ -3,8 +3,8 @@
     xmlns:bind="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
-            name="film"
-            type="com.fufufu.moviecataloguemvvm.models.Film"/>
+            name="favoriteFilm"
+            type="com.fufufu.moviecataloguemvvm.models.FavoriteFilm"/>
     </data>
     <androidx.cardview.widget.CardView
         android:id="@+id/film_cardview"
@@ -20,7 +20,7 @@
             android:padding="16dp">
             <ImageView
                 android:id="@+id/iv_poster"
-                bind:filmPoster="@{film.posterPath}"
+                bind:filmPoster="@{favoriteFilm.posterPath}"
                 android:layout_width="160dp"
                 android:layout_height="200dp"
                 android:contentDescription="@string/poster_film_description" />
@@ -30,7 +30,7 @@
                 android:orientation="vertical">
                 <TextView
                     android:id="@+id/tv_judul_film"
-                    android:text="@{film.title}"
+                    android:text="@{favoriteFilm.title}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/black"
@@ -46,7 +46,7 @@
                     android:textSize="16sp" />
                 <TextView
                     android:id="@+id/tv_genre_film"
-                    android:text="@{film.overview}"
+                    android:text="@{favoriteFilm.overview}"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"

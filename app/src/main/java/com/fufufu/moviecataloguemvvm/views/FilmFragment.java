@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
+
 import com.fufufu.moviecataloguemvvm.adapters.FilmAdapter;
 import com.fufufu.moviecataloguemvvm.databinding.FragmentFilmBinding;
 import com.fufufu.moviecataloguemvvm.models.Film;
@@ -60,6 +62,7 @@ public class FilmFragment extends Fragment{
         filmViewModel.getFilmList().observe(this, new Observer<ArrayList<Film>>() {
             @Override
             public void onChanged(@Nullable ArrayList<Film> films) {
+                Toast.makeText(getContext(), "Film Fragment onChanged", Toast.LENGTH_LONG).show();
                 filmAdapter.setFilms(films);
             }
         });

@@ -11,13 +11,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fufufu.moviecataloguemvvm.R;
 import com.fufufu.moviecataloguemvvm.databinding.FavoriteFilmListItemBinding;
+import com.fufufu.moviecataloguemvvm.models.FavoriteFilm;
 import com.fufufu.moviecataloguemvvm.models.Film;
 import com.fufufu.moviecataloguemvvm.views.DetailFilmActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FavoriteFilmAdapter extends RecyclerView.Adapter<FavoriteFilmAdapter.FilmHolder>{
-    private ArrayList<Film> films;
+    private List<FavoriteFilm> favoriteFilms;
 
     @NonNull
     @Override
@@ -30,28 +32,20 @@ public class FavoriteFilmAdapter extends RecyclerView.Adapter<FavoriteFilmAdapte
 
     @Override
     public void onBindViewHolder(@NonNull FavoriteFilmAdapter.FilmHolder holder, int position) {
-        final Film film = films.get(position);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent moveWithDataIntent = new Intent(view.getContext(), DetailFilmActivity.class);
-                moveWithDataIntent.putExtra("film", film);
-                view.getContext().startActivity(moveWithDataIntent);
-            }
-        });
-        holder.favoriteFilmListItemBinding.setFilm(film);
+        final FavoriteFilm favoriteFilm = favoriteFilms.get(position);
+        holder.favoriteFilmListItemBinding.setFavoriteFilm(favoriteFilm);
     }
 
     @Override
     public int getItemCount() {
-        if (films != null) {
-            return films.size();
+        if (favoriteFilms != null) {
+            return favoriteFilms.size();
         } else {
             return 0;
         }
     }
-    public void setFilms(ArrayList<Film> films) {
-        this.films = films;
+    public void setFavoriteFilms(List<FavoriteFilm> favoriteFilms) {
+        this.favoriteFilms = favoriteFilms;
         notifyDataSetChanged();
     }
 
