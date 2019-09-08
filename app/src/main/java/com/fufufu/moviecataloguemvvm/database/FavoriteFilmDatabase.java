@@ -44,9 +44,9 @@ public abstract class FavoriteFilmDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            favoriteFilmDao.insertFavoriteFilm(new FavoriteFilm("PosterPath 1", "Overview1", "01-01-1111", "Title 1", "Original Title 1", 8.1f));
-            favoriteFilmDao.insertFavoriteFilm(new FavoriteFilm("PosterPath 2", "Overview2", "02-01-1111", "Title 2", "Original Title 2", 8.2f));
-            favoriteFilmDao.insertFavoriteFilm(new FavoriteFilm("PosterPath 3", "Overview3", "03-01-1111", "Title 3", "Original Title 3", 8.3f));
+            favoriteFilmDao.insertFavoriteFilm(new FavoriteFilm(1, "PosterPath 1", "Overview1", "01-01-1111", "Title 1", "Original Title 1", 8.1f));
+            favoriteFilmDao.insertFavoriteFilm(new FavoriteFilm(2, "PosterPath 2", "Overview2", "02-01-1111", "Title 2", "Original Title 2", 8.2f));
+            favoriteFilmDao.insertFavoriteFilm(new FavoriteFilm(3, "PosterPath 3", "Overview3", "03-01-1111", "Title 3", "Original Title 3", 8.3f));
             return null;
         }
     }

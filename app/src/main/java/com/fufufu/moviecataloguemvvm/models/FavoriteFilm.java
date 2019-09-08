@@ -1,6 +1,7 @@
 package com.fufufu.moviecataloguemvvm.models;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.Expose;
@@ -10,6 +11,7 @@ import com.google.gson.annotations.SerializedName;
 public class FavoriteFilm {
     @PrimaryKey(autoGenerate = true)
     private int id;
+    private int filmId;
     private String posterPath;
     private String overview;
     private String releaseDate;
@@ -17,7 +19,8 @@ public class FavoriteFilm {
     private String originalTitle;
     private Float voteAverage;
 
-    public FavoriteFilm(String posterPath, String overview, String releaseDate, String title, String originalTitle, Float voteAverage) {
+    public FavoriteFilm(int filmId, String posterPath, String overview, String releaseDate, String title, String originalTitle, Float voteAverage) {
+        this.filmId = filmId;
         this.posterPath = posterPath;
         this.overview = overview;
         this.releaseDate = releaseDate;
@@ -25,6 +28,9 @@ public class FavoriteFilm {
         this.originalTitle = originalTitle;
         this.voteAverage = voteAverage;
     }
+
+    @Ignore
+    public FavoriteFilm(){}
 
     public void setId(int id) {
         this.id = id;
@@ -58,6 +64,14 @@ public class FavoriteFilm {
         return id;
     }
 
+    public int getFilmId() {
+        return filmId;
+    }
+
+    public void setFilmId(int filmId) {
+        this.filmId = filmId;
+    }
+
     public String getPosterPath() {
         return posterPath;
     }
@@ -81,4 +95,5 @@ public class FavoriteFilm {
     public Float getVoteAverage() {
         return voteAverage;
     }
+
 }
