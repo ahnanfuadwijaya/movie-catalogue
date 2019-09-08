@@ -15,7 +15,7 @@ public class Repository {
     private ArrayList<TvShow> tvShows = new ArrayList<>();
     private MutableLiveData<ArrayList<Film>> mutableFilmLiveData = new MutableLiveData<>();
     private MutableLiveData<ArrayList<TvShow>> mutableTvShowLiveData = new MutableLiveData<>();
-    private MutableLiveData<Boolean> mutableIsLoading=new MutableLiveData<>();
+    private MutableLiveData<Boolean> mutableIsLoading = new MutableLiveData<>();
 
     public Repository(){
     }

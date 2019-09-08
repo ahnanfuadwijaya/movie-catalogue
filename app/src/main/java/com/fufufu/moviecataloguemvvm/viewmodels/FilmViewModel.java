@@ -13,10 +13,11 @@ import java.util.ArrayList;
 
 public class FilmViewModel extends AndroidViewModel {
     private MutableLiveData<ArrayList<Film>> currentFilmList;
-    private Repository repository = new Repository();
+    private Repository repository;
 
     public FilmViewModel(@NonNull Application application) {
         super(application);
+        repository = new Repository(application);
     }
 
 
