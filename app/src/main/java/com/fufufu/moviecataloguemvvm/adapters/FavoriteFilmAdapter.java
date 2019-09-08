@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fufufu.moviecataloguemvvm.R;
 import com.fufufu.moviecataloguemvvm.databinding.FavoriteFilmListItemBinding;
-import com.fufufu.moviecataloguemvvm.databinding.FilmListItemBinding;
 import com.fufufu.moviecataloguemvvm.models.Film;
 import com.fufufu.moviecataloguemvvm.views.DetailFilmActivity;
 

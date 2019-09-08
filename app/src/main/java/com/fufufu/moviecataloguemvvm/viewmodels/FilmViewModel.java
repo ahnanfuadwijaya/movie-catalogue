@@ -7,8 +7,10 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import com.fufufu.moviecataloguemvvm.models.Repository;
+
 import com.fufufu.moviecataloguemvvm.models.Film;
+import com.fufufu.moviecataloguemvvm.models.Repository;
+
 import java.util.ArrayList;
 
 public class FilmViewModel extends AndroidViewModel {
@@ -17,7 +19,7 @@ public class FilmViewModel extends AndroidViewModel {
 
     public FilmViewModel(@NonNull Application application) {
         super(application);
-        repository = new Repository(application);
+        repository = new Repository();
     }
 
 

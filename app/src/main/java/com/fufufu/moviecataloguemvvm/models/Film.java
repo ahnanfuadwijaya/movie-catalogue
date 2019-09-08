@@ -3,14 +3,7 @@ package com.fufufu.moviecataloguemvvm.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.widget.ImageView;
-
-import androidx.annotation.NonNull;
 import androidx.databinding.BindingAdapter;
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.Ignore;
-import androidx.room.PrimaryKey;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.fufufu.moviecataloguemvvm.R;
@@ -19,31 +12,24 @@ import com.google.gson.annotations.SerializedName;
 
 public class Film implements Parcelable {
     private final String posterBaseUrl = "https://image.tmdb.org/t/p/w500/";
-
     @SerializedName("id")
     @Expose
     private int id;
-
     @SerializedName("poster_path")
     @Expose
     private String posterPath;
-
     @SerializedName("overview")
     @Expose
     private String overview;
-
     @SerializedName("release_date")
     @Expose
     private String releaseDate;
-
     @SerializedName("title")
     @Expose
     private String title;
-
     @SerializedName("original_title")
     @Expose
     private String originalTitle;
-
     @SerializedName("vote_average")
     @Expose
     private Float voteAverage;
@@ -99,10 +85,6 @@ public class Film implements Parcelable {
 
     public static Creator<Film> getCREATOR() {
         return CREATOR;
-    }
-
-    public Film(){
-
     }
 
     protected Film(Parcel in) {

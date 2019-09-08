@@ -6,23 +6,25 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
-import com.fufufu.moviecataloguemvvm.models.Film;
+
+import com.fufufu.moviecataloguemvvm.models.FavoriteFilm;
+
 import java.util.List;
 
 @Dao
-public interface FilmDao {
+public interface FavoriteFilmDao {
 
     @Insert
-    void insertFavoriteFilm(Film film);
+    void insertFavoriteFilm(FavoriteFilm favoriteFilm);
 
     @Query("SELECT * FROM favorite_film_table")
-    LiveData<List<Film>> getAllFavoriteFilms();
+    LiveData<List<FavoriteFilm>> getAllFavoriteFilms();
 
     @Update
-    void updateFavoriteFilm(Film film);
+    void updateFavoriteFilm(FavoriteFilm favoriteFilm);
 
     @Delete
-    void deleteFavoriteFilm(Film film);
+    void deleteFavoriteFilm(FavoriteFilm favoriteFilm);
 
     @Query("DELETE FROM favorite_film_table")
     void deleteAllFavoriteFilms();

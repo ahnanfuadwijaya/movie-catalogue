@@ -16,14 +16,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import com.fufufu.moviecataloguemvvm.R;
 import com.fufufu.moviecataloguemvvm.adapters.FavoriteFilmAdapter;
-import com.fufufu.moviecataloguemvvm.adapters.FilmAdapter;
 import com.fufufu.moviecataloguemvvm.databinding.FragmentFavoriteFilmBinding;
-import com.fufufu.moviecataloguemvvm.databinding.FragmentFilmBinding;
-import com.fufufu.moviecataloguemvvm.models.Film;
 import com.fufufu.moviecataloguemvvm.viewmodels.FavoriteFilmViewModel;
-import com.fufufu.moviecataloguemvvm.viewmodels.FilmViewModel;
 
 import java.util.ArrayList;
 
@@ -69,11 +64,5 @@ public class FavoriteFilmFragment extends Fragment {
     }
 
     private void getFilms() {
-        favoriteFilmViewModel.getFavoriteFilm().observe(this, new Observer<ArrayList<Film>>() {
-            @Override
-            public void onChanged(@Nullable ArrayList<Film> films) {
-                favoriteFilmAdapter.setFilms(films);
-            }
-        });
     }
 }

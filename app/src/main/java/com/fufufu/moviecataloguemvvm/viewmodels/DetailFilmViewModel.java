@@ -1,6 +1,7 @@
 package com.fufufu.moviecataloguemvvm.viewmodels;
 
 import androidx.lifecycle.ViewModel;
+
 import com.fufufu.moviecataloguemvvm.models.Film;
 
 public class DetailFilmViewModel extends ViewModel {
