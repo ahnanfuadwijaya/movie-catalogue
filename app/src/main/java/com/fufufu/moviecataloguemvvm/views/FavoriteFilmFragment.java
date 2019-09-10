@@ -53,12 +53,9 @@ public class FavoriteFilmFragment extends Fragment {
             @Override
             public void onChanged(List<FavoriteFilm> favoriteFilms) {
                 favoriteFilmAdapter.setFavoriteFilms(favoriteFilms);
-                Toast.makeText(getContext(), "Favorite Film Fragment onChanged", Toast.LENGTH_LONG).show();
             }
         });
-
-
-        favoriteFilmAdapter = new FavoriteFilmAdapter();
+        favoriteFilmAdapter = new FavoriteFilmAdapter(this);
         recyclerView.setAdapter(favoriteFilmAdapter);
         return fragmentFavoriteFilmBinding.getRoot();
     }

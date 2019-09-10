@@ -62,7 +62,6 @@ public class FilmFragment extends Fragment{
         filmViewModel.getFilmList().observe(this, new Observer<ArrayList<Film>>() {
             @Override
             public void onChanged(@Nullable ArrayList<Film> films) {
-                Toast.makeText(getContext(), "Film Fragment onChanged", Toast.LENGTH_LONG).show();
                 filmAdapter.setFilms(films);
             }
         });

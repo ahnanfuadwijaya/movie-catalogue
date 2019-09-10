@@ -9,9 +9,8 @@ import com.google.gson.annotations.SerializedName;
 
 @Entity(tableName = "favorite_film_table")
 public class FavoriteFilm {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     private int id;
-    private int filmId;
     private String posterPath;
     private String overview;
     private String releaseDate;
@@ -19,8 +18,8 @@ public class FavoriteFilm {
     private String originalTitle;
     private Float voteAverage;
 
-    public FavoriteFilm(int filmId, String posterPath, String overview, String releaseDate, String title, String originalTitle, Float voteAverage) {
-        this.filmId = filmId;
+    public FavoriteFilm(int id, String posterPath, String overview, String releaseDate, String title, String originalTitle, Float voteAverage) {
+        this.id = id;
         this.posterPath = posterPath;
         this.overview = overview;
         this.releaseDate = releaseDate;
@@ -62,14 +61,6 @@ public class FavoriteFilm {
 
     public int getId() {
         return id;
-    }
-
-    public int getFilmId() {
-        return filmId;
-    }
-
-    public void setFilmId(int filmId) {
-        this.filmId = filmId;
     }
 
     public String getPosterPath() {

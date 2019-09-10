@@ -2,6 +2,7 @@ package com.fufufu.moviecataloguemvvm.views;
 
 import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -32,11 +33,11 @@ public class DetailFilmActivity extends AppCompatActivity {
         activityDetailFilmBinding.setFilm(detailFilmViewModel.getFilm());
         setTitle(detailFilmViewModel.getFilm().getTitle());
 
-        activityDetailFilmBinding.btnAddToFavoriteFilm.setOnClickListener(new View.OnClickListener() {
+        activityDetailFilmBinding.addToFavoriteFilm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FavoriteFilm favoriteFilm = new FavoriteFilm();
-                favoriteFilm.setFilmId(film.getId());
+                favoriteFilm.setId(film.getId());
                 favoriteFilm.setOriginalTitle(film.getOriginalTitle());
                 favoriteFilm.setOverview(film.getOverview());
                 favoriteFilm.setPosterPath(film.getPosterPath());
@@ -45,8 +46,8 @@ public class DetailFilmActivity extends AppCompatActivity {
                 favoriteFilm.setTitle(film.getTitle());
                 favoriteFilmViewModel.insertFavoriteFilm(favoriteFilm);
                 Toast.makeText(getBaseContext(), "Add to Favorite", Toast.LENGTH_LONG).show();
-                activityDetailFilmBinding.btnAddToFavoriteFilm.setBackgroundColor(Color.DKGRAY);
-                activityDetailFilmBinding.btnAddToFavoriteFilm.setTextColor(Color.WHITE);
+                activityDetailFilmBinding.ivAddFavoriteFilm.setImageResource(R.drawable.ic_favorite_24px);
+                activityDetailFilmBinding.ivAddFavoriteFilm.setColorFilter(ContextCompat.getColor(getBaseContext(), R.color.design_default_color_error), android.graphics.PorterDuff.Mode.SRC_IN);
             }
         });
 

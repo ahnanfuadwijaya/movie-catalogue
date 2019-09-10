@@ -1,5 +1,6 @@
 package com.fufufu.moviecataloguemvvm.adapters;
 
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,19 +8,27 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fufufu.moviecataloguemvvm.R;
 import com.fufufu.moviecataloguemvvm.databinding.FavoriteFilmListItemBinding;
 import com.fufufu.moviecataloguemvvm.models.FavoriteFilm;
 import com.fufufu.moviecataloguemvvm.models.Film;
+import com.fufufu.moviecataloguemvvm.viewmodels.FavoriteFilmViewModel;
 import com.fufufu.moviecataloguemvvm.views.DetailFilmActivity;
+import com.fufufu.moviecataloguemvvm.views.FavoriteFilmFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FavoriteFilmAdapter extends RecyclerView.Adapter<FavoriteFilmAdapter.FilmHolder>{
     private List<FavoriteFilm> favoriteFilms;
+    private FavoriteFilmViewModel favoriteFilmViewModel;
+
+    public FavoriteFilmAdapter(FavoriteFilmFragment favoriteFilmFragment){
+        favoriteFilmViewModel = ViewModelProviders.of(favoriteFilmFragment).get(FavoriteFilmViewModel.class);
+    }
 
     @NonNull
     @Override
@@ -34,6 +43,12 @@ public class FavoriteFilmAdapter extends RecyclerView.Adapter<FavoriteFilmAdapte
     public void onBindViewHolder(@NonNull FavoriteFilmAdapter.FilmHolder holder, int position) {
         final FavoriteFilm favoriteFilm = favoriteFilms.get(position);
         holder.favoriteFilmListItemBinding.setFavoriteFilm(favoriteFilm);
+        holder.favoriteFilmListItemBinding.removeFromFavoriteFilm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                favoriteFilmViewModel.deleteFavoriteFilm(favoriteFilm);
+            }
+        });
     }
 
     @Override
