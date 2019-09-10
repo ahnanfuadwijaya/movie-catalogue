@@ -32,7 +32,7 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
             @Override
             public void onClick(View view) {
                 Intent moveWithDataIntent = new Intent(view.getContext(), DetailFilmActivity.class);
-                moveWithDataIntent.putExtra("film", film);
+                moveWithDataIntent.putExtra("filmId", film.getId());
                 view.getContext().startActivity(moveWithDataIntent);
             }
         });

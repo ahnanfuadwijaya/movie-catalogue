@@ -1,5 +1,7 @@
 package com.fufufu.moviecataloguemvvm.models;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import com.fufufu.moviecataloguemvvm.network.FilmDataService;
@@ -16,6 +18,7 @@ public class Repository {
     private MutableLiveData<ArrayList<Film>> mutableFilmLiveData = new MutableLiveData<>();
     private MutableLiveData<ArrayList<TvShow>> mutableTvShowLiveData = new MutableLiveData<>();
     private MutableLiveData<Boolean> mutableIsLoading = new MutableLiveData<>();
+    private MutableLiveData<Film> detailFilm = new MutableLiveData<>();
 
     public Repository(){
     }
@@ -43,6 +46,34 @@ public class Repository {
         });
         mutableIsLoading.setValue(false);
         return mutableFilmLiveData;
+    }
+
+    public MutableLiveData<Film> getDetailFilmFromApi(String apiKey,int filmId, String lang){
+        FilmDataService userDataService = RetrofitClient.getFilmService();
+        Call<Film> call = userDataService.getDetailFilm(filmId, apiKey, lang);
+        call.enqueue(new Callback<Film>() {
+            @Override
+            public void onResponse(Call<Film> call, Response<Film> response) {
+                mutableIsLoading.setValue(true);
+                if(response.body() != null){
+                    Log.d("FilmDbResponse", "Tidak Null");
+                    Log.d("response.raw() ", response.raw().toString());
+                }
+                else {
+                    Log.d("FilmDbResponse", "Null");
+                }
+                if(response.body() != null){
+                    detailFilm.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Film> call, Throwable t) {
+
+            }
+        });
+        mutableIsLoading.setValue(false);
+        return detailFilm;
     }
 
     public MutableLiveData<ArrayList<TvShow>> getTvShowListFromApi(String apiKey, String lang, String sortBy){
