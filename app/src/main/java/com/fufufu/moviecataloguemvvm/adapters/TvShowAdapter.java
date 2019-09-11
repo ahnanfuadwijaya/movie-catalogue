@@ -20,7 +20,7 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.TvShowHold
     @Override
     public TvShowAdapter.TvShowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         TvShowListItemBinding tvShowListItemBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
-                        R.layout.tv_show_list_item, parent, false);
+                R.layout.tv_show_list_item, parent, false);
         return new TvShowHolder(tvShowListItemBinding);
     }
 
@@ -46,6 +46,7 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.TvShowHold
             return 0;
         }
     }
+
     public void setTvShows(ArrayList<TvShow> tvShows) {
         this.tvShows = tvShows;
         notifyDataSetChanged();
@@ -53,6 +54,7 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.TvShowHold
 
     class TvShowHolder extends RecyclerView.ViewHolder {
         TvShowListItemBinding tvShowListItemBinding;
+
         TvShowHolder(@NonNull TvShowListItemBinding tvShowListItemBinding) {
             super(tvShowListItemBinding.getRoot());
             this.tvShowListItemBinding = tvShowListItemBinding;

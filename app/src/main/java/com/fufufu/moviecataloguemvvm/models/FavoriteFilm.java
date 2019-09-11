@@ -1,18 +1,10 @@
 package com.fufufu.moviecataloguemvvm.models;
 
-import android.renderscript.ScriptGroup;
-import android.util.Log;
 import android.widget.TextView;
-
 import androidx.databinding.BindingAdapter;
-import androidx.databinding.BindingMethod;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
-
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 import java.text.DecimalFormat;
 
 @Entity(tableName = "favorite_film_table")
@@ -31,7 +23,8 @@ public class FavoriteFilm {
     }
 
     @Ignore
-    public FavoriteFilm(){}
+    public FavoriteFilm() {
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -57,7 +50,6 @@ public class FavoriteFilm {
         return posterPath;
     }
 
-
     public String getTitle() {
         return title;
     }
@@ -67,7 +59,7 @@ public class FavoriteFilm {
     }
 
     @BindingAdapter({"voteFilmAverageValue"})
-    public static void voteFilmAverageValue(TextView textView, Float voteAverage){
+    public static void voteFilmAverageValue(TextView textView, Float voteAverage) {
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
         textView.setText(decimalFormat.format(voteAverage));
     }

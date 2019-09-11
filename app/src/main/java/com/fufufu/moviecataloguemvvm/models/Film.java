@@ -37,13 +37,15 @@ public class Film implements Parcelable {
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
 
     public String getPosterPath() {
-        return posterBaseUrl+posterPath;
+        return posterBaseUrl + posterPath;
     }
+
     public void setPosterPath(String posterPath) {
         this.posterPath = posterPath;
     }
@@ -51,6 +53,7 @@ public class Film implements Parcelable {
     public String getOriginalTitle() {
         return originalTitle;
     }
+
     public void setOriginalTitle(String originalTitle) {
         this.originalTitle = originalTitle;
     }
@@ -58,6 +61,7 @@ public class Film implements Parcelable {
     public String getVoteAverage() {
         return voteAverage.toString();
     }
+
     public void setVoteAverage(Float voteAverage) {
         this.voteAverage = voteAverage;
     }
@@ -65,6 +69,7 @@ public class Film implements Parcelable {
     public String getOverview() {
         return overview;
     }
+
     public void setOverview(String overview) {
         this.overview = overview;
     }
@@ -72,6 +77,7 @@ public class Film implements Parcelable {
     public String getReleaseDate() {
         return releaseDate;
     }
+
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
@@ -79,6 +85,7 @@ public class Film implements Parcelable {
     public String getTitle() {
         return title;
     }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -133,7 +140,8 @@ public class Film implements Parcelable {
             parcel.writeFloat(voteAverage);
         }
     }
-    @BindingAdapter({ "filmPoster" })
+
+    @BindingAdapter({"filmPoster"})
     public static void loadImage(ImageView imageView, String imageURL) {
         Glide.with(imageView.getContext())
                 .setDefaultRequestOptions(new RequestOptions().centerInside())

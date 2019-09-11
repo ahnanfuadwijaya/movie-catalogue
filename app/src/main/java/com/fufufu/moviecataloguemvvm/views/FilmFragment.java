@@ -1,6 +1,10 @@
 package com.fufufu.moviecataloguemvvm.views;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -8,25 +12,13 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ProgressBar;
-import android.widget.Toast;
-
 import com.fufufu.moviecataloguemvvm.adapters.FilmAdapter;
 import com.fufufu.moviecataloguemvvm.databinding.FragmentFilmBinding;
 import com.fufufu.moviecataloguemvvm.models.Film;
 import com.fufufu.moviecataloguemvvm.viewmodels.FilmViewModel;
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-
-public class FilmFragment extends Fragment{
+public class FilmFragment extends Fragment {
     private FilmViewModel filmViewModel;
     private FilmAdapter filmAdapter;
 
@@ -46,13 +38,10 @@ public class FilmFragment extends Fragment{
         filmViewModel.isLoading().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
-                if(!aBoolean){
+                if (!aBoolean) {
                     progressBar.setVisibility(View.VISIBLE);
-                    Log.d("LoadingState", "true");
-                }
-                else {
+                } else {
                     progressBar.setVisibility(View.GONE);
-                    Log.d("LoadingState", "false");
                 }
             }
         });

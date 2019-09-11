@@ -1,7 +1,5 @@
 package com.fufufu.moviecataloguemvvm.models;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import com.fufufu.moviecataloguemvvm.network.FilmDataService;
@@ -21,16 +19,16 @@ public class Repository {
     private MutableLiveData<Film> detailFilm = new MutableLiveData<>();
     private MutableLiveData<TvShow> detailTvShow = new MutableLiveData<>();
 
-    public Repository(){
+    public Repository() {
     }
 
-    public MutableLiveData<Boolean> getLoading(){
+    public MutableLiveData<Boolean> getLoading() {
         return mutableIsLoading;
     }
 
-    public MutableLiveData<ArrayList<Film>> getFilmListFromApi(String apiKey, String lang, String sortBy){
+    public MutableLiveData<ArrayList<Film>> getFilmListFromApi(String lang, String sortBy) {
         FilmDataService userDataService = RetrofitClient.getFilmService();
-        Call<FilmDBResponse> call = userDataService.getFilms(apiKey, lang, sortBy);
+        Call<FilmDBResponse> call = userDataService.getFilms(lang, sortBy);
         call.enqueue(new Callback<FilmDBResponse>() {
             @Override
             public void onResponse(@NonNull Call<FilmDBResponse> call, @NonNull Response<FilmDBResponse> response) {
@@ -41,6 +39,7 @@ public class Repository {
                     mutableFilmLiveData.setValue(films);
                 }
             }
+
             @Override
             public void onFailure(@NonNull Call<FilmDBResponse> call, @NonNull Throwable t) {
             }
@@ -49,21 +48,14 @@ public class Repository {
         return mutableFilmLiveData;
     }
 
-    public MutableLiveData<Film> getDetailFilmFromApi(String apiKey,int filmId, String lang){
+    public MutableLiveData<Film> getDetailFilmFromApi(int filmId, String lang) {
         FilmDataService userDataService = RetrofitClient.getFilmService();
-        Call<Film> call = userDataService.getDetailFilm(filmId, apiKey, lang);
+        Call<Film> call = userDataService.getDetailFilm(filmId, lang);
         call.enqueue(new Callback<Film>() {
             @Override
             public void onResponse(@NonNull Call<Film> call, @NonNull Response<Film> response) {
                 mutableIsLoading.setValue(true);
-                if(response.body() != null){
-                    Log.d("FilmDbResponse", "Tidak Null");
-                    Log.d("response.raw() ", response.raw().toString());
-                }
-                else {
-                    Log.d("FilmDbResponse", "Null");
-                }
-                if(response.body() != null){
+                if (response.body() != null) {
                     detailFilm.setValue(response.body());
                 }
             }
@@ -77,9 +69,9 @@ public class Repository {
         return detailFilm;
     }
 
-    public MutableLiveData<ArrayList<TvShow>> getTvShowListFromApi(String apiKey, String lang, String sortBy){
+    public MutableLiveData<ArrayList<TvShow>> getTvShowListFromApi(String lang, String sortBy) {
         final TvShowDataService userDataService = RetrofitClient.getTvShowService();
-        Call<TvShowDBResponse> call = userDataService.getTvShows(apiKey, lang, sortBy);
+        Call<TvShowDBResponse> call = userDataService.getTvShows(lang, sortBy);
         call.enqueue(new Callback<TvShowDBResponse>() {
             @Override
             public void onResponse(@NonNull Call<TvShowDBResponse> call, @NonNull Response<TvShowDBResponse> response) {
@@ -90,6 +82,7 @@ public class Repository {
                     mutableTvShowLiveData.setValue(tvShows);
                 }
             }
+
             @Override
             public void onFailure(@NonNull Call<TvShowDBResponse> call, @NonNull Throwable t) {
             }
@@ -99,22 +92,14 @@ public class Repository {
         return mutableTvShowLiveData;
     }
 
-    public MutableLiveData<TvShow> getDetailTvShowFromApi(String apiKey,int tvId, String lang){
+    public MutableLiveData<TvShow> getDetailTvShowFromApi(int tvId, String lang) {
         TvShowDataService userDataService = RetrofitClient.getTvShowService();
-        Call<TvShow> call = userDataService.getDetailTvShow(tvId, apiKey, lang);
+        Call<TvShow> call = userDataService.getDetailTvShow(tvId, lang);
         call.enqueue(new Callback<TvShow>() {
             @Override
             public void onResponse(@NonNull Call<TvShow> call, @NonNull Response<TvShow> response) {
                 mutableIsLoading.setValue(true);
-                if(response.body() != null){
-                    Log.d("Tv Response", "Tidak Null");
-                    Log.d("response.raw() ", response.raw().toString());
-                }
-                else {
-                    Log.d("TvResponse", "Null");
-                    Log.d("response.raw() ", response.raw().toString());
-                }
-                if(response.body() != null){
+                if (response.body() != null) {
                     detailTvShow.setValue(response.body());
                 }
             }

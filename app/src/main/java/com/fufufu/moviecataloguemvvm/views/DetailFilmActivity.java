@@ -1,27 +1,21 @@
 package com.fufufu.moviecataloguemvvm.views;
 
-import androidx.annotation.ColorInt;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
-
 import com.fufufu.moviecataloguemvvm.R;
 import com.fufufu.moviecataloguemvvm.databinding.ActivityDetailFilmBinding;
 import com.fufufu.moviecataloguemvvm.models.FavoriteFilm;
 import com.fufufu.moviecataloguemvvm.models.Film;
 import com.fufufu.moviecataloguemvvm.viewmodels.DetailFilmViewModel;
 import com.fufufu.moviecataloguemvvm.viewmodels.FavoriteFilmViewModel;
-
 import java.util.Locale;
 import java.util.Objects;
 
@@ -37,15 +31,14 @@ public class DetailFilmActivity extends AppCompatActivity {
         detailFilmViewModel.isLoading().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
-                if(!aBoolean){
+                if (!aBoolean) {
                     activityDetailFilmBinding.progressBarDetailFilm.setVisibility(View.VISIBLE);
-                }
-                else {
+                } else {
                     activityDetailFilmBinding.progressBarDetailFilm.setVisibility(View.GONE);
                 }
             }
         });
-        if(favoriteFilmViewModel.getFavoriteFilm(filmId) != null){
+        if (favoriteFilmViewModel.getFavoriteFilm(filmId) != null) {
             activityDetailFilmBinding.ivAddFavoriteFilm.setImageResource(R.drawable.ic_favorite_24px);
             activityDetailFilmBinding.ivAddFavoriteFilm.setColorFilter(ContextCompat.getColor(getBaseContext(), R.color.design_default_color_error), android.graphics.PorterDuff.Mode.SRC_IN);
         }
@@ -81,16 +74,15 @@ public class DetailFilmActivity extends AppCompatActivity {
         changeLang(language);
     }
 
+    @SuppressWarnings({"RedundantSuppression","deprecation"})
     public void changeLang(String lang) {
         if (lang.equalsIgnoreCase(""))
             return;
         Locale locale = new Locale(lang);
         Locale.setDefault(locale);
         Configuration config = new Configuration();
-        //deprecate
         config.locale = locale;
-        //deprecate
-        this.getResources().updateConfiguration(config,getBaseContext().getResources().getDisplayMetrics());
+        this.getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
     }
 
     @Override

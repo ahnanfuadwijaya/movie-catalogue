@@ -59,7 +59,7 @@ public class TvShow implements Parcelable {
     }
 
     public String getPosterPath() {
-        return posterBaseUrl+posterPath;
+        return posterBaseUrl + posterPath;
     }
 
     public void setPosterPath(String posterPath) {
@@ -140,7 +140,8 @@ public class TvShow implements Parcelable {
             parcel.writeFloat(voteAverage);
         }
     }
-    @BindingAdapter({ "tvShowPoster" })
+
+    @BindingAdapter({"tvShowPoster"})
     public static void loadImage(ImageView imageView, String imageURL) {
         Glide.with(imageView.getContext())
                 .setDefaultRequestOptions(new RequestOptions().centerInside())

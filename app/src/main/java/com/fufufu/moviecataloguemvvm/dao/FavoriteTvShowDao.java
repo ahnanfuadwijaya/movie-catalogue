@@ -7,10 +7,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
-
-import com.fufufu.moviecataloguemvvm.models.FavoriteFilm;
 import com.fufufu.moviecataloguemvvm.models.FavoriteTvShow;
-
 import java.util.List;
 
 @Dao

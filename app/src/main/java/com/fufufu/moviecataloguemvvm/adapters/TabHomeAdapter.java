@@ -1,7 +1,6 @@
 package com.fufufu.moviecataloguemvvm.adapters;
 
 import android.content.Context;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -27,10 +26,9 @@ public class TabHomeAdapter extends androidx.fragment.app.FragmentStatePagerAdap
     @Override
     public Fragment getItem(int position) {
         Fragment fragment;
-        if(position == 0){
+        if (position == 0) {
             fragment = new FilmFragment();
-        }
-        else{
+        } else {
             fragment = new TvShowFragment();
         }
         return fragment;

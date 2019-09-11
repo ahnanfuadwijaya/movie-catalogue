@@ -32,7 +32,8 @@ public class About {
     public void setPhoto(String photo) {
         this.photo = photo;
     }
-    @BindingAdapter({ "avatar" })
+
+    @BindingAdapter({"avatar"})
     public static void loadImage(ImageView imageView, String imageURL) {
         int resourceId = imageView.getContext().getResources().getIdentifier(imageURL, "drawable", imageView.getContext().getPackageName());
         Glide.with(imageView.getContext())

@@ -47,6 +47,7 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmHolder> {
             return 0;
         }
     }
+
     public void setFilms(ArrayList<Film> films) {
         this.films = films;
         notifyDataSetChanged();

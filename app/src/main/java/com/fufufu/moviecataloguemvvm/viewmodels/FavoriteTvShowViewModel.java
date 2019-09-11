@@ -1,15 +1,10 @@
 package com.fufufu.moviecataloguemvvm.viewmodels;
 
 import android.app.Application;
-
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-
-import com.fufufu.moviecataloguemvvm.models.FavoriteFilm;
-import com.fufufu.moviecataloguemvvm.models.FavoriteFilmRepository;
 import com.fufufu.moviecataloguemvvm.models.FavoriteTvShow;
 import com.fufufu.moviecataloguemvvm.models.FavoriteTvShowRepository;
-
 import java.util.List;
 
 public class FavoriteTvShowViewModel extends AndroidViewModel {
@@ -22,27 +17,27 @@ public class FavoriteTvShowViewModel extends AndroidViewModel {
         allFavoriteTvShows = favoriteTvShowRepository.getAllFavoriteTvShows();
     }
 
-    public void insertFavoriteTvShow(FavoriteTvShow favoriteTvShow){
+    public void insertFavoriteTvShow(FavoriteTvShow favoriteTvShow) {
         favoriteTvShowRepository.insertFavoriteTvShow(favoriteTvShow);
     }
 
-    public LiveData<List<FavoriteTvShow>> getAllFavoriteTvShows(){
+    public LiveData<List<FavoriteTvShow>> getAllFavoriteTvShows() {
         return allFavoriteTvShows;
     }
 
-    public FavoriteTvShow getFavoriteTvShow(int id){
+    public FavoriteTvShow getFavoriteTvShow(int id) {
         return favoriteTvShowRepository.getFavoriteTvShow(id);
     }
 
-    public void updateFavoriteTvShow(FavoriteTvShow favoriteTvShow){
+    public void updateFavoriteTvShow(FavoriteTvShow favoriteTvShow) {
         favoriteTvShowRepository.updateFavoriteTvShow(favoriteTvShow);
     }
 
-    public void deleteFavoriteTvShow(FavoriteTvShow favoriteTvShow){
+    public void deleteFavoriteTvShow(FavoriteTvShow favoriteTvShow) {
         favoriteTvShowRepository.deleteFavoriteTvShow(favoriteTvShow);
     }
 
-    public void deleteAllFavoriteTvShows(){
+    public void deleteAllFavoriteTvShows() {
         favoriteTvShowRepository.deleteAllFavoriteTvShows();
     }
 

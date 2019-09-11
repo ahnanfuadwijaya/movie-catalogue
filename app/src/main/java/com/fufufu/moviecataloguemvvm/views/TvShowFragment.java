@@ -1,7 +1,10 @@
 package com.fufufu.moviecataloguemvvm.views;
 
 import android.os.Bundle;
-
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -9,27 +12,18 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import com.fufufu.moviecataloguemvvm.adapters.TvShowAdapter;
 import com.fufufu.moviecataloguemvvm.databinding.FragmentTvShowBinding;
 import com.fufufu.moviecataloguemvvm.models.TvShow;
 import com.fufufu.moviecataloguemvvm.viewmodels.TvShowViewModel;
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class TvShowFragment extends Fragment{
+public class TvShowFragment extends Fragment {
     private TvShowViewModel tvViewModel;
     private TvShowAdapter tvShowAdapter;
 
-
     public TvShowFragment() {
     }
-
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -46,10 +40,9 @@ public class TvShowFragment extends Fragment{
         tvViewModel.isLoading().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
-                if(aBoolean){
+                if (aBoolean) {
                     progressBar.setVisibility(View.GONE);
-                }
-                else {
+                } else {
                     progressBar.setVisibility(View.VISIBLE);
                 }
             }

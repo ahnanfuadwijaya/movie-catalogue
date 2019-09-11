@@ -1,5 +1,13 @@
 package com.fufufu.moviecataloguemvvm.views;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
@@ -7,16 +15,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
 import com.fufufu.moviecataloguemvvm.R;
 import com.fufufu.moviecataloguemvvm.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -31,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         changeLang(language);
     }
 
-    @SuppressWarnings("deprecation")
+    @SuppressWarnings({"RedundantSuppression","deprecation"})
     public void changeLang(String lang) {
         if (lang.equalsIgnoreCase(""))
             return;
@@ -39,10 +37,8 @@ public class MainActivity extends AppCompatActivity {
         saveLocale(lang);
         Locale.setDefault(locale);
         Configuration config = new Configuration();
-        //deprecate
         config.locale = locale;
-        //deprecate
-        this.getResources().updateConfiguration(config,getBaseContext().getResources().getDisplayMetrics());
+        this.getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
     }
 
     public void saveLocale(String lang) {
@@ -54,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.language_action, menu);
         return super.onCreateOptionsMenu(menu);
@@ -62,18 +58,16 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Log.d("option", "Selected");
         View menuItemView = findViewById(R.id.action_language);
         PopupMenu popupMenu = new PopupMenu(this, menuItemView);
         popupMenu.inflate(R.menu.menu_language);
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                if(item.getItemId() == R.id.menu_en){
+                if (item.getItemId() == R.id.menu_en) {
                     changeLang("en");
                     saveLocale("en");
-                }
-                else if(item.getItemId() == R.id.menu_indonesia){
+                } else if (item.getItemId() == R.id.menu_indonesia) {
                     changeLang("in");
                     saveLocale("in");
                 }
@@ -115,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-        if(savedInstanceState == null){
+        if (savedInstanceState == null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             HomeFragment homeFragment = new HomeFragment();

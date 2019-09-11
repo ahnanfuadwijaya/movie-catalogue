@@ -25,19 +25,18 @@ public class TvShowViewModel extends AndroidViewModel {
         SharedPreferences prefs = getApplication().getSharedPreferences("CommonPrefs", Activity.MODE_PRIVATE);
         String language = prefs.getString(langPref, "");
         String lang = "en";
-        if(language.equalsIgnoreCase("en")){
+        if (language.equalsIgnoreCase("en")) {
             lang = "en-US";
-        }
-        else if(language.equalsIgnoreCase("in")){
+        } else if (language.equalsIgnoreCase("in")) {
             lang = "id-ID";
         }
         if (currentTvShowList == null) {
-            currentTvShowList = repository.getTvShowListFromApi("f240487696509310687e5998a34a405f", lang, "popularity.desc");
+            currentTvShowList = repository.getTvShowListFromApi(lang, "popularity.desc");
         }
         return currentTvShowList;
     }
 
-    public LiveData<Boolean> isLoading(){
+    public LiveData<Boolean> isLoading() {
         return repository.getLoading();
     }
 }
