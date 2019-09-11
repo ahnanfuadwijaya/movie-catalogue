@@ -19,5 +19,4 @@ public interface TvShowDataService {
     Call<TvShow> getDetailTvShow(
             @Path("tv_id") int tvId,
             @Query("language") String lang);
-
 }
