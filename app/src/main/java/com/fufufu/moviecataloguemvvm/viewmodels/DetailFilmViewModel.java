@@ -48,10 +48,6 @@ public class DetailFilmViewModel extends AndroidViewModel {
         return film;
     }
 
-    public void setFilm(int id) {
-
-    }
-
     public LiveData<Boolean> isLoading() {
         return repository.getLoading();
     }

@@ -15,23 +15,23 @@ import com.google.gson.annotations.SerializedName;
 
 import java.text.DecimalFormat;
 
-@Entity(tableName = "favorite_film_table")
-public class FavoriteFilm {
+@Entity(tableName = "favorite_tv_show_table")
+public class FavoriteTvShow {
     @PrimaryKey
     private int id;
     private String posterPath;
-    private String title;
+    private String name;
     private Float voteAverage;
 
-    public FavoriteFilm(int id, String posterPath, String title, Float voteAverage) {
+    public FavoriteTvShow(int id, String posterPath, String name, Float voteAverage) {
         this.id = id;
         this.posterPath = posterPath;
-        this.title = title;
+        this.name = name;
         this.voteAverage = voteAverage;
     }
 
     @Ignore
-    public FavoriteFilm(){}
+    public FavoriteTvShow(){}
 
     public void setId(int id) {
         this.id = id;
@@ -41,8 +41,8 @@ public class FavoriteFilm {
         this.posterPath = posterPath;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setVoteAverage(Float voteAverage) {
@@ -57,17 +57,16 @@ public class FavoriteFilm {
         return posterPath;
     }
 
-
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
     public Float getVoteAverage() {
         return voteAverage;
     }
 
-    @BindingAdapter({"voteFilmAverageValue"})
-    public static void voteFilmAverageValue(TextView textView, Float voteAverage){
+    @BindingAdapter({"voteTvShowAverageValue"})
+    public static void voteTvShowAverageValue(TextView textView, Float voteAverage){
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
         textView.setText(decimalFormat.format(voteAverage));
     }

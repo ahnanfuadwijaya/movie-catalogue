@@ -35,42 +35,85 @@
                     android:layout_marginStart="133dp"
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="151dp"
-                    android:contentDescription="@string/film_poster"
+                    android:contentDescription="@string/tv_show_poster_description"
                     bind:tvShowPoster="@{tvShow.posterPath}"
                     bind:layout_constraintEnd_toEndOf="parent"
                     bind:layout_constraintStart_toStartOf="parent"
                     bind:layout_constraintTop_toTopOf="parent"
                     tools:srcCompat="@tools:sample/avatars[1]" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/add_to_favorite_tv_show"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/border"
+                    bind:layout_constraintEnd_toEndOf="@+id/imageView"
+                    bind:layout_constraintStart_toStartOf="@+id/imageView"
+                    bind:layout_constraintTop_toBottomOf="@+id/imageView">
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="@string/add_to_favorite_tv_show"
+                        android:textColor="@android:color/black"
+                        android:textSize="20sp"
+                        bind:layout_constraintBottom_toBottomOf="parent"
+                        bind:layout_constraintEnd_toStartOf="@+id/iv_add_favorite_tv_show"
+                        bind:layout_constraintStart_toStartOf="parent"
+                        bind:layout_constraintTop_toTopOf="parent"
+                        bind:layout_constraintVertical_bias="1.0" />
+
+                    <ImageView
+                        android:id="@+id/iv_add_favorite_tv_show"
+                        android:layout_width="29dp"
+                        android:layout_height="29dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:contentDescription="@string/add_to_favorite_tv_show"
+                        android:src="@drawable/ic_favorite_border_24px"
+                        bind:layout_constraintBottom_toBottomOf="parent"
+                        bind:layout_constraintEnd_toEndOf="parent"
+                        bind:layout_constraintTop_toTopOf="parent"
+                        bind:layout_constraintVertical_bias="0.0" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <TextView
-                    android:id="@+id/tv__title"
+                    android:id="@+id/tv__name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="24dp"
                     android:layout_marginEnd="24dp"
                     android:text="@{tvShow.name}"
                     android:textColor="@android:color/black"
                     android:textSize="24sp"
                     app:layout_constrainedWidth="true"
                     bind:layout_constraintEnd_toEndOf="parent"
-                    bind:layout_constraintHorizontal_bias="0.003"
+                    bind:layout_constraintHorizontal_bias="0.0"
                     bind:layout_constraintStart_toStartOf="parent"
-                    bind:layout_constraintTop_toBottomOf="@+id/imageView"
+                    bind:layout_constraintTop_toBottomOf="@+id/add_to_favorite_tv_show"
                     tools:text="Title" />
                 <TextView
-                    android:id="@+id/tv_original_title_tag"
+                    android:id="@+id/tv_original_name_tag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="24dp"
-                    android:text="@string/original_title_tag"
+                    android:text="@string/original_name_tag"
                     android:textSize="14sp"
                     android:textColor="@android:color/black"
                     app:layout_constrainedWidth="true"
                     bind:layout_constraintStart_toStartOf="parent"
-                    bind:layout_constraintTop_toBottomOf="@+id/tv__title" />
+                    bind:layout_constraintTop_toBottomOf="@+id/tv__name" />
                 <TextView
-                    android:id="@+id/tv_original_title_value"
+                    android:id="@+id/tv_original_name_value"
                     android:layout_width="76dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
@@ -81,11 +124,11 @@
                     app:layout_constrainedWidth="true"
                     bind:layout_constraintEnd_toEndOf="parent"
                     bind:layout_constraintHorizontal_bias="0.1"
-                    bind:layout_constraintStart_toEndOf="@+id/tv_original_title_tag"
-                    bind:layout_constraintTop_toBottomOf="@+id/tv__title"
+                    bind:layout_constraintStart_toEndOf="@+id/tv_original_name_tag"
+                    bind:layout_constraintTop_toBottomOf="@+id/tv__name"
                     tools:text="Genre Value" />
                 <TextView
-                    android:id="@+id/tv_release_date"
+                    android:id="@+id/tv_first_air_date_tag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -93,8 +136,8 @@
                     android:textSize="14sp"
                     android:textColor="@android:color/black"
                     app:layout_constrainedWidth="true"
-                    bind:layout_constraintStart_toStartOf="@+id/tv_original_title_tag"
-                    bind:layout_constraintTop_toBottomOf="@+id/tv_original_title_value" />
+                    bind:layout_constraintStart_toStartOf="@+id/tv_original_name_tag"
+                    bind:layout_constraintTop_toBottomOf="@+id/tv_original_name_value" />
                 <TextView
                     android:id="@+id/tv_first_air_date_value"
                     android:layout_width="wrap_content"
@@ -105,8 +148,8 @@
                     android:textSize="14sp"
                     bind:layout_constraintEnd_toEndOf="parent"
                     bind:layout_constraintHorizontal_bias="0.0"
-                    bind:layout_constraintStart_toStartOf="@+id/tv_original_title_value"
-                    bind:layout_constraintTop_toBottomOf="@+id/tv_original_title_value"
+                    bind:layout_constraintStart_toStartOf="@+id/tv_original_name_value"
+                    bind:layout_constraintTop_toBottomOf="@+id/tv_original_name_value"
                     tools:text="Release Date" />
                 <TextView
                     android:id="@+id/tv_score_tag"
@@ -117,7 +160,7 @@
                     android:textSize="14sp"
                     android:textColor="@android:color/black"
                     app:layout_constrainedWidth="true"
-                    bind:layout_constraintStart_toStartOf="@+id/tv_release_date"
+                    bind:layout_constraintStart_toStartOf="@+id/tv_first_air_date_tag"
                     bind:layout_constraintTop_toBottomOf="@+id/tv_first_air_date_value"
                     tools:text="Score" />
                 <TextView

@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import com.fufufu.moviecataloguemvvm.R;
 import com.fufufu.moviecataloguemvvm.views.FavoriteFilmFragment;
 import com.fufufu.moviecataloguemvvm.views.FavoriteFragment;
+import com.fufufu.moviecataloguemvvm.views.FavoriteTvShowFragment;
 
 public class TabFavoriteAdapter extends androidx.fragment.app.FragmentStatePagerAdapter {
     private final static int PAGE_COUNT = 2;
@@ -27,12 +28,11 @@ public class TabFavoriteAdapter extends androidx.fragment.app.FragmentStatePager
     @Override
     public Fragment getItem(int position) {
         Fragment fragment;
-        fragment = new Fragment();
         if(position == 0){
             fragment = new FavoriteFilmFragment();
         }
         else{
-            //fragment = new TvShowFragment();
+            fragment = new FavoriteTvShowFragment();
         }
         return fragment;
     }

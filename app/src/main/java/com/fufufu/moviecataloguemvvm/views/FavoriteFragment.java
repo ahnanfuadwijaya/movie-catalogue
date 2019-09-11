@@ -35,33 +35,13 @@ public class FavoriteFragment extends Fragment {
 
         Objects.requireNonNull(getActivity()).setTitle(getResources().getString(R.string.fragment_favorite_title));
         View view = inflater.inflate(R.layout.fragment_favorite, container, false);
+
         TabLayout tabLayout = view.findViewById(R.id.tab_favorite);
         final ViewPager viewPager = view.findViewById(R.id.viewpager_favorite);
         final TabFavoriteAdapter tabFavoriteAdapter = new TabFavoriteAdapter(getChildFragmentManager(), requireContext());
         viewPager.setAdapter(tabFavoriteAdapter);
         tabLayout.setupWithViewPager(viewPager);
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener(){
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-                if(tab.getPosition()==0){
-                    //
-                }
-                else if(tab.getPosition()==1){
-                    //
-                }
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-            }
-        });
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         return view;
     }
-
 }

@@ -10,16 +10,18 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.fufufu.moviecataloguemvvm.dao.FavoriteFilmDao;
+import com.fufufu.moviecataloguemvvm.dao.FavoriteTvShowDao;
 import com.fufufu.moviecataloguemvvm.models.FavoriteFilm;
+import com.fufufu.moviecataloguemvvm.models.FavoriteTvShow;
 
-@Database(entities = {FavoriteFilm.class}, version = 1, exportSchema = false)
-public abstract class FavoriteFilmDatabase extends RoomDatabase {
-    private static FavoriteFilmDatabase instance;
-    public abstract FavoriteFilmDao favoriteFilmDao();
+@Database(entities = {FavoriteTvShow.class}, version = 1, exportSchema = false)
+public abstract class FavoriteTvShowDatabase extends RoomDatabase {
+    private static FavoriteTvShowDatabase instance;
+    public abstract FavoriteTvShowDao favoriteTvShowDao();
 
-    public static synchronized FavoriteFilmDatabase getInstance(Context context){
+    public static synchronized FavoriteTvShowDatabase getInstance(Context context){
         if(instance == null){
-            instance = Room.databaseBuilder(context, FavoriteFilmDatabase.class, "favorite_film_database")
+            instance = Room.databaseBuilder(context, FavoriteTvShowDatabase.class, "favorite_tv_show_database")
                     .addCallback(roomCallback)
                     .fallbackToDestructiveMigration()
                     .build();
@@ -31,15 +33,15 @@ public abstract class FavoriteFilmDatabase extends RoomDatabase {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
-            new PopulateDatabaseAsync(instance).execute();
+            new FavoriteTvShowDatabase.PopulateDatabaseAsync(instance).execute();
         }
     };
 
-    private static class PopulateDatabaseAsync extends AsyncTask<Void, Void, Void>{
-        private FavoriteFilmDao favoriteFilmDao;
+    private static class PopulateDatabaseAsync extends AsyncTask<Void, Void, Void> {
+        private FavoriteTvShowDao favoriteTvShowDao;
 
-        private PopulateDatabaseAsync(FavoriteFilmDatabase database){
-            this.favoriteFilmDao = database.favoriteFilmDao();
+        private PopulateDatabaseAsync(FavoriteTvShowDatabase database){
+            this.favoriteTvShowDao = database.favoriteTvShowDao();
         }
 
         @Override

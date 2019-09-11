@@ -3,11 +3,11 @@
     xmlns:bind="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
-            name="favoriteFilm"
-            type="com.fufufu.moviecataloguemvvm.models.FavoriteFilm"/>
+            name="favoriteTvShow"
+            type="com.fufufu.moviecataloguemvvm.models.FavoriteTvShow"/>
     </data>
     <androidx.cardview.widget.CardView
-        android:id="@+id/film_cardview"
+        android:id="@+id/tv_show_cardview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
@@ -26,50 +26,50 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:contentDescription="@string/poster_film_description"
-                bind:filmPoster="@{favoriteFilm.posterPath}"
+                android:contentDescription="@string/tv_show_poster_description"
+                bind:filmPoster="@{favoriteTvShow.posterPath}"
                 bind:layout_constraintBottom_toBottomOf="parent"
                 bind:layout_constraintStart_toStartOf="parent"
                 bind:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_favorite_film_title"
+                android:id="@+id/tv_favorite_tv_show_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="12dp"
-                android:text="@{favoriteFilm.title}"
+                android:text="@{favoriteTvShow.name}"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 bind:layout_constraintStart_toEndOf="@+id/iv_poster"
                 bind:layout_constraintTop_toTopOf="@+id/iv_poster"
-                tools:text="Judul Filem" />
+                tools:text="Judul Tv Show" />
 
             <TextView
-                android:id="@+id/tv_favorite_film_score_tag"
+                android:id="@+id/tv_favorite_tv_show_score_tag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/score_tag"
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
-                bind:layout_constraintStart_toStartOf="@+id/tv_favorite_film_title"
-                bind:layout_constraintTop_toBottomOf="@+id/tv_favorite_film_title" />
+                bind:layout_constraintStart_toStartOf="@+id/tv_favorite_tv_show_name"
+                bind:layout_constraintTop_toBottomOf="@+id/tv_favorite_tv_show_name" />
 
             <TextView
-                android:id="@+id/tv_favorite_film_score_value"
+                android:id="@+id/tv_favorite_tv_show_score_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
                 tools:text="7.9"
-                bind:voteFilmAverageValue="@{favoriteFilm.voteAverage}"
-                bind:layout_constraintStart_toEndOf="@+id/tv_favorite_film_score_tag"
-                bind:layout_constraintTop_toTopOf="@+id/tv_favorite_film_score_tag" />
+                bind:voteTvShowAverageValue="@{favoriteTvShow.voteAverage}"
+                bind:layout_constraintStart_toEndOf="@+id/tv_favorite_tv_show_score_tag"
+                bind:layout_constraintTop_toTopOf="@+id/tv_favorite_tv_show_score_tag" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/remove_from_favorite_film"
+                android:id="@+id/remove_from_favorite_tv_show"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -80,7 +80,7 @@
                 bind:layout_constraintStart_toEndOf="@+id/iv_poster">
 
                 <TextView
-                    android:id="@+id/tv_remove_favorite_film"
+                    android:id="@+id/tv_remove_favorite_tv_show"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -94,7 +94,7 @@
                     bind:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:id="@+id/iv_remove_favorite_film"
+                    android:id="@+id/iv_remove_favorite_tv_show"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -105,7 +105,7 @@
                     android:src="@drawable/ic_remove_24px"
                     bind:layout_constraintBottom_toBottomOf="parent"
                     bind:layout_constraintEnd_toEndOf="parent"
-                    bind:layout_constraintStart_toEndOf="@+id/tv_remove_favorite_film"
+                    bind:layout_constraintStart_toEndOf="@+id/tv_remove_favorite_tv_show"
                     bind:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

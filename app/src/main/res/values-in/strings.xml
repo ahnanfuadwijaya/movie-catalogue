@@ -24,4 +24,10 @@
     </string-array>
     <string name="fragment_home_title">Beranda</string>
     <string name="fragment_favorite_title">Favorit</string>
+    <string name="fragment_about_me_title">Tentang Saya</string>
+    <string name="add_to_favorite_film">Tambah ke Favorit</string>
+    <string name="remove_from_favorite">Hapus</string>
+    <string name="add_to_favorite_tv_show">Tambah ke Favorit</string>
+    <string name="toast_add_to_favorite">Ditambahkan ke Daftar</string>
+    <string name="original_name_tag">Judul Asli</string>
 </resources>

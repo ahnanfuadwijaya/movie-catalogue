@@ -29,15 +29,15 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
-                    android:id="@+id/tv_judul_film"
+                    android:id="@+id/tv_film_title"
                     android:text="@{film.title}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/black"
                     android:textSize="20sp"
-                    tools:text="Judul Filem" />
+                    tools:text="Judul Film" />
                 <TextView
-                    android:id="@+id/tv_overview_film_tag"
+                    android:id="@+id/tv_film_overview_tag"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:paddingTop="10dp"
@@ -45,7 +45,7 @@
                     android:textColor="@android:color/black"
                     android:textSize="16sp" />
                 <TextView
-                    android:id="@+id/tv_genre_film"
+                    android:id="@+id/tv_film_overview_value"
                     android:text="@{film.overview}"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"

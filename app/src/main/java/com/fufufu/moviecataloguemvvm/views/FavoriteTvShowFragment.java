@@ -4,7 +4,6 @@ package com.fufufu.moviecataloguemvvm.views;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -15,26 +14,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
+import com.fufufu.moviecataloguemvvm.R;
 import com.fufufu.moviecataloguemvvm.adapters.FavoriteFilmAdapter;
+import com.fufufu.moviecataloguemvvm.adapters.FavoriteTvShowAdapter;
 import com.fufufu.moviecataloguemvvm.databinding.FragmentFavoriteFilmBinding;
+import com.fufufu.moviecataloguemvvm.databinding.FragmentFavoriteTvShowBinding;
 import com.fufufu.moviecataloguemvvm.models.FavoriteFilm;
+import com.fufufu.moviecataloguemvvm.models.FavoriteTvShow;
 import com.fufufu.moviecataloguemvvm.viewmodels.FavoriteFilmViewModel;
+import com.fufufu.moviecataloguemvvm.viewmodels.FavoriteTvShowViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FavoriteFilmFragment extends Fragment {
+public class FavoriteTvShowFragment extends Fragment {
 
-    private FavoriteFilmViewModel favoriteFilmViewModel;
-    private FavoriteFilmAdapter favoriteFilmAdapter;
+    private FavoriteTvShowViewModel favoriteTvShowViewModel;
+    private FavoriteTvShowAdapter favoriteTvShowAdapter;
 
 
-    public FavoriteFilmFragment() {
+    public FavoriteTvShowFragment() {
         // Required empty public constructor
     }
 
@@ -43,21 +45,21 @@ public class FavoriteFilmFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        final FragmentFavoriteFilmBinding fragmentFavoriteFilmBinding = FragmentFavoriteFilmBinding.inflate(inflater, container, false);
-        RecyclerView recyclerView = fragmentFavoriteFilmBinding.rvFavoriteFilmList;
+        final FragmentFavoriteTvShowBinding fragmentFavoriteTvShowBinding = FragmentFavoriteTvShowBinding.inflate(inflater, container, false);
+        RecyclerView recyclerView = fragmentFavoriteTvShowBinding.rvFavoriteTvShowList;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
-        final ProgressBar progressBar = fragmentFavoriteFilmBinding.progressBarFavoriteFilm;
-        favoriteFilmViewModel = ViewModelProviders.of(this).get(FavoriteFilmViewModel.class);
-        favoriteFilmAdapter = new FavoriteFilmAdapter(this);
-        recyclerView.setAdapter(favoriteFilmAdapter);
-        favoriteFilmViewModel.getAllFavoriteFilms().observe(this, new Observer<List<FavoriteFilm>>() {
+        final ProgressBar progressBar = fragmentFavoriteTvShowBinding.progressBarFavoriteTvShow;
+        favoriteTvShowViewModel = ViewModelProviders.of(this).get(FavoriteTvShowViewModel.class);
+        favoriteTvShowAdapter = new FavoriteTvShowAdapter(this);
+        recyclerView.setAdapter(favoriteTvShowAdapter);
+        favoriteTvShowViewModel.getAllFavoriteTvShows().observe(this, new Observer<List<FavoriteTvShow>>() {
             @Override
-            public void onChanged(List<FavoriteFilm> favoriteFilms) {
-                favoriteFilmAdapter.setFavoriteFilms(favoriteFilms);
+            public void onChanged(List<FavoriteTvShow> favoriteTvShows) {
+                favoriteTvShowAdapter.setFavoriteTvShows(favoriteTvShows);
             }
         });
-        favoriteFilmViewModel.isLoading().observe(this, new Observer<Boolean>() {
+        favoriteTvShowViewModel.isLoading().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
                 if(aBoolean){
@@ -68,6 +70,6 @@ public class FavoriteFilmFragment extends Fragment {
                 }
             }
         });
-        return fragmentFavoriteFilmBinding.getRoot();
+        return fragmentFavoriteTvShowBinding.getRoot();
     }
 }

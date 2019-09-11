@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.fufufu.moviecataloguemvvm.R;
 import com.fufufu.moviecataloguemvvm.databinding.FragmentAboutBinding;
 import com.fufufu.moviecataloguemvvm.viewmodels.AboutViewModel;
 
@@ -24,8 +26,7 @@ public class AboutFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        //Hardcode Sementara
-        Objects.requireNonNull(getActivity()).setTitle("About Me");
+        Objects.requireNonNull(getActivity()).setTitle(getResources().getString(R.string.fragment_about_me_title));
         FragmentAboutBinding fragmentAboutBinding = FragmentAboutBinding.inflate(inflater, container, false);
         AboutViewModel aboutViewModel = new AboutViewModel();
         aboutViewModel.setData();

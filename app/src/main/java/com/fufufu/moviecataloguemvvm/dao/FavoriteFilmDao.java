@@ -21,6 +21,9 @@ public interface FavoriteFilmDao {
     @Query("SELECT * FROM favorite_film_table")
     LiveData<List<FavoriteFilm>> getAllFavoriteFilms();
 
+    @Query("SELECT * FROM favorite_film_table WHERE favorite_film_table.id IS :id")
+    FavoriteFilm getFilm(int id);
+
     @Update
     void updateFavoriteFilm(FavoriteFilm favoriteFilm);
 

@@ -27,6 +27,10 @@ public class FavoriteFilmViewModel extends AndroidViewModel{
         return allFavoriteFilms;
     }
 
+    public FavoriteFilm getFavoriteFilm(int id){
+        return favoriteFilmRepository.getFavoriteFilm(id);
+    }
+
     public void updateFavoriteFilm(FavoriteFilm favoriteFilm){
         favoriteFilmRepository.updateFavoriteFilm(favoriteFilm);
     }
@@ -37,5 +41,9 @@ public class FavoriteFilmViewModel extends AndroidViewModel{
 
     public void deleteAllFavoriteFilms(){
         favoriteFilmRepository.deleteAllFavoriteFilms();
+    }
+
+    public LiveData<Boolean> isLoading() {
+        return favoriteFilmRepository.getLoading();
     }
 }

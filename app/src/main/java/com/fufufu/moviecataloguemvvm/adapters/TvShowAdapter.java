@@ -31,7 +31,7 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.TvShowHold
             @Override
             public void onClick(View view) {
                 Intent moveWithDataIntent = new Intent(view.getContext(), DetailTvShowActivity.class);
-                moveWithDataIntent.putExtra("tvShow", tvShow);
+                moveWithDataIntent.putExtra("tvShowId", tvShow.getId());
                 view.getContext().startActivity(moveWithDataIntent);
             }
         });

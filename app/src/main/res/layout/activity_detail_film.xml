@@ -25,16 +25,18 @@
                 android:layout_marginTop="16dp"
                 android:indeterminate="true"
                 android:visibility="visible"/>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <ImageView
                     android:id="@+id/imageView"
                     android:layout_width="289dp"
                     android:layout_height="421dp"
-                    android:layout_marginStart="133dp"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="24dp"
-                    android:layout_marginEnd="151dp"
+                    android:layout_marginEnd="8dp"
                     android:contentDescription="@string/film_poster"
                     bind:filmPoster="@{film.posterPath}"
                     bind:layout_constraintEnd_toEndOf="parent"
@@ -44,43 +46,43 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/add_to_favorite_film"
-                    android:layout_width="288dp"
-                    android:layout_height="44dp"
-                    android:layout_marginStart="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
                     android:background="@drawable/border"
-                    bind:layout_constraintEnd_toEndOf="parent"
-                    bind:layout_constraintHorizontal_bias="0.4"
-                    bind:layout_constraintStart_toStartOf="parent"
+                    bind:layout_constraintEnd_toEndOf="@+id/imageView"
+                    bind:layout_constraintStart_toStartOf="@+id/imageView"
                     bind:layout_constraintTop_toBottomOf="@+id/imageView">
 
                     <TextView
                         android:id="@+id/textView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="36dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
                         android:text="@string/add_to_favorite_film"
                         android:textColor="@android:color/black"
                         android:textSize="20sp"
                         bind:layout_constraintBottom_toBottomOf="parent"
+                        bind:layout_constraintEnd_toStartOf="@+id/iv_add_favorite_film"
                         bind:layout_constraintStart_toStartOf="parent"
-                        bind:layout_constraintTop_toTopOf="parent" />
+                        bind:layout_constraintTop_toTopOf="parent"
+                        bind:layout_constraintVertical_bias="1.0" />
 
                     <ImageView
                         android:id="@+id/iv_add_favorite_film"
                         android:layout_width="29dp"
                         android:layout_height="29dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="36dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
                         android:layout_marginBottom="8dp"
                         android:contentDescription="@string/add_to_favorite_film"
                         android:src="@drawable/ic_favorite_border_24px"
-                        bind:layout_constraintBottom_toBottomOf="@+id/textView"
+                        bind:layout_constraintBottom_toBottomOf="parent"
                         bind:layout_constraintEnd_toEndOf="parent"
-                        bind:layout_constraintHorizontal_bias="0.0"
-                        bind:layout_constraintStart_toEndOf="@+id/textView"
-                        bind:layout_constraintTop_toTopOf="@+id/textView"
+                        bind:layout_constraintTop_toTopOf="parent"
                         bind:layout_constraintVertical_bias="0.0" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -100,6 +102,7 @@
                     bind:layout_constraintStart_toStartOf="parent"
                     bind:layout_constraintTop_toBottomOf="@+id/add_to_favorite_film"
                     tools:text="Title" />
+
                 <TextView
                     android:id="@+id/tv_original_title_tag"
                     android:layout_width="wrap_content"
@@ -115,6 +118,7 @@
                     bind:layout_constraintHorizontal_bias="0.0"
                     bind:layout_constraintStart_toStartOf="parent"
                     bind:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
                 <TextView
                     android:id="@+id/tv_original_title_value"
                     android:layout_width="wrap_content"
@@ -130,6 +134,7 @@
                     bind:layout_constraintStart_toEndOf="@+id/tv_original_title_tag"
                     bind:layout_constraintTop_toBottomOf="@+id/tv_title"
                     tools:text="Genre Value" />
+
                 <TextView
                     android:id="@+id/tv_release_date"
                     android:layout_width="wrap_content"
@@ -142,6 +147,7 @@
                     bind:layout_constraintEnd_toEndOf="@+id/tv_original_title_tag"
                     bind:layout_constraintStart_toStartOf="@+id/tv_original_title_tag"
                     bind:layout_constraintTop_toBottomOf="@+id/tv_original_title_value" />
+
                 <TextView
                     android:id="@+id/tv_release_date_value"
                     android:layout_width="wrap_content"
@@ -155,6 +161,7 @@
                     bind:layout_constraintStart_toStartOf="@+id/tv_original_title_value"
                     bind:layout_constraintTop_toBottomOf="@+id/tv_original_title_value"
                     tools:text="Release Date" />
+
                 <TextView
                     android:id="@+id/tv_score_tag"
                     android:layout_width="wrap_content"
@@ -170,6 +177,7 @@
                     bind:layout_constraintStart_toStartOf="@+id/tv_release_date"
                     bind:layout_constraintTop_toBottomOf="@+id/tv_release_date_value"
                     tools:text="Score" />
+
                 <TextView
                     android:id="@+id/tv_score_value"
                     android:layout_width="wrap_content"
@@ -183,6 +191,7 @@
                     bind:layout_constraintStart_toStartOf="@+id/tv_release_date_value"
                     bind:layout_constraintTop_toBottomOf="@+id/tv_release_date_value"
                     tools:text="8.0" />
+
                 <TextView
                     android:id="@+id/tv_overview_tag"
                     android:layout_width="wrap_content"
@@ -197,6 +206,7 @@
                     bind:layout_constraintHorizontal_bias="0.062"
                     bind:layout_constraintStart_toStartOf="@+id/tv_score_tag"
                     bind:layout_constraintTop_toBottomOf="@+id/tv_score_value" />
+
                 <TextView
                     android:id="@+id/tv_overview_value"
                     android:layout_width="wrap_content"

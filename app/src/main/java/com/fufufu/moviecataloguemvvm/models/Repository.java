@@ -19,6 +19,7 @@ public class Repository {
     private MutableLiveData<ArrayList<TvShow>> mutableTvShowLiveData = new MutableLiveData<>();
     private MutableLiveData<Boolean> mutableIsLoading = new MutableLiveData<>();
     private MutableLiveData<Film> detailFilm = new MutableLiveData<>();
+    private MutableLiveData<TvShow> detailTvShow = new MutableLiveData<>();
 
     public Repository(){
     }
@@ -33,8 +34,8 @@ public class Repository {
         call.enqueue(new Callback<FilmDBResponse>() {
             @Override
             public void onResponse(@NonNull Call<FilmDBResponse> call, @NonNull Response<FilmDBResponse> response) {
-                FilmDBResponse filmDBResponse = response.body();
                 mutableIsLoading.setValue(true);
+                FilmDBResponse filmDBResponse = response.body();
                 if (filmDBResponse != null && filmDBResponse.getFilm() != null) {
                     films = filmDBResponse.getFilm();
                     mutableFilmLiveData.setValue(films);
@@ -53,7 +54,7 @@ public class Repository {
         Call<Film> call = userDataService.getDetailFilm(filmId, apiKey, lang);
         call.enqueue(new Callback<Film>() {
             @Override
-            public void onResponse(Call<Film> call, Response<Film> response) {
+            public void onResponse(@NonNull Call<Film> call, @NonNull Response<Film> response) {
                 mutableIsLoading.setValue(true);
                 if(response.body() != null){
                     Log.d("FilmDbResponse", "Tidak Null");
@@ -68,7 +69,7 @@ public class Repository {
             }
 
             @Override
-            public void onFailure(Call<Film> call, Throwable t) {
+            public void onFailure(@NonNull Call<Film> call, @NonNull Throwable t) {
 
             }
         });
@@ -96,5 +97,34 @@ public class Repository {
         });
         mutableIsLoading.setValue(false);
         return mutableTvShowLiveData;
+    }
+
+    public MutableLiveData<TvShow> getDetailTvShowFromApi(String apiKey,int tvId, String lang){
+        TvShowDataService userDataService = RetrofitClient.getTvShowService();
+        Call<TvShow> call = userDataService.getDetailTvShow(tvId, apiKey, lang);
+        call.enqueue(new Callback<TvShow>() {
+            @Override
+            public void onResponse(@NonNull Call<TvShow> call, @NonNull Response<TvShow> response) {
+                mutableIsLoading.setValue(true);
+                if(response.body() != null){
+                    Log.d("Tv Response", "Tidak Null");
+                    Log.d("response.raw() ", response.raw().toString());
+                }
+                else {
+                    Log.d("TvResponse", "Null");
+                    Log.d("response.raw() ", response.raw().toString());
+                }
+                if(response.body() != null){
+                    detailTvShow.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<TvShow> call, @NonNull Throwable t) {
+
+            }
+        });
+        mutableIsLoading.setValue(false);
+        return detailTvShow;
     }
 }
