@@ -10,7 +10,7 @@ public class FilmDBResponse {
     private Integer page;
     @SerializedName("results")
     @Expose
-    private ArrayList<Film> filmList = null;
+    private ArrayList<Film> filmList;
 
     public Integer getPage() {
         return page;

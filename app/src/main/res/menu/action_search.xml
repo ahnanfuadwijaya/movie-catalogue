@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:app="http://schemas.android.com/apk/res-auto">
 <item
-    android:id="@+id/menu_search_album"
+    android:id="@+id/action_search_item"
     android:icon="@drawable/ic_search_black_24dp"
-    android:title="@string/action_search__title"
-    app:actionViewClass="androidx.appcompat.widget.SearchView$SearchAutoComplete"
+    android:title="@string/action_search_title"
+    app:actionViewClass="androidx.appcompat.widget.SearchView"
     app:showAsAction="collapseActionView|always" />
 </menu>

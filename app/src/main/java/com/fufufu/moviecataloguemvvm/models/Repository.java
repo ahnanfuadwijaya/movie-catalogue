@@ -1,11 +1,18 @@
 package com.fufufu.moviecataloguemvvm.models;
 
+import android.text.TextUtils;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import com.fufufu.moviecataloguemvvm.network.FilmDataService;
 import com.fufufu.moviecataloguemvvm.network.RetrofitClient;
 import com.fufufu.moviecataloguemvvm.network.TvShowDataService;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -18,6 +25,7 @@ public class Repository {
     private MutableLiveData<Boolean> mutableIsLoading = new MutableLiveData<>();
     private MutableLiveData<Film> detailFilm = new MutableLiveData<>();
     private MutableLiveData<TvShow> detailTvShow = new MutableLiveData<>();
+    private MutableLiveData<ArrayList<Film>> mutableFilmResult = new MutableLiveData<>();
 
     public Repository() {
     }
@@ -46,6 +54,33 @@ public class Repository {
         });
         mutableIsLoading.setValue(false);
         return mutableFilmLiveData;
+    }
+
+    public MutableLiveData<ArrayList<Film>> getFilmResult(String lang, String query) {
+        FilmDataService userDataService = RetrofitClient.getFilmService();
+        Call<FilmDBResponse> call = userDataService.getFilmResult(lang, query);
+        final String querySearch = query;
+        call.enqueue(new Callback<FilmDBResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<FilmDBResponse> call, @NonNull Response<FilmDBResponse> response) {
+                mutableIsLoading.setValue(true);
+                FilmDBResponse filmDBResponse = response.body();
+                if (filmDBResponse != null && filmDBResponse.getFilm() != null) {
+                    films = filmDBResponse.getFilm();
+                    mutableFilmResult.setValue(films);
+                    String listString = TextUtils.join(", ", films);
+                    Log.d("Isi film", listString);
+                }
+                Log.d("Repository", "Search "+querySearch);
+                Log.d("call.enqueue", response.raw().toString());
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<FilmDBResponse> call, @NonNull Throwable t) {
+            }
+        });
+        mutableIsLoading.setValue(false);
+        return mutableFilmResult;
     }
 
     public MutableLiveData<Film> getDetailFilmFromApi(int filmId, String lang) {

@@ -19,4 +19,9 @@ public interface FilmDataService {
     Call<Film> getDetailFilm(
             @Path("film_id") int filmId,
             @Query("language") String lang);
+
+    @GET("search/movie?api_key="+API_KEY)
+    Call<FilmDBResponse> getFilmResult(
+            @Query("language") String lang,
+            @Query("query") String query);
 }

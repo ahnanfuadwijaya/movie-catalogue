@@ -11,7 +11,7 @@
 
     // action title
     <string name="action_setting_title">Pengaturan</string>
-    <string name="action_search__title">Pencarian</string>
+    <string name="action_search_title">Pencarian</string>
 
     // bottom nav
     <string name="home_bottom_nav_title">Beranda</string>
@@ -30,8 +30,8 @@
         <item>Serial TV Favorit</item>
     </string-array>
     <string-array name="tab_search_title">
-        <item>Film Terbaru</item>
-        <item>Serial TV Terbaru</item>
+        <item>Film</item>
+        <item>Serial TV</item>
     </string-array>
 
     // detail film tag
