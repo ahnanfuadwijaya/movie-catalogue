@@ -2,6 +2,7 @@ package com.fufufu.moviecataloguemvvm.views;
 
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -39,15 +40,16 @@ public class DetailFilmActivity extends AppCompatActivity {
             }
         });
         if (favoriteFilmViewModel.getFavoriteFilm(filmId) != null) {
-            activityDetailFilmBinding.ivAddFavoriteFilm.setImageResource(R.drawable.ic_favorite_24px);
-            activityDetailFilmBinding.ivAddFavoriteFilm.setColorFilter(ContextCompat.getColor(getBaseContext(), R.color.design_default_color_error), android.graphics.PorterDuff.Mode.SRC_IN);
+            Drawable favorite = getResources().getDrawable(R.drawable.ic_favorite_red_24dp, null);
+            favorite.setBounds(8, 0, 0, 0);
+            activityDetailFilmBinding.btnAddToFavorite.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, favorite, null);
         }
         detailFilmViewModel.getFilm(filmId).observe(this, new Observer<Film>() {
             @Override
             public void onChanged(final Film film) {
                 activityDetailFilmBinding.setFilm(film);
                 setTitle(film.getTitle());
-                activityDetailFilmBinding.addToFavoriteFilm.setOnClickListener(new View.OnClickListener() {
+                activityDetailFilmBinding.btnAddToFavorite.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         FavoriteFilm favoriteFilm = new FavoriteFilm();
@@ -56,9 +58,11 @@ public class DetailFilmActivity extends AppCompatActivity {
                         favoriteFilm.setVoteAverage(Float.parseFloat(film.getVoteAverage()));
                         favoriteFilm.setTitle(film.getTitle());
                         favoriteFilmViewModel.insertFavoriteFilm(favoriteFilm);
-                        Toast.makeText(getBaseContext(), getResources().getString(R.string.toast_add_to_favorite), Toast.LENGTH_LONG).show();
-                        activityDetailFilmBinding.ivAddFavoriteFilm.setImageResource(R.drawable.ic_favorite_24px);
-                        activityDetailFilmBinding.ivAddFavoriteFilm.setColorFilter(ContextCompat.getColor(getBaseContext(), R.color.design_default_color_error), android.graphics.PorterDuff.Mode.SRC_IN);
+                        Toast.makeText(getBaseContext(), getResources().getString(R.string.detail_film_toast_add_to_favorite_film), Toast.LENGTH_LONG).show();
+
+                        Drawable favorite = getResources().getDrawable(R.drawable.ic_favorite_red_24dp, null);
+                        favorite.setBounds(8, 0, 0, 0);
+                        activityDetailFilmBinding.btnAddToFavorite.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, favorite, null);
                     }
                 });
             }

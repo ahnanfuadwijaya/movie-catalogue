@@ -6,12 +6,12 @@
         android:id="@+id/menu_en"
         android:icon="@drawable/ic_usa_flag"
         app:showAsAction="ifRoom"
-        android:title="@string/english_lang"
+        android:title="@string/language_english"
         />
     <item
         android:id="@+id/menu_indonesia"
         android:icon="@drawable/ic_ina_flag"
         app:showAsAction="ifRoom"
-        android:title="@string/indonesia_lang"
+        android:title="@string/language_indonesia"
         />
 </menu>

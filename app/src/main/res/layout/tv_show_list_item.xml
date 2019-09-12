@@ -23,7 +23,7 @@
                 bind:tvShowPoster="@{tvShow.posterPath}"
                 android:layout_width="160dp"
                 android:layout_height="200dp"
-                android:contentDescription="@string/tv_show_poster_description" />
+                android:contentDescription="@string/detail_tv_show_poster_description_tag" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:paddingTop="10dp"
-                    android:text="@string/overview_tag"
+                    android:text="@string/detail_tv_show_overview_tag"
                     android:textColor="@android:color/black"
                     android:textSize="16sp" />
                 <TextView

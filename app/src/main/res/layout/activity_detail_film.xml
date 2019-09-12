@@ -13,218 +13,163 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white">
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <ProgressBar
                 android:id="@+id/progress_bar_detail_film"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:indeterminate="true"
-                android:visibility="visible"/>
+                android:visibility="visible"
+                bind:layout_constraintEnd_toEndOf="parent"
+                bind:layout_constraintStart_toStartOf="parent"
+                bind:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_overview_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:text="@{film.overview}"
+                android:textSize="14sp"
+                app:layout_constrainedWidth="true"
+                bind:layout_constraintBottom_toBottomOf="parent"
+                bind:layout_constraintStart_toStartOf="@+id/tv_score_value"
+                bind:layout_constraintTop_toTopOf="@+id/tv_overview_tag"
+                tools:text="Overview Value" />
 
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="289dp"
-                    android:layout_height="421dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="8dp"
-                    android:contentDescription="@string/film_poster"
-                    bind:filmPoster="@{film.posterPath}"
-                    bind:layout_constraintEnd_toEndOf="parent"
-                    bind:layout_constraintStart_toStartOf="parent"
-                    bind:layout_constraintTop_toTopOf="parent"
-                    tools:srcCompat="@tools:sample/avatars[1]" />
+            <TextView
+                android:id="@+id/tv_original_title_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/detail_film_original_title_tag"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                app:layout_constrainedWidth="true"
+                bind:layout_constraintStart_toStartOf="@+id/tv_title"
+                bind:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/add_to_favorite_film"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/border"
-                    bind:layout_constraintEnd_toEndOf="@+id/imageView"
-                    bind:layout_constraintStart_toStartOf="@+id/imageView"
-                    bind:layout_constraintTop_toBottomOf="@+id/imageView">
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@{film.title}"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                app:layout_constrainedWidth="true"
+                bind:layout_constraintStart_toStartOf="parent"
+                bind:layout_constraintTop_toBottomOf="@+id/btn_add_to_favorite"
+                tools:text="Title" />
 
-                    <TextView
-                        android:id="@+id/textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:text="@string/add_to_favorite_film"
-                        android:textColor="@android:color/black"
-                        android:textSize="20sp"
-                        bind:layout_constraintBottom_toBottomOf="parent"
-                        bind:layout_constraintEnd_toStartOf="@+id/iv_add_favorite_film"
-                        bind:layout_constraintStart_toStartOf="parent"
-                        bind:layout_constraintTop_toTopOf="parent"
-                        bind:layout_constraintVertical_bias="1.0" />
+            <TextView
+                android:id="@+id/tv_original_title_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:text="@{film.originalTitle}"
+                android:textSize="14sp"
+                app:layout_constrainedWidth="true"
+                bind:layout_constraintStart_toEndOf="@+id/tv_original_title_tag"
+                bind:layout_constraintTop_toTopOf="@+id/tv_original_title_tag"
+                tools:text="Genre Value" />
 
-                    <ImageView
-                        android:id="@+id/iv_add_favorite_film"
-                        android:layout_width="29dp"
-                        android:layout_height="29dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:contentDescription="@string/add_to_favorite_film"
-                        android:src="@drawable/ic_favorite_border_24px"
-                        bind:layout_constraintBottom_toBottomOf="parent"
-                        bind:layout_constraintEnd_toEndOf="parent"
-                        bind:layout_constraintTop_toTopOf="parent"
-                        bind:layout_constraintVertical_bias="0.0" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tv_overview_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/detail_film_overview_tag"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                app:layout_constrainedWidth="true"
+                bind:layout_constraintStart_toStartOf="@+id/tv_score_tag"
+                bind:layout_constraintTop_toBottomOf="@+id/tv_score_value" />
 
-                <TextView
-                    android:id="@+id/tv_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:text="@{film.title}"
-                    android:textColor="@android:color/black"
-                    android:textSize="24sp"
-                    app:layout_constrainedWidth="true"
-                    bind:layout_constraintEnd_toEndOf="parent"
-                    bind:layout_constraintHorizontal_bias="0.003"
-                    bind:layout_constraintStart_toStartOf="parent"
-                    bind:layout_constraintTop_toBottomOf="@+id/add_to_favorite_film"
-                    tools:text="Title" />
+            <TextView
+                android:id="@+id/tv_release_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/detail_film_release_date_tag"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                app:layout_constrainedWidth="true"
+                bind:layout_constraintStart_toStartOf="@+id/tv_original_title_tag"
+                bind:layout_constraintTop_toBottomOf="@+id/tv_original_title_value" />
 
-                <TextView
-                    android:id="@+id/tv_original_title_tag"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="@string/original_title_tag"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"
-                    app:layout_constrainedWidth="true"
-                    bind:layout_constraintEnd_toEndOf="parent"
-                    bind:layout_constraintHorizontal_bias="0.0"
-                    bind:layout_constraintStart_toStartOf="parent"
-                    bind:layout_constraintTop_toBottomOf="@+id/tv_title" />
+            <TextView
+                android:id="@+id/tv_release_date_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{film.releaseDate}"
+                android:textSize="14sp"
+                bind:layout_constraintStart_toStartOf="@+id/tv_original_title_value"
+                bind:layout_constraintTop_toTopOf="@+id/tv_release_date"
+                tools:text="Release Date" />
 
-                <TextView
-                    android:id="@+id/tv_original_title_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="@{film.originalTitle}"
-                    android:textSize="14sp"
-                    app:layout_constrainedWidth="true"
-                    bind:layout_constraintEnd_toEndOf="parent"
-                    bind:layout_constraintHorizontal_bias="0.043"
-                    bind:layout_constraintStart_toEndOf="@+id/tv_original_title_tag"
-                    bind:layout_constraintTop_toBottomOf="@+id/tv_title"
-                    tools:text="Genre Value" />
+            <TextView
+                android:id="@+id/tv_score_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/detail_film_score_tag"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                app:layout_constrainedWidth="true"
+                bind:layout_constraintStart_toStartOf="@+id/tv_release_date"
+                bind:layout_constraintTop_toBottomOf="@+id/tv_release_date_value"
+                tools:text="Score" />
 
-                <TextView
-                    android:id="@+id/tv_release_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/release_date_tag"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"
-                    app:layout_constrainedWidth="true"
-                    bind:layout_constraintEnd_toEndOf="@+id/tv_original_title_tag"
-                    bind:layout_constraintStart_toStartOf="@+id/tv_original_title_tag"
-                    bind:layout_constraintTop_toBottomOf="@+id/tv_original_title_value" />
+            <TextView
+                android:id="@+id/tv_score_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{film.voteAverage}"
+                android:textSize="14sp"
+                bind:layout_constraintStart_toStartOf="@+id/tv_release_date_value"
+                bind:layout_constraintTop_toTopOf="@+id/tv_score_tag"
+                tools:text="8.0" />
 
-                <TextView
-                    android:id="@+id/tv_release_date_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="@{film.releaseDate}"
-                    android:textSize="14sp"
-                    bind:layout_constraintEnd_toEndOf="parent"
-                    bind:layout_constraintHorizontal_bias="0.0"
-                    bind:layout_constraintStart_toStartOf="@+id/tv_original_title_value"
-                    bind:layout_constraintTop_toBottomOf="@+id/tv_original_title_value"
-                    tools:text="Release Date" />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="289dp"
+                android:layout_height="421dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="@string/detail_film_poster_film_description_tag"
+                bind:filmPoster="@{film.posterPath}"
+                bind:layout_constraintEnd_toEndOf="parent"
+                bind:layout_constraintStart_toStartOf="parent"
+                bind:layout_constraintTop_toBottomOf="@+id/progress_bar_detail_film"
+                tools:srcCompat="@tools:sample/avatars[1]" />
 
-                <TextView
-                    android:id="@+id/tv_score_tag"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="@string/score_tag"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"
-                    app:layout_constrainedWidth="true"
-                    bind:layout_constraintEnd_toEndOf="@+id/tv_original_title_tag"
-                    bind:layout_constraintHorizontal_bias="0.0"
-                    bind:layout_constraintStart_toStartOf="@+id/tv_release_date"
-                    bind:layout_constraintTop_toBottomOf="@+id/tv_release_date_value"
-                    tools:text="Score" />
+            <Button
+                android:id="@+id/btn_add_to_favorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:drawableEnd="@drawable/ic_favorite_border_24px"
+                android:drawablePadding="8dp"
+                android:text="@string/detail_film_add_to_favorite_film"
+                android:textSize="20sp"
+                android:padding="8dp"
+                android:background="@color/cardview_light_background"
+                bind:layout_constraintEnd_toEndOf="@+id/imageView"
+                bind:layout_constraintStart_toStartOf="@+id/imageView"
+                bind:layout_constraintTop_toBottomOf="@+id/imageView"
+                tools:ignore="PrivateResource" />
 
-                <TextView
-                    android:id="@+id/tv_score_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="@{film.voteAverage}"
-                    android:textSize="14sp"
-                    bind:layout_constraintEnd_toEndOf="parent"
-                    bind:layout_constraintHorizontal_bias="0.0"
-                    bind:layout_constraintStart_toStartOf="@+id/tv_release_date_value"
-                    bind:layout_constraintTop_toBottomOf="@+id/tv_release_date_value"
-                    tools:text="8.0" />
-
-                <TextView
-                    android:id="@+id/tv_overview_tag"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="@string/overview_tag"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"
-                    app:layout_constrainedWidth="true"
-                    bind:layout_constraintEnd_toEndOf="@+id/tv_original_title_tag"
-                    bind:layout_constraintHorizontal_bias="0.062"
-                    bind:layout_constraintStart_toStartOf="@+id/tv_score_tag"
-                    bind:layout_constraintTop_toBottomOf="@+id/tv_score_value" />
-
-                <TextView
-                    android:id="@+id/tv_overview_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="24dp"
-                    android:text="@{film.overview}"
-                    android:textSize="14sp"
-                    app:layout_constrainedWidth="true"
-                    bind:layout_constraintBottom_toBottomOf="parent"
-                    bind:layout_constraintEnd_toEndOf="parent"
-                    bind:layout_constraintHorizontal_bias="0.0"
-                    bind:layout_constraintStart_toStartOf="@+id/tv_score_value"
-                    bind:layout_constraintTop_toBottomOf="@+id/tv_score_value"
-                    bind:layout_constraintVertical_bias="0.0"
-                    tools:text="Overview Value" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>

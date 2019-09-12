@@ -20,7 +20,7 @@
         app:backgroundTint="@color/cardview_light_background"
         app:itemIconTint="@color/cardview_dark_background"
         app:itemTextColor="@color/cardview_dark_background"
-        app:menu="@menu/menu_bottom_nav"
+        app:menu="@menu/bottom_navigation"
         tools:ignore="PrivateResource" />
 </LinearLayout>
 </layout>

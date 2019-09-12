@@ -2,6 +2,7 @@ package com.fufufu.moviecataloguemvvm.views;
 
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -40,15 +41,16 @@ public class DetailTvShowActivity extends AppCompatActivity {
             }
         });
         if (favoriteTvShowViewModel.getFavoriteTvShow(tvShowId) != null) {
-            activityDetailTvShowBinding.ivAddFavoriteTvShow.setImageResource(R.drawable.ic_favorite_24px);
-            activityDetailTvShowBinding.ivAddFavoriteTvShow.setColorFilter(ContextCompat.getColor(getBaseContext(), R.color.design_default_color_error), android.graphics.PorterDuff.Mode.SRC_IN);
+            Drawable favorite = getResources().getDrawable(R.drawable.ic_favorite_red_24dp, null);
+            favorite.setBounds(8, 0, 0, 0);
+            activityDetailTvShowBinding.btnAddToFavorite.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, favorite, null);
         }
         detailTvShowViewModel.getTvShow(tvShowId).observe(this, new Observer<TvShow>() {
             @Override
             public void onChanged(final TvShow tvShow) {
                 activityDetailTvShowBinding.setTvShow(tvShow);
                 setTitle(tvShow.getName());
-                activityDetailTvShowBinding.addToFavoriteTvShow.setOnClickListener(new View.OnClickListener() {
+                activityDetailTvShowBinding.btnAddToFavorite.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         FavoriteTvShow favoriteTvShow = new FavoriteTvShow();
@@ -57,9 +59,11 @@ public class DetailTvShowActivity extends AppCompatActivity {
                         favoriteTvShow.setVoteAverage(Float.parseFloat(tvShow.getVoteAverage()));
                         favoriteTvShow.setName(tvShow.getName());
                         favoriteTvShowViewModel.insertFavoriteTvShow(favoriteTvShow);
-                        Toast.makeText(getBaseContext(), getResources().getString(R.string.toast_add_to_favorite), Toast.LENGTH_LONG).show();
-                        activityDetailTvShowBinding.ivAddFavoriteTvShow.setImageResource(R.drawable.ic_favorite_24px);
-                        activityDetailTvShowBinding.ivAddFavoriteTvShow.setColorFilter(ContextCompat.getColor(getBaseContext(), R.color.design_default_color_error), android.graphics.PorterDuff.Mode.SRC_IN);
+                        Toast.makeText(getBaseContext(), getResources().getString(R.string.detail_tv_show_toast_add_to_favorite_tv_show), Toast.LENGTH_LONG).show();
+
+                        Drawable favorite = getResources().getDrawable(R.drawable.ic_favorite_red_24dp, null);
+                        favorite.setBounds(8, 0, 0, 0);
+                        activityDetailTvShowBinding.btnAddToFavorite.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, favorite, null);
                     }
                 });
             }

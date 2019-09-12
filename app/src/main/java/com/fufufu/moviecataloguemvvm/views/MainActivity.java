@@ -52,32 +52,41 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.language_action, menu);
+        inflater.inflate(R.menu.action_language, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        View menuItemView = findViewById(R.id.action_language);
-        PopupMenu popupMenu = new PopupMenu(this, menuItemView);
-        popupMenu.inflate(R.menu.menu_language);
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                if (item.getItemId() == R.id.menu_en) {
-                    changeLang("en");
-                    saveLocale("en");
-                } else if (item.getItemId() == R.id.menu_indonesia) {
-                    changeLang("in");
-                    saveLocale("in");
+        if(item.getItemId() == R.id.action_language){
+            View menuItemView = findViewById(R.id.action_language);
+            PopupMenu popupMenu = new PopupMenu(this, menuItemView);
+            popupMenu.inflate(R.menu.menu_language);
+            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    if (item.getItemId() == R.id.menu_en) {
+                        changeLang("en");
+                        saveLocale("en");
+                    } else if (item.getItemId() == R.id.menu_indonesia) {
+                        changeLang("in");
+                        saveLocale("in");
+                    }
+                    finish();
+                    Intent refresh = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(refresh);
+                    return true;
                 }
-                finish();
-                Intent refresh = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(refresh);
-                return true;
-            }
-        });
-        popupMenu.show();
+            });
+            popupMenu.show();
+        }
+        else if(item.getItemId() == R.id.action_setting){
+            Intent intent = new Intent(this, SettingActivity.class);
+            startActivity(intent);
+        }
+
         return true;
     }
 
@@ -96,11 +105,17 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_home:
                         fragment = new HomeFragment();
                         break;
+                    case R.id.nav_search:
+                        fragment = new SearchFragment();
+                        break;
                     case R.id.nav_favorite:
                         fragment = new FavoriteFragment();
                         break;
                     case R.id.nav_account:
                         fragment = new AboutFragment();
+                        break;
+                    case R.id.nav_more:
+                        fragment = new MoreFragment();
                         break;
                     default:
                 }

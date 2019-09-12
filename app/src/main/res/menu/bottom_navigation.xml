@@ -7,14 +7,21 @@
         android:name="Home"
         android:icon="@drawable/ic_home_black_24dp"
         app:showAsAction="ifRoom"
-        android:title="@string/home_bott_nav_title"/>
+        android:title="@string/home_bottom_nav_title"/>
+    <item
+        android:id="@+id/nav_search"
+        android:enabled="true"
+        android:name="Search"
+        android:icon="@drawable/ic_search_black_24dp"
+        app:showAsAction="ifRoom"
+        android:title="@string/search_bottom_nav_title"/>
     <item
         android:id="@+id/nav_favorite"
         android:enabled="true"
         android:name="Favorite"
         android:icon="@drawable/ic_favorite_border_black_24dp"
         app:showAsAction="ifRoom"
-        android:title="Favorite"/>
+        android:title="@string/favorite_bottom_nav_title"/>
     <item
         android:id="@+id/nav_account"
         android:enabled="true"
@@ -22,4 +29,11 @@
         android:icon="@drawable/ic_person_outline_black_24dp"
         app:showAsAction="ifRoom"
         android:title="@string/about_me_bottom_nav_title" />
+    <item
+        android:id="@+id/nav_more"
+        android:enabled="true"
+        android:name="More"
+        android:icon="@drawable/ic_more_vert_black_24dp"
+        app:showAsAction="ifRoom"
+        android:title="@string/more_bottom_nav_title"/>
 </menu>

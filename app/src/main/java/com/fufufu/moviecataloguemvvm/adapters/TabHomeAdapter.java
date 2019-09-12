@@ -14,7 +14,7 @@ public class TabHomeAdapter extends androidx.fragment.app.FragmentStatePagerAdap
 
     public TabHomeAdapter(FragmentManager fragmentManager, Context context) {
         super(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        tabTitles = context.getResources().getStringArray(R.array.tab_title);
+        tabTitles = context.getResources().getStringArray(R.array.tab_home_title);
     }
 
     @Override
