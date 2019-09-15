@@ -26,6 +26,7 @@ public class Repository {
     private MutableLiveData<Film> detailFilm = new MutableLiveData<>();
     private MutableLiveData<TvShow> detailTvShow = new MutableLiveData<>();
     private MutableLiveData<ArrayList<Film>> mutableFilmResult = new MutableLiveData<>();
+    private MutableLiveData<ArrayList<TvShow>> mutableTvShowResult  = new MutableLiveData<>();
 
     public Repository() {
     }
@@ -125,6 +126,33 @@ public class Repository {
         });
         mutableIsLoading.setValue(false);
         return mutableTvShowLiveData;
+    }
+
+    public MutableLiveData<ArrayList<TvShow>> getTvShowResult(String lang, String query) {
+        TvShowDataService userDataService = RetrofitClient.getTvShowService();
+        Call<TvShowDBResponse> call = userDataService.getTvShowResult(lang, query);
+        final String querySearch = query;
+        call.enqueue(new Callback<TvShowDBResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<TvShowDBResponse> call, @NonNull Response<TvShowDBResponse> response) {
+                mutableIsLoading.setValue(true);
+                TvShowDBResponse tvShowDBResponse = response.body();
+                if (tvShowDBResponse != null && tvShowDBResponse.getTvShow() != null) {
+                    tvShows = tvShowDBResponse.getTvShow();
+                    mutableTvShowResult.setValue(tvShows);
+                    String listString = TextUtils.join(", ", tvShows);
+                    Log.d("Isi tv show", listString);
+                }
+                Log.d("Repository", "Search "+querySearch);
+                Log.d("call.enqueue", response.raw().toString());
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<TvShowDBResponse> call, @NonNull Throwable t) {
+            }
+        });
+        mutableIsLoading.setValue(false);
+        return mutableTvShowResult;
     }
 
     public MutableLiveData<TvShow> getDetailTvShowFromApi(int tvId, String lang) {

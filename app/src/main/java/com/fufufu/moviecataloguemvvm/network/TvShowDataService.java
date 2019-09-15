@@ -1,6 +1,7 @@
 package com.fufufu.moviecataloguemvvm.network;
 
 import com.fufufu.moviecataloguemvvm.BuildConfig;
+import com.fufufu.moviecataloguemvvm.models.FilmDBResponse;
 import com.fufufu.moviecataloguemvvm.models.TvShow;
 import com.fufufu.moviecataloguemvvm.models.TvShowDBResponse;
 import retrofit2.Call;
@@ -19,4 +20,9 @@ public interface TvShowDataService {
     Call<TvShow> getDetailTvShow(
             @Path("tv_id") int tvId,
             @Query("language") String lang);
+
+    @GET("search/tv?api_key="+API_KEY)
+    Call<TvShowDBResponse> getTvShowResult(
+            @Query("language") String lang,
+            @Query("query") String query);
 }

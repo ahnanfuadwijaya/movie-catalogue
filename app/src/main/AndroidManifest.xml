@@ -19,7 +19,9 @@
         <activity android:name=".views.SettingActivity" />
         <activity android:name=".views.DetailTvShowActivity" />
         <activity android:name=".views.DetailFilmActivity" />
-        <activity android:name=".views.MainActivity">
+        <activity
+            android:name=".views.MainActivity"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

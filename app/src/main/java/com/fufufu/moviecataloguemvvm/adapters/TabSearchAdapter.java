@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.fufufu.moviecataloguemvvm.R;
 import com.fufufu.moviecataloguemvvm.views.SearchFilmFragment;
+import com.fufufu.moviecataloguemvvm.views.SearchTvShowFragment;
 
 public class TabSearchAdapter extends FragmentStatePagerAdapter {
     private int totalPage;
@@ -27,6 +28,9 @@ public class TabSearchAdapter extends FragmentStatePagerAdapter {
         Fragment fragment = new Fragment();
         if(position == 0){
             fragment = new SearchFilmFragment();
+        }
+        else if (position == 1){
+            fragment = new SearchTvShowFragment();
         }
         return fragment;
     }

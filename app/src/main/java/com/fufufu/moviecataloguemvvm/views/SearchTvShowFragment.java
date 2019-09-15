@@ -20,30 +20,30 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
 import com.fufufu.moviecataloguemvvm.R;
 import com.fufufu.moviecataloguemvvm.adapters.FilmAdapter;
-import com.fufufu.moviecataloguemvvm.databinding.FragmentFilmBinding;
+import com.fufufu.moviecataloguemvvm.adapters.TvShowAdapter;
 import com.fufufu.moviecataloguemvvm.databinding.FragmentSearchFilmBinding;
+import com.fufufu.moviecataloguemvvm.databinding.FragmentSearchTvShowBinding;
 import com.fufufu.moviecataloguemvvm.models.Film;
-import com.fufufu.moviecataloguemvvm.viewmodels.FilmViewModel;
+import com.fufufu.moviecataloguemvvm.models.TvShow;
 import com.fufufu.moviecataloguemvvm.viewmodels.SearchFilmViewModel;
+import com.fufufu.moviecataloguemvvm.viewmodels.SearchTvShowViewModel;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class SearchFilmFragment extends Fragment {
-    private FragmentSearchFilmBinding fragmentSearchFilmBinding;
-    private FilmAdapter filmAdapter;
-    private SearchFilmViewModel searchFilmViewModel;
+
+public class SearchTvShowFragment extends Fragment {
+    private FragmentSearchTvShowBinding fragmentSearchTvShowBinding;
+    private TvShowAdapter tvShowAdapter;
+    private SearchTvShowViewModel searchTvShowViewModel;
     private String lang;
     private String query;
 
-    public SearchFilmFragment() {
+
+    public SearchTvShowFragment() {
         // Required empty public constructor
         lang = "";
         query = "";
@@ -66,7 +66,9 @@ public class SearchFilmFragment extends Fragment {
         searchItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-
+//                FragmentTransaction fragmentTransaction = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
+//                fragmentTransaction.replace(R.id.fragment_container, new ActiveSearchFragment());
+//                fragmentTransaction.commit();
                 return false;
             }
         });
@@ -83,13 +85,13 @@ public class SearchFilmFragment extends Fragment {
                 Log.d("Search", s);
                 loadLocale();
                 query = s;
-                fragmentSearchFilmBinding.progressBarFilm.setVisibility(View.VISIBLE);
-                searchFilmViewModel.setMutableFilmResult(lang, query);
-                searchFilmViewModel.getFilmResult().observe(SearchFilmFragment.this, new Observer<ArrayList<Film>>() {
+                fragmentSearchTvShowBinding.progressBarTvShow.setVisibility(View.VISIBLE);
+                searchTvShowViewModel.setMutableTvShowResult(lang, query);
+                searchTvShowViewModel.getTvShowmResult().observe(SearchTvShowFragment.this, new Observer<ArrayList<TvShow>>() {
                     @Override
-                    public void onChanged(ArrayList<Film> films) {
-                        filmAdapter.setFilms(films);
-                        fragmentSearchFilmBinding.progressBarFilm.setVisibility(View.GONE);
+                    public void onChanged(ArrayList<TvShow> tvShows) {
+                        tvShowAdapter.setTvShows(tvShows);
+                        fragmentSearchTvShowBinding.progressBarTvShow.setVisibility(View.GONE);
                     }
                 });
                 return false;
@@ -103,19 +105,20 @@ public class SearchFilmFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        fragmentSearchFilmBinding = FragmentSearchFilmBinding.inflate(inflater, container, false);
-        fragmentSearchFilmBinding.progressBarFilm.setVisibility(View.GONE);
-        RecyclerView recyclerView = fragmentSearchFilmBinding.rvFilmList;
+        fragmentSearchTvShowBinding = FragmentSearchTvShowBinding.inflate(inflater, container, false);
+        fragmentSearchTvShowBinding.progressBarTvShow.setVisibility(View.GONE);
+        RecyclerView recyclerView = fragmentSearchTvShowBinding.rvTvShowList;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
-        searchFilmViewModel = ViewModelProviders.of(this).get(SearchFilmViewModel.class);
-        filmAdapter = new FilmAdapter();
-        recyclerView.setAdapter(filmAdapter);
-        return fragmentSearchFilmBinding.getRoot();
+        searchTvShowViewModel = ViewModelProviders.of(this).get(SearchTvShowViewModel.class);
+        tvShowAdapter = new TvShowAdapter();
+        recyclerView.setAdapter(tvShowAdapter);
+        return fragmentSearchTvShowBinding.getRoot();
     }
 
     private void loadLocale() {
@@ -123,5 +126,4 @@ public class SearchFilmFragment extends Fragment {
         SharedPreferences prefs = Objects.requireNonNull(getActivity()).getSharedPreferences("CommonPrefs", AppCompatActivity.MODE_PRIVATE);
         lang = prefs.getString(langPref, "");
     }
-
 }
