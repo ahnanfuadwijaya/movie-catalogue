@@ -27,6 +27,7 @@ public class Repository {
     private MutableLiveData<TvShow> detailTvShow = new MutableLiveData<>();
     private MutableLiveData<ArrayList<Film>> mutableFilmResult = new MutableLiveData<>();
     private MutableLiveData<ArrayList<TvShow>> mutableTvShowResult  = new MutableLiveData<>();
+    private MutableLiveData<ArrayList<Film>> mutableReleaseFilmToday = new MutableLiveData<>();
 
     public Repository() {
     }
@@ -103,6 +104,26 @@ public class Repository {
         });
         mutableIsLoading.setValue(false);
         return detailFilm;
+    }
+
+    public MutableLiveData<ArrayList<Film>> getReleaseFilmToday(String lang, String primaryReleaseDateGte, String primaryReleaseDateLte) {
+        FilmDataService userDataService = RetrofitClient.getFilmService();
+        Call<FilmDBResponse> call = userDataService.getReleaseFilmToday(lang, primaryReleaseDateGte, primaryReleaseDateLte);
+        call.enqueue(new Callback<FilmDBResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<FilmDBResponse> call, @NonNull Response<FilmDBResponse> response) {
+                FilmDBResponse filmDBResponse = response.body();
+                if (filmDBResponse != null && filmDBResponse.getFilm() != null) {
+                    films = filmDBResponse.getFilm();
+                    mutableReleaseFilmToday.setValue(films);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<FilmDBResponse> call, @NonNull Throwable t) {
+            }
+        });
+        return mutableReleaseFilmToday;
     }
 
     public MutableLiveData<ArrayList<TvShow>> getTvShowListFromApi(String lang, String sortBy) {

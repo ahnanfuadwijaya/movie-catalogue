@@ -9,6 +9,7 @@ import java.util.List;
 public class ReleaseTodayReminder extends JobScheduler {
     //endpoint
     //https://api.themoviedb.org/3/discover/movie?api_key=<<api_key>>&primary_release_date.gte=2019-09-14&primary_release_date.lte=2019-09-14
+    public static final String TAG = ReleaseTodayReminder.class.getSimpleName();
 
     @Override
     public int schedule(JobInfo jobInfo) {
