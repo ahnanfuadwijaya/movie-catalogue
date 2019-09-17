@@ -27,7 +27,7 @@ public class Repository {
     private MutableLiveData<TvShow> detailTvShow = new MutableLiveData<>();
     private MutableLiveData<ArrayList<Film>> mutableFilmResult = new MutableLiveData<>();
     private MutableLiveData<ArrayList<TvShow>> mutableTvShowResult  = new MutableLiveData<>();
-    private MutableLiveData<ArrayList<Film>> mutableReleaseFilmToday = new MutableLiveData<>();
+    private List<Film> releaseFilmToday = new ArrayList<>();
 
     public Repository() {
     }
@@ -106,7 +106,8 @@ public class Repository {
         return detailFilm;
     }
 
-    public MutableLiveData<ArrayList<Film>> getReleaseFilmToday(String lang, String primaryReleaseDateGte, String primaryReleaseDateLte) {
+    public List<Film> getReleaseFilmToday(String lang, String primaryReleaseDateGte, String primaryReleaseDateLte) {
+        Log.d("getReleaseFilmTodayRep", "executed");
         FilmDataService userDataService = RetrofitClient.getFilmService();
         Call<FilmDBResponse> call = userDataService.getReleaseFilmToday(lang, primaryReleaseDateGte, primaryReleaseDateLte);
         call.enqueue(new Callback<FilmDBResponse>() {
@@ -115,15 +116,21 @@ public class Repository {
                 FilmDBResponse filmDBResponse = response.body();
                 if (filmDBResponse != null && filmDBResponse.getFilm() != null) {
                     films = filmDBResponse.getFilm();
-                    mutableReleaseFilmToday.setValue(films);
+                    Log.d("films.size(), repo", String.valueOf(films.size()));
+                    releaseFilmToday = films;
+                    Log.d("releaseFilm.size",String.valueOf(releaseFilmToday.size()));
                 }
+                else {
+                    Log.d("Response", "null");
+                }
+                Log.d("response", response.raw().toString());
             }
 
             @Override
             public void onFailure(@NonNull Call<FilmDBResponse> call, @NonNull Throwable t) {
             }
         });
-        return mutableReleaseFilmToday;
+        return releaseFilmToday;
     }
 
     public MutableLiveData<ArrayList<TvShow>> getTvShowListFromApi(String lang, String sortBy) {

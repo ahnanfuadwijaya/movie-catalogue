@@ -79,7 +79,7 @@ public class DailyReminder extends BroadcastReceiver {
     }
 
     private void showReminderNotification(Context context, String title, String message, int notifId) {
-        String CHANNEL_ID = "Channel_1";
+        String CHANNEL_ID = "Channel_dailyReminder_1";
         String CHANNEL_NAME = "DailyReminderChannel";
 
         NotificationManager notificationManagerCompat = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);

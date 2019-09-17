@@ -16,7 +16,7 @@ public interface FilmDataService {
             @Query("language") String lang,
             @Query("sort_by") String sortBy);
 
-    @GET("discovr/movie?api_key"+API_KEY)
+    @GET("discover/movie?api_key="+API_KEY)
     Call<FilmDBResponse> getReleaseFilmToday(
             @Query("language") String lang,
             @Query("primary_release_date.gte") String primaryReleaseDateGte,
