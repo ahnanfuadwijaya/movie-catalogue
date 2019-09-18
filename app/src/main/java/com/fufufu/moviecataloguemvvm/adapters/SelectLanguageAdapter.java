@@ -1,12 +1,10 @@
 package com.fufufu.moviecataloguemvvm.adapters;
 
 import android.content.Intent;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,14 +12,9 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fufufu.moviecataloguemvvm.R;
-import com.fufufu.moviecataloguemvvm.databinding.ActivitySetLanguageBinding;
 import com.fufufu.moviecataloguemvvm.databinding.LanguageListItemBinding;
-import com.fufufu.moviecataloguemvvm.views.DetailFilmActivity;
 import com.fufufu.moviecataloguemvvm.views.MainActivity;
-
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class SelectLanguageAdapter extends RecyclerView.Adapter<SelectLanguageAdapter.SelectHolder> {
