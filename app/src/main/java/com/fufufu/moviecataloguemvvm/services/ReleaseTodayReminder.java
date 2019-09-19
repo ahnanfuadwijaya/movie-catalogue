@@ -41,13 +41,15 @@ public class ReleaseTodayReminder extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.d("ReleaseToday", "onReceive");
-        Log.d("Film Size", String.valueOf(repository.getReleaseFilmToday().size()));
+        repository.setReleaseFilmToday("en", "2019-09-16", "2019-09-16");
         List<Film> releaseFilmTodayResult = repository.getReleaseFilmToday();
-        for (int i = 0; i< releaseFilmTodayResult.size(); i++){
+/*        for (int i = 0; i< releaseFilmTodayResult.size(); i++){
             showReminderNotification(context, releaseFilmTodayResult.get(i).getTitle(), releaseFilmTodayResult.get(i).getOverview(), releaseFilmTodayResult.get(i).getPosterPath(), ID_REMINDER);
-        }
+        }*/
         if(releaseFilmTodayResult.size() != 0){
             Log.d("releaseTodaySize", String.valueOf(releaseFilmTodayResult.size()));
+            Log.d("Judul Pertama", releaseFilmTodayResult.get(0).getTitle());
+            Log.d("Judul Terakhir", releaseFilmTodayResult.get(releaseFilmTodayResult.size()-1).getTitle());
         }
         else {
             Log.d("ReleaseToday", "Null");
@@ -121,14 +123,6 @@ public class ReleaseTodayReminder extends BroadcastReceiver {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-
-    private class GetReleaseTodayAsync extends AsyncTask<Void, Void, List<Film>>{
-        Repository repository = new Repository();
-        @Override
-        protected List<Film> doInBackground(Void... voids) {
-            return repository.getReleaseFilmToday();
         }
     }
 }

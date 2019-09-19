@@ -11,7 +11,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Film implements Parcelable {
-    private final String posterBaseUrl = "https://image.tmdb.org/t/p/w500/";
+    private final String posterBaseUrl = "https://image.tmdb.org/t/p/w500";
     @SerializedName("id")
     @Expose
     private int id;

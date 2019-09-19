@@ -63,8 +63,8 @@ public class SettingActivity extends AppCompatActivity {
                     editor.apply();
 
                     Calendar calendar = Calendar.getInstance();
-                    calendar.set(Calendar.HOUR_OF_DAY, 8);
-                    calendar.set(Calendar.MINUTE, 0);
+                    calendar.set(Calendar.HOUR_OF_DAY, 0);
+                    calendar.set(Calendar.MINUTE, 1);
                     calendar.set(Calendar.SECOND, 0);
 
 

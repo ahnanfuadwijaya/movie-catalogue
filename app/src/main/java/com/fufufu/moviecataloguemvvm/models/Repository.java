@@ -124,26 +124,6 @@ public class Repository {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        /*call.enqueue(new Callback<FilmDBResponse>() {
-            @Override
-            public void onResponse(@NonNull Call<FilmDBResponse> call, @NonNull Response<FilmDBResponse> response) {
-                FilmDBResponse filmDBResponse = response.body();
-                if (filmDBResponse != null && filmDBResponse.getFilm() != null) {
-                    films = filmDBResponse.getFilm();
-                    Log.d("films.size(), repo", String.valueOf(films.size()));
-                    releaseFilmToday = films;
-                    Log.d("releaseFilm.size",String.valueOf(releaseFilmToday.size()));
-                }
-                else {
-                    Log.d("Response", "null");
-                }
-                Log.d("response", response.raw().toString());
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<FilmDBResponse> call, @NonNull Throwable t) {
-            }
-        });*/
     }
     public ArrayList<Film> getReleaseFilmToday() {
         Log.d("getReleaseFilmTodayRep", "executed");
