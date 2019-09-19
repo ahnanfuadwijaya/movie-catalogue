@@ -79,7 +79,7 @@ public class ReleaseTodayIntentService extends IntentService {
             intent.putExtra("filmId", idFilm);
 
             //PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, DetailFilmActivity.class), 0);
-            PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, 0);
+            PendingIntent contentIntent = PendingIntent.getActivity(this, idFilm, intent, PendingIntent.FLAG_ONE_SHOT);
 
             Log.d("Path", imageUrl);
 
