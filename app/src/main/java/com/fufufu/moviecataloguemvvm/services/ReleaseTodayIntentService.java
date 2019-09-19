@@ -1,9 +1,9 @@
 package com.fufufu.moviecataloguemvvm.services;
 
+import android.app.IntentService;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -11,38 +11,44 @@ import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
-import android.os.IBinder;
+import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
+import com.fufufu.moviecataloguemvvm.models.Film;
+import com.fufufu.moviecataloguemvvm.models.Repository;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.List;
 
-public class ReleaseTodayReminderService extends Service {
-    NotificationManager notificationManagerCompat;
+
+public class ReleaseTodayIntentService extends IntentService {
     private final int ID_REMINDER = 957;
+    private Repository repository;
 
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
+    public ReleaseTodayIntentService() {
+        super("ReleaseTodayIntentService");
+        repository = new Repository();
     }
 
     @Override
-    public void onCreate() {
-        notificationManagerCompat = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        super.onCreate();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        return super.onStartCommand(intent, flags, startId);
+    protected void onHandleIntent(Intent intent) {
+        if (intent != null) {
+            Log.d("Film Size", String.valueOf(repository.getReleaseFilmToday("en", "2019-09-16", "2019-09-16").size()));
+            List<Film> releaseFilmTodayResult = repository.getReleaseFilmToday("en", "2019-09-16", "2019-09-16");
+            for (int i = 0; i< releaseFilmTodayResult.size(); i++){
+                showReminderNotification(getApplicationContext(), releaseFilmTodayResult.get(i).getTitle(), releaseFilmTodayResult.get(i).getOverview(), releaseFilmTodayResult.get(i).getPosterPath(), ID_REMINDER);
+            }
+            if(releaseFilmTodayResult.size() != 0){
+                Log.d("releaseTodayISSize", String.valueOf(releaseFilmTodayResult.size()));
+            }
+            else {
+                Log.d("ReleaseToday", "Null");
+            }
+        }
     }
 
     private void showReminderNotification(Context context, String title, String message, String imageUrl, int notifId) {
@@ -52,7 +58,7 @@ public class ReleaseTodayReminderService extends Service {
         try {
             InputStream inputStreamImage = new URL("https://image.tmdb.org/t/p/w500"+imageUrl).openStream();
             Bitmap bmp = BitmapFactory.decodeStream(inputStreamImage);
-            //NotificationManager notificationManagerCompat = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            NotificationManager notificationManagerCompat = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                     .setLargeIcon(bmp)
