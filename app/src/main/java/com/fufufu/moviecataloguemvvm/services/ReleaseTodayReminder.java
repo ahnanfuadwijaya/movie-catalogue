@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class ReleaseTodayReminder extends BroadcastReceiver {
     private final int ID_REMINDER = 957;
@@ -42,19 +41,11 @@ public class ReleaseTodayReminder extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.d("ReleaseToday", "onReceive");
-        List<Film> releaseFilmTodayResult = new ArrayList<>();
-        try {
-            releaseFilmTodayResult = new GetReleaseTodayAsync().execute().get();
-            Log.d("releaseTodaySize", String.valueOf(releaseFilmTodayResult.size()));
-            for (int i = 0; i< releaseFilmTodayResult.size(); i++){
-                showReminderNotification(context, releaseFilmTodayResult.get(i).getTitle(), releaseFilmTodayResult.get(i).getOverview(), releaseFilmTodayResult.get(i).getPosterPath(), ID_REMINDER);
-            }
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        Log.d("Film Size", String.valueOf(repository.getReleaseFilmToday("en", "2019-09-16", "2019-09-16").size()));
+        List<Film> releaseFilmTodayResult = repository.getReleaseFilmToday("en", "2019-09-16", "2019-09-16");
+        for (int i = 0; i< releaseFilmTodayResult.size(); i++){
+            showReminderNotification(context, releaseFilmTodayResult.get(i).getTitle(), releaseFilmTodayResult.get(i).getOverview(), releaseFilmTodayResult.get(i).getPosterPath(), ID_REMINDER);
         }
-
         if(releaseFilmTodayResult.size() != 0){
             Log.d("releaseTodaySize", String.valueOf(releaseFilmTodayResult.size()));
         }
@@ -133,7 +124,7 @@ public class ReleaseTodayReminder extends BroadcastReceiver {
         }
     }
 
-    private static class GetReleaseTodayAsync extends AsyncTask<Void, Void, List<Film>>{
+    private class GetReleaseTodayAsync extends AsyncTask<Void, Void, List<Film>>{
         Repository repository = new Repository();
         @Override
         protected List<Film> doInBackground(Void... voids) {
