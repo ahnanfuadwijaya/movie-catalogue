@@ -8,6 +8,8 @@ import androidx.lifecycle.MutableLiveData;
 import com.fufufu.moviecataloguemvvm.network.FilmDataService;
 import com.fufufu.moviecataloguemvvm.network.RetrofitClient;
 import com.fufufu.moviecataloguemvvm.network.TvShowDataService;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,9 +29,10 @@ public class Repository {
     private MutableLiveData<TvShow> detailTvShow = new MutableLiveData<>();
     private MutableLiveData<ArrayList<Film>> mutableFilmResult = new MutableLiveData<>();
     private MutableLiveData<ArrayList<TvShow>> mutableTvShowResult  = new MutableLiveData<>();
-    private List<Film> releaseFilmToday = new ArrayList<>();
+    private ArrayList<Film> releaseFilmToday = new ArrayList<>();
 
     public Repository() {
+
     }
 
     public MutableLiveData<Boolean> getLoading() {
@@ -106,11 +109,22 @@ public class Repository {
         return detailFilm;
     }
 
-    public List<Film> getReleaseFilmToday(String lang, String primaryReleaseDateGte, String primaryReleaseDateLte) {
-        Log.d("getReleaseFilmTodayRep", "executed");
+    public void setReleaseFilmToday(String lang, String primaryReleaseDateGte, String primaryReleaseDateLte){
+        Log.d("setReleaseFilmTodayRep", "executed");
         FilmDataService userDataService = RetrofitClient.getFilmService();
         Call<FilmDBResponse> call = userDataService.getReleaseFilmToday(lang, primaryReleaseDateGte, primaryReleaseDateLte);
-        call.enqueue(new Callback<FilmDBResponse>() {
+        try {
+            FilmDBResponse filmDBResponse = call.execute().body();
+            if (filmDBResponse != null){
+                films = filmDBResponse.getFilm();
+                Log.d("films.size(), repo", String.valueOf(films.size()));
+                releaseFilmToday = films;
+                Log.d("releaseFilm.size",String.valueOf(releaseFilmToday.size()));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        /*call.enqueue(new Callback<FilmDBResponse>() {
             @Override
             public void onResponse(@NonNull Call<FilmDBResponse> call, @NonNull Response<FilmDBResponse> response) {
                 FilmDBResponse filmDBResponse = response.body();
@@ -129,7 +143,10 @@ public class Repository {
             @Override
             public void onFailure(@NonNull Call<FilmDBResponse> call, @NonNull Throwable t) {
             }
-        });
+        });*/
+    }
+    public ArrayList<Film> getReleaseFilmToday() {
+        Log.d("getReleaseFilmTodayRep", "executed");
         return releaseFilmToday;
     }
 

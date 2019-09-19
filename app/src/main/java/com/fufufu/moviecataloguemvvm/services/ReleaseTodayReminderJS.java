@@ -30,7 +30,7 @@ public class ReleaseTodayReminderJS extends JobService {
 
     private void getReleaseTodayFilms(final JobParameters jobParameters) {
         try{
-            releaseTodayFilms = repository.getReleaseFilmToday("en", "2019-09-16", "2019-09-16");
+            releaseTodayFilms = repository.getReleaseFilmToday();
             if(releaseTodayFilms != null){
                 for(int i=0; i< releaseTodayFilms.size(); i++){
                     Log.d("releaseToday.size()", String.valueOf(releaseTodayFilms.size()));

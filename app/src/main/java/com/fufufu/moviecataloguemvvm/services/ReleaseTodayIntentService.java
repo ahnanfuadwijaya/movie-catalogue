@@ -22,6 +22,7 @@ import com.fufufu.moviecataloguemvvm.models.Repository;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -37,16 +38,21 @@ public class ReleaseTodayIntentService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
-            Log.d("Film Size", String.valueOf(repository.getReleaseFilmToday("en", "2019-09-16", "2019-09-16").size()));
-            List<Film> releaseFilmTodayResult = repository.getReleaseFilmToday("en", "2019-09-16", "2019-09-16");
-            for (int i = 0; i< releaseFilmTodayResult.size(); i++){
-                showReminderNotification(getApplicationContext(), releaseFilmTodayResult.get(i).getTitle(), releaseFilmTodayResult.get(i).getOverview(), releaseFilmTodayResult.get(i).getPosterPath(), ID_REMINDER);
-            }
+
+            repository.setReleaseFilmToday("en", "2019-09-16", "2019-09-16");
+
+            ArrayList<Film> releaseFilmTodayResult = repository.getReleaseFilmToday();
+            Log.d("Film Size", String.valueOf(repository.getReleaseFilmToday().size()));
+//            for (int i = 0; i< releaseFilmTodayResult.size(); i++){
+//                showReminderNotification(getApplicationContext(), releaseFilmTodayResult.get(i).getTitle(), releaseFilmTodayResult.get(i).getOverview(), releaseFilmTodayResult.get(i).getPosterPath(), ID_REMINDER);
+//            }
             if(releaseFilmTodayResult.size() != 0){
                 Log.d("releaseTodayISSize", String.valueOf(releaseFilmTodayResult.size()));
+                Log.d("Title Pertama", releaseFilmTodayResult.get(0).getTitle());
+                Log.d("Title Terakhir", releaseFilmTodayResult.get(releaseFilmTodayResult.size()-1).getTitle());
             }
             else {
-                Log.d("ReleaseToday", "Null");
+                Log.d("ReleaseTodayIS", "Null");
             }
         }
     }
@@ -55,8 +61,9 @@ public class ReleaseTodayIntentService extends IntentService {
         String CHANNEL_ID = "Channel_releaseTodayReminder_1";
         String CHANNEL_NAME = "ReleaseTodayReminderChannel";
 
+        //"https://image.tmdb.org/t/p/w500"+
         try {
-            InputStream inputStreamImage = new URL("https://image.tmdb.org/t/p/w500"+imageUrl).openStream();
+            InputStream inputStreamImage = new URL(imageUrl).openStream();
             Bitmap bmp = BitmapFactory.decodeStream(inputStreamImage);
             NotificationManager notificationManagerCompat = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);

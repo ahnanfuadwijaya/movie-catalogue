@@ -41,8 +41,8 @@ public class ReleaseTodayReminder extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.d("ReleaseToday", "onReceive");
-        Log.d("Film Size", String.valueOf(repository.getReleaseFilmToday("en", "2019-09-16", "2019-09-16").size()));
-        List<Film> releaseFilmTodayResult = repository.getReleaseFilmToday("en", "2019-09-16", "2019-09-16");
+        Log.d("Film Size", String.valueOf(repository.getReleaseFilmToday().size()));
+        List<Film> releaseFilmTodayResult = repository.getReleaseFilmToday();
         for (int i = 0; i< releaseFilmTodayResult.size(); i++){
             showReminderNotification(context, releaseFilmTodayResult.get(i).getTitle(), releaseFilmTodayResult.get(i).getOverview(), releaseFilmTodayResult.get(i).getPosterPath(), ID_REMINDER);
         }
@@ -128,7 +128,7 @@ public class ReleaseTodayReminder extends BroadcastReceiver {
         Repository repository = new Repository();
         @Override
         protected List<Film> doInBackground(Void... voids) {
-            return repository.getReleaseFilmToday("en", "2019-09-16", "2019-09-16");
+            return repository.getReleaseFilmToday();
         }
     }
 }
