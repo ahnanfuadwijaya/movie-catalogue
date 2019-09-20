@@ -16,6 +16,7 @@ import android.os.Build;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 
 import com.fufufu.moviecataloguemvvm.R;
@@ -26,18 +27,21 @@ import com.fufufu.moviecataloguemvvm.views.DetailFilmActivity;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class ReleaseTodayIntentService extends IntentService {
-    //private final int ID_REMINDER = 957;
+    private final int NOTIFICATION_ID = 957;
+    private int SUMMARY_ID = 9596;
     private Repository repository;
     private NotificationManager notificationManager;
     private final String CHANNEL_ID = "Channel_releaseTodayReminder_1";
     private final String CHANNEL_NAME = "ReleaseTodayReminderChannel";
-    private final static String GROUP_KEY_FILMS = "group_key_emails";
+    private final static String GROUP_KEY_FILMS = "com.fufufu.FILMS";
 
     public ReleaseTodayIntentService() {
         super("ReleaseTodayIntentService");
@@ -55,10 +59,12 @@ public class ReleaseTodayIntentService extends IntentService {
 
             ArrayList<Film> releaseFilmTodayResult = repository.getReleaseFilmToday();
 
-            for (int i = 0; i< releaseFilmTodayResult.size(); i++){
-                showReminderNotification(getApplicationContext(), releaseFilmTodayResult.get(i).getId(), releaseFilmTodayResult.get(i).getTitle(), releaseFilmTodayResult.get(i).getOverview(), releaseFilmTodayResult.get(i).getPosterPath());
+            if(releaseFilmTodayResult != null){
+                showReminderNotification(releaseFilmTodayResult);
             }
-            if(releaseFilmTodayResult.size() != 0){
+
+
+            if(releaseFilmTodayResult != null){
                 Log.d("releaseTodayISSize", String.valueOf(releaseFilmTodayResult.size()));
                 Log.d("Title Pertama", releaseFilmTodayResult.get(0).getTitle());
                 Log.d("Title Terakhir", releaseFilmTodayResult.get(releaseFilmTodayResult.size()-1).getTitle());
@@ -69,63 +75,94 @@ public class ReleaseTodayIntentService extends IntentService {
         }
     }
 
-    private void showReminderNotification(Context context, int idFilm, String title, String message, String imageUrl) {
+    private void showReminderNotification(ArrayList<Film> films) {
 
         try {
 
-            notificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID);
+            NotificationCompat.Builder groupBuilder = new NotificationCompat.Builder(this, CHANNEL_ID);
+            NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
+            NotificationCompat.BigTextStyle bigTextStyle = new NotificationCompat.BigTextStyle();
 
-            Intent intent = new Intent(this, DetailFilmActivity.class);
-            intent.putExtra("filmId", idFilm);
+                for(int i = 0; i < films.size(); i++){
 
-            //PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, DetailFilmActivity.class), 0);
-            PendingIntent contentIntent = PendingIntent.getActivity(this, idFilm, intent, PendingIntent.FLAG_ONE_SHOT);
+                    Intent intent = new Intent(this, DetailFilmActivity.class);
+                    intent.putExtra("filmId", films.get(i).getId());
+                    intent.setAction(String.valueOf(films.get(i).getId()));
 
-            Log.d("Path", imageUrl);
+                    //PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, DetailFilmActivity.class), 0);
+                    PendingIntent contentIntent = PendingIntent.getActivity(this, films.get(i).getId(), intent, PendingIntent.FLAG_ONE_SHOT);
 
-            URL url = new URL(imageUrl);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream in = connection.getInputStream();
-            Bitmap bmp = BitmapFactory.decodeStream(in);
-            //NotificationManager notificationManagerCompat = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                    Log.d("Path", films.get(i).getPosterPath());
+
+                    URL url = new URL(films.get(i).getPosterPath());
+                    URLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setDoInput(true);
+                    connection.connect();
+                    InputStream in = connection.getInputStream();
+                    Bitmap bmp = BitmapFactory.decodeStream(in);
+                    //NotificationManager notificationManagerCompat = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                    Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+                    bigTextStyle.setBigContentTitle(films.get(i).getTitle())
+                            .bigText(films.get(i).getOverview());
+
+                    builder.setGroup(GROUP_KEY_FILMS)
+                            .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_SUMMARY)
+                            .setSmallIcon(R.drawable.ic_favorite_24px)
+                            .setLargeIcon(bmp)
+                            .setStyle(bigTextStyle)
+                            .setContentTitle(films.get(i).getTitle())
+                            .setContentText(films.get(i).getOverview())
+                            .setVibrate(new long[]{1000})
+                            .setSound(alarmSound)
+                            .setAutoCancel(true)
+                            .setContentIntent(contentIntent);
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+                        NotificationChannel channel = new NotificationChannel(CHANNEL_ID,
+                                CHANNEL_NAME,
+                                NotificationManager.IMPORTANCE_LOW);
+
+                        channel.enableVibration(true);
+                        channel.setVibrationPattern(new long[]{1000});
+
+                        notificationManager.createNotificationChannel(channel);
+                    }
+                    Notification notification = builder.build();
+                    notificationManager.notify(films.get(i).getId(), notification);
+                }
+
             Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+
+            bigTextStyle.setSummaryText("Release Today");
+
+            groupBuilder.setGroup(GROUP_KEY_FILMS)
+                    .setGroupSummary(true)
+                    .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_SUMMARY)
                     .setSmallIcon(R.drawable.ic_favorite_24px)
-                    .setLargeIcon(bmp)
-                    .setContentTitle(title)
-                    .setContentText(message)
-                    .setColor(ContextCompat.getColor(context, android.R.color.transparent))
+                    .setStyle(bigTextStyle)
                     .setVibrate(new long[]{1000})
                     .setSound(alarmSound)
-                    .setGroup(GROUP_KEY_FILMS)
-                    .setGroupSummary(true)
                     .setAutoCancel(true);
-
-            builder.setContentIntent(contentIntent);
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
                 NotificationChannel channel = new NotificationChannel(CHANNEL_ID,
                         CHANNEL_NAME,
-                        NotificationManager.IMPORTANCE_DEFAULT);
+                        NotificationManager.IMPORTANCE_LOW);
 
                 channel.enableVibration(true);
                 channel.setVibrationPattern(new long[]{1000});
 
-                builder.setChannelId(CHANNEL_ID);
-
-                if (notificationManager != null) {
-                    notificationManager.createNotificationChannel(channel);
-                }
+                notificationManager.createNotificationChannel(channel);
             }
+            Notification groupNotification = groupBuilder.build();
+            notificationManager.notify(SUMMARY_ID, groupNotification);
 
-            Notification notification = builder.build();
 
-            if (notificationManager != null) {
-                notificationManager.notify(idFilm, notification);
-            }
         } catch (IOException e) {
             e.printStackTrace();
         }
