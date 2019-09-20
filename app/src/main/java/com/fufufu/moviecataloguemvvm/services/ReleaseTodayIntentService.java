@@ -5,11 +5,9 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
@@ -17,7 +15,6 @@ import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-import androidx.core.content.ContextCompat;
 
 import com.fufufu.moviecataloguemvvm.R;
 import com.fufufu.moviecataloguemvvm.models.Film;
@@ -26,17 +23,13 @@ import com.fufufu.moviecataloguemvvm.views.DetailFilmActivity;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class ReleaseTodayIntentService extends IntentService {
-    private final int NOTIFICATION_ID = 957;
-    private int SUMMARY_ID = 9596;
+    private int GROUP_ID = 9596;
     private Repository repository;
     private NotificationManager notificationManager;
     private final String CHANNEL_ID = "Channel_releaseTodayReminder_1";
@@ -101,15 +94,14 @@ public class ReleaseTodayIntentService extends IntentService {
                     connection.connect();
                     InputStream in = connection.getInputStream();
                     Bitmap bmp = BitmapFactory.decodeStream(in);
-                    //NotificationManager notificationManagerCompat = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                     Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
-                    bigPictureStyle.setBigContentTitle(films.get(i).getTitle()).setSummaryText(films.get(i).getOverview()).bigPicture(bmp);
+                    bigPictureStyle.setBigContentTitle(films.get(i).getTitle()).setSummaryText(films.get(i).getOverview()).bigPicture(bmp).bigLargeIcon(bmp);
 
                     builder.setGroup(GROUP_KEY_FILMS)
                             .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_SUMMARY)
                             .setLargeIcon(bmp)
-                            .setSmallIcon(R.drawable.ic_favorite_24px)
+                            .setSmallIcon(R.drawable.ic_movie_filter_black_24dp)
                             .setStyle(bigPictureStyle)
                             .setContentTitle(films.get(i).getTitle())
                             .setContentText(films.get(i).getOverview())
@@ -134,14 +126,13 @@ public class ReleaseTodayIntentService extends IntentService {
                 }
 
             Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-
             bigPictureStyle.setSummaryText("Release Today").setBigContentTitle("Release Today");
 
             groupBuilder.setGroup(GROUP_KEY_FILMS)
                     .setGroupSummary(true)
                     .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_SUMMARY)
                     .setStyle(bigPictureStyle)
-                    .setSmallIcon(R.drawable.ic_favorite_24px)
+                    .setSmallIcon(R.drawable.ic_movie_filter_black_24dp)
                     .setVibrate(new long[]{1000})
                     .setSound(alarmSound)
                     .setAutoCancel(true);
@@ -158,7 +149,7 @@ public class ReleaseTodayIntentService extends IntentService {
                 notificationManager.createNotificationChannel(channel);
             }
             Notification groupNotification = groupBuilder.build();
-            notificationManager.notify(SUMMARY_ID, groupNotification);
+            notificationManager.notify(GROUP_ID, groupNotification);
 
 
         } catch (IOException e) {

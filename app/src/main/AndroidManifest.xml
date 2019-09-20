@@ -15,9 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light"
         tools:ignore="GoogleAppIndexingWarning">
-        <service
-            android:name=".services.ReleaseTodayIntentService"
-            android:exported="false"></service>
 
         <activity android:name=".views.SetLanguageActivity" />
         <activity android:name=".views.SettingActivity" />
@@ -36,21 +33,11 @@
         <receiver
             android:name=".services.DailyReminder"
             android:enabled="true" />
-        <receiver
-            android:name=".services.ReleaseTodayReminder"
-            android:enabled="true" />
-
         <service
-            android:name=".services.ReleaseTodayReminderJS"
+            android:name=".services.ReleaseTodayIntentService"
             android:enabled="true"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
-        <service
-            android:name=".services.ReleaseTodayReminderService"
-            android:enabled="true"
-            android:exported="true"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
-
         <meta-data
             android:name="android.app.searchable"
             android:resource="@layout/searchable" />

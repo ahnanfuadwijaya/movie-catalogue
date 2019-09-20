@@ -5,9 +5,6 @@ import androidx.databinding.DataBindingUtil;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.app.job.JobInfo;
-import android.app.job.JobScheduler;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,51 +17,70 @@ import com.fufufu.moviecataloguemvvm.R;
 import com.fufufu.moviecataloguemvvm.databinding.ActivitySettingBinding;
 import com.fufufu.moviecataloguemvvm.services.DailyReminder;
 import com.fufufu.moviecataloguemvvm.services.ReleaseTodayIntentService;
-import com.fufufu.moviecataloguemvvm.services.ReleaseTodayReminder;
-import com.fufufu.moviecataloguemvvm.services.ReleaseTodayReminderJS;
-import com.fufufu.moviecataloguemvvm.services.ReleaseTodayReminderService;
 
 import java.util.Calendar;
-import java.util.Objects;
 
 public class SettingActivity extends AppCompatActivity {
     private final int ID_REMINDER = 957;
+    private String releaseTodayPref = "ReleaseToday";
+    private String dailyReminderPref = "DailyReminder";
+    private boolean dailyReminderState = false;
+    private boolean releaseTodayState = false;
+
+    private void loadPreference(){
+        SharedPreferences prefs = getSharedPreferences("CommonPrefs", AppCompatActivity.MODE_PRIVATE);
+        dailyReminderState = prefs.getBoolean(dailyReminderPref, false);
+        releaseTodayState = prefs.getBoolean(releaseTodayPref, false);
+    }
+
+    private void savePreferenceReleaseToday(boolean b){
+        SharedPreferences prefs = getSharedPreferences("CommonPrefs", AppCompatActivity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean(releaseTodayPref, b);
+        editor.apply();
+    }
+
+    private void savePreferenceDailyRemainder(boolean b){
+        SharedPreferences prefs = getSharedPreferences("CommonPrefs", AppCompatActivity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean(dailyReminderPref, b);
+        editor.apply();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivitySettingBinding activitySettingBinding = DataBindingUtil.setContentView(this, R.layout.activity_setting);
+        loadPreference();
+        activitySettingBinding.swDailyReminder.setChecked(dailyReminderState);
+        activitySettingBinding.swReleaseTodayReminder.setChecked(releaseTodayState);
         final DailyReminder dailyReminder = new DailyReminder();
         activitySettingBinding.swDailyReminder.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b){
-                    Toast.makeText(getApplicationContext(), "Daily Reminder: On", Toast.LENGTH_LONG).show();
+                    savePreferenceDailyRemainder(true);
                     dailyReminder.setReminder(getApplicationContext(), "Check out latest movies and tv shows today");
+                    Toast.makeText(getApplicationContext(), "Daily Reminder: On", Toast.LENGTH_LONG).show();
                 }
                 else {
-                    Toast.makeText(getApplicationContext(), "Daily Reminder: Off", Toast.LENGTH_LONG).show();
+                    savePreferenceDailyRemainder(false);
                     dailyReminder.cancelReminder(getApplicationContext());
+                    Toast.makeText(getApplicationContext(), "Daily Reminder: Off", Toast.LENGTH_LONG).show();
                 }
             }
         });
 
-        final ReleaseTodayReminder releaseTodayReminder = new ReleaseTodayReminder();
+
         activitySettingBinding.swReleaseTodayReminder.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b){
-                    //releaseTodayReminder.setReminder(getApplicationContext());
-
-                    String releaseTodayPref = "ReleaseToday";
-                    SharedPreferences prefs = getSharedPreferences("CommonPrefs", AppCompatActivity.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = prefs.edit();
-                    editor.putBoolean(releaseTodayPref, true);
-                    editor.apply();
+                    savePreferenceReleaseToday(true);
 
                     Calendar calendar = Calendar.getInstance();
-                    calendar.set(Calendar.HOUR_OF_DAY, 0);
-                    calendar.set(Calendar.MINUTE, 1);
+                    calendar.set(Calendar.HOUR_OF_DAY, 8);
+                    calendar.set(Calendar.MINUTE, 0);
                     calendar.set(Calendar.SECOND, 0);
 
 
@@ -79,7 +95,9 @@ public class SettingActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Release Today Reminder: On", Toast.LENGTH_LONG).show();
                 }
                 else{
-                    releaseTodayReminder.cancelReminder(getApplicationContext());
+                    savePreferenceReleaseToday(false);
+
+
                     Toast.makeText(getApplicationContext(), "Release Today Reminder: Off", Toast.LENGTH_LONG).show();
                 }
             }
