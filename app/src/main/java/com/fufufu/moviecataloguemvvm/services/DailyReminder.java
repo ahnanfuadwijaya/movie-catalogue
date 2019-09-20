@@ -62,7 +62,7 @@ public class DailyReminder extends BroadcastReceiver {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, ID_REMINDER, intent, 0);
         if (alarmManager != null) {
             alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
-            Log.d("Reminder", "Set");
+            Log.d("Daily Reminder", "Set");
         }
     }
 
@@ -74,7 +74,7 @@ public class DailyReminder extends BroadcastReceiver {
 
         if (alarmManager != null) {
             alarmManager.cancel(pendingIntent);
-            Toast.makeText(context, "Repeating alarm dibatalkan", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Daily Reminder Off", Toast.LENGTH_SHORT).show();
         }
     }
 

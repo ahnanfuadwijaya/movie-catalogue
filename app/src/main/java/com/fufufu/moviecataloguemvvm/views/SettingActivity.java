@@ -82,8 +82,7 @@ public class SettingActivity extends AppCompatActivity {
                     calendar.set(Calendar.HOUR_OF_DAY, 8);
                     calendar.set(Calendar.MINUTE, 0);
                     calendar.set(Calendar.SECOND, 0);
-
-
+                    
                     Intent intent = new Intent(getApplicationContext(), ReleaseTodayIntentService.class);
                     PendingIntent pendingIntent = PendingIntent.getService(getApplicationContext(), ID_REMINDER, intent, 0);
                     AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
@@ -96,7 +95,14 @@ public class SettingActivity extends AppCompatActivity {
                 }
                 else{
                     savePreferenceReleaseToday(false);
+                    AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                    Intent intent = new Intent(getApplicationContext(), ReleaseTodayIntentService.class);
+                    PendingIntent pendingIntent = PendingIntent.getService(getApplicationContext(), ID_REMINDER, intent, 0);
+                    pendingIntent.cancel();
 
+                    if (alarmManager != null) {
+                        alarmManager.cancel(pendingIntent);
+                    }
 
                     Toast.makeText(getApplicationContext(), "Release Today Reminder: Off", Toast.LENGTH_LONG).show();
                 }
