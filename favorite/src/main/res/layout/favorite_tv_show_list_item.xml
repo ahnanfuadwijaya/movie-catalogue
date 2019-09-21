@@ -27,7 +27,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:contentDescription="@string/detail_tv_show_poster_description_tag"
-                bind:filmPoster="@{favoriteTvShow.posterPath}"
+                bind:tvShowPoster="@{favoriteTvShow.posterPath}"
                 bind:layout_constraintBottom_toBottomOf="parent"
                 bind:layout_constraintStart_toStartOf="parent"
                 bind:layout_constraintTop_toTopOf="parent" />
