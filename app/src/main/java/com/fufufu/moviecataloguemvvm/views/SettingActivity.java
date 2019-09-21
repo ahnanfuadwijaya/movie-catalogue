@@ -82,7 +82,7 @@ public class SettingActivity extends AppCompatActivity {
                     calendar.set(Calendar.HOUR_OF_DAY, 8);
                     calendar.set(Calendar.MINUTE, 0);
                     calendar.set(Calendar.SECOND, 0);
-                    
+
                     Intent intent = new Intent(getApplicationContext(), ReleaseTodayIntentService.class);
                     PendingIntent pendingIntent = PendingIntent.getService(getApplicationContext(), ID_REMINDER, intent, 0);
                     AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
