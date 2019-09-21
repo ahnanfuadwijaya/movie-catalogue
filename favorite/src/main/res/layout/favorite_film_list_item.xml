@@ -1,0 +1,113 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="favoriteFilm"
+            type="com.fufufu.favoritefilm.models.FavoriteFilm"/>
+    </data>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/film_cardview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:radius="8dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/iv_poster"
+                android:layout_width="100dp"
+                android:layout_height="140dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:contentDescription="@string/detail_film_poster_film_description_tag"
+                bind:filmPoster="@{favoriteFilm.posterPath}"
+                bind:layout_constraintBottom_toBottomOf="parent"
+                bind:layout_constraintStart_toStartOf="parent"
+                bind:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_favorite_film_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="12dp"
+                android:text="@{favoriteFilm.title}"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                bind:layout_constraintStart_toEndOf="@+id/iv_poster"
+                bind:layout_constraintTop_toTopOf="@+id/iv_poster"
+                tools:text="Judul Filem" />
+
+            <TextView
+                android:id="@+id/tv_favorite_film_score_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/detail_film_score_tag"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                bind:layout_constraintStart_toStartOf="@+id/tv_favorite_film_title"
+                bind:layout_constraintTop_toBottomOf="@+id/tv_favorite_film_title" />
+
+            <TextView
+                android:id="@+id/tv_favorite_film_score_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                tools:text="7.9"
+                bind:voteFilmAverageValue="@{favoriteFilm.voteAverage}"
+                bind:layout_constraintStart_toEndOf="@+id/tv_favorite_film_score_tag"
+                bind:layout_constraintTop_toTopOf="@+id/tv_favorite_film_score_tag" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/remove_from_favorite_film"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/border"
+                android:orientation="horizontal"
+                bind:layout_constraintBottom_toBottomOf="@+id/iv_poster"
+                bind:layout_constraintStart_toEndOf="@+id/iv_poster">
+
+                <TextView
+                    android:id="@+id/tv_remove_favorite_film"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/remove_from_favorite_film"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    bind:layout_constraintBottom_toBottomOf="parent"
+                    bind:layout_constraintStart_toStartOf="parent"
+                    bind:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_remove_favorite_film"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:contentDescription="@string/remove_from_favorite_film"
+                    android:src="@drawable/ic_remove_24px"
+                    bind:layout_constraintBottom_toBottomOf="parent"
+                    bind:layout_constraintEnd_toEndOf="parent"
+                    bind:layout_constraintStart_toEndOf="@+id/tv_remove_favorite_film"
+                    bind:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

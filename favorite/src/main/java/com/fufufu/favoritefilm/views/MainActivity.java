@@ -1,8 +1,10 @@
-package com.fufufu.favoritefilm;
+package com.fufufu.favoritefilm.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.fufufu.favoritefilm.R;
 
 public class MainActivity extends AppCompatActivity {
 
