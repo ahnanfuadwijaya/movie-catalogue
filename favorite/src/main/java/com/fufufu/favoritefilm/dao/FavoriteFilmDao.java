@@ -20,6 +20,9 @@ public interface FavoriteFilmDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insertFavoriteFilm(FavoriteFilm favoriteFilm);
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    long[] insertAllFavoriteFilms(FavoriteFilm[] favoriteFilms);
+
     @Query("SELECT * FROM favorite_film_table")
     Cursor getAllFavoriteFilms();
 
@@ -27,10 +30,10 @@ public interface FavoriteFilmDao {
     Cursor getFilm(long id);
 
     @Update
-    void updateFavoriteFilm(FavoriteFilm favoriteFilm);
+    int updateFavoriteFilm(FavoriteFilm favoriteFilm);
 
     @Delete
-    void deleteFavoriteFilm(FavoriteFilm favoriteFilm);
+    int deleteFavoriteFilm(long id);
 
     @Query("DELETE FROM favorite_film_table")
     void deleteAllFavoriteFilms();
