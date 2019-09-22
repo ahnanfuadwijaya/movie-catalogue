@@ -9,7 +9,6 @@ import androidx.lifecycle.LiveData;
 import com.fufufu.favoritefilm.models.FavoriteFilm;
 import com.fufufu.favoritefilm.repository.Repository;
 
-import java.util.List;
 
 public class FavoriteFilmViewModel extends AndroidViewModel {
     private Repository favoriteFilmRepository;
