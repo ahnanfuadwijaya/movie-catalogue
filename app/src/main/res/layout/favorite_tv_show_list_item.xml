@@ -4,7 +4,7 @@
     <data>
         <variable
             name="favoriteTvShow"
-            type="com.fufufu.moviecataloguemvvm.models.FavoriteTvShow"/>
+            type="com.fufufu.moviecatalogue.models.FavoriteTvShow"/>
     </data>
     <androidx.cardview.widget.CardView
         android:id="@+id/tv_show_cardview"

@@ -6,7 +6,7 @@
     <data>
         <variable
             name="tvShow"
-            type="com.fufufu.moviecataloguemvvm.models.TvShow" />
+            type="com.fufufu.moviecatalogue.models.TvShow" />
     </data>
     <ScrollView
         android:id="@+id/activity_detail_tv_show"
@@ -88,13 +88,15 @@
 
             <TextView
                 android:id="@+id/tv_overview_value"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="24dp"
                 android:text="@{tvShow.overview}"
                 android:textSize="14sp"
                 app:layout_constrainedWidth="true"
                 bind:layout_constraintBottom_toBottomOf="parent"
+                bind:layout_constraintEnd_toEndOf="parent"
                 bind:layout_constraintStart_toStartOf="@+id/tv_score_value"
                 bind:layout_constraintTop_toTopOf="@+id/tv_overview_tag"
                 bind:layout_constraintVertical_bias="0.0"

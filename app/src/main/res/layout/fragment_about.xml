@@ -2,7 +2,7 @@
     <data>
         <variable
             name="about"
-            type="com.fufufu.moviecataloguemvvm.models.About" />
+            type="com.fufufu.moviecatalogue.models.About" />
     </data>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"

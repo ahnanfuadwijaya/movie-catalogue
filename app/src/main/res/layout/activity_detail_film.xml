@@ -6,7 +6,7 @@
     <data>
         <variable
             name="film"
-            type="com.fufufu.moviecataloguemvvm.models.Film" />
+            type="com.fufufu.moviecatalogue.models.Film" />
     </data>
     <ScrollView
         android:id="@+id/activity_detail_film"
@@ -34,13 +34,15 @@
 
             <TextView
                 android:id="@+id/tv_overview_value"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="24dp"
                 android:text="@{film.overview}"
                 android:textSize="14sp"
                 app:layout_constrainedWidth="true"
                 bind:layout_constraintBottom_toBottomOf="parent"
+                bind:layout_constraintEnd_toEndOf="parent"
                 bind:layout_constraintStart_toStartOf="@+id/tv_score_value"
                 bind:layout_constraintTop_toTopOf="@+id/tv_overview_tag"
                 tools:text="Overview Value" />

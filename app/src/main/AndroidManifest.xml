@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.fufufu.moviecataloguemvvm">
+    package="com.fufufu.moviecatalogue">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -16,12 +16,12 @@
         android:theme="@style/Theme.AppCompat.Light"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".views.SetLanguageActivity" />
-        <activity android:name=".views.SettingActivity" />
-        <activity android:name=".views.DetailTvShowActivity" />
-        <activity android:name=".views.DetailFilmActivity" />
+        <activity android:name="com.fufufu.moviecatalogue.views.SetLanguageActivity" />
+        <activity android:name="com.fufufu.moviecatalogue.views.SettingActivity" />
+        <activity android:name="com.fufufu.moviecatalogue.views.DetailTvShowActivity" />
+        <activity android:name="com.fufufu.moviecatalogue.views.DetailFilmActivity" />
         <activity
-            android:name=".views.MainActivity"
+            android:name="com.fufufu.moviecatalogue.views.MainActivity"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,10 +31,10 @@
         </activity>
 
         <receiver
-            android:name=".services.DailyReminder"
+            android:name="com.fufufu.moviecatalogue.services.DailyReminder"
             android:enabled="true" />
         <service
-            android:name=".services.ReleaseTodayIntentService"
+            android:name="com.fufufu.moviecatalogue.services.ReleaseTodayIntentService"
             android:enabled="true"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />

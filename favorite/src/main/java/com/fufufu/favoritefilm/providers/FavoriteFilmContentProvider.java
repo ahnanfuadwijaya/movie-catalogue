@@ -72,7 +72,7 @@ public class FavoriteFilmContentProvider extends ContentProvider {
                     return null;
                 }
                 final long id = FavoriteFilmDatabase.getInstance(context).favoriteFilmDao()
-                        .insertFavoriteFilm(FavoriteFilm.fromContentValues(values));
+                        .insertFavoriteFilm(FavoriteFilm.fromContentValues(contentValues));
                 context.getContentResolver().notifyChange(uri, null);
                 return ContentUris.withAppendedId(uri, id);
             case FAVORITE_FILM_ID:

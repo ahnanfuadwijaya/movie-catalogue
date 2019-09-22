@@ -4,7 +4,7 @@
     <data>
         <variable
             name="film"
-            type="com.fufufu.moviecataloguemvvm.models.Film"/>
+            type="com.fufufu.moviecatalogue.models.Film"/>
     </data>
     <androidx.cardview.widget.CardView
         android:id="@+id/film_cardview"

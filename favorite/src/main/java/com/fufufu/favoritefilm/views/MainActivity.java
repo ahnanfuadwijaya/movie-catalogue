@@ -18,8 +18,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActivityMainBinding activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         TabLayout tabLayout = activityMainBinding.tabFavorite;
-        final ViewPager viewPager = activityMainBinding.viewpagerFavorite;
-        final TabFavoriteAdapter tabFavoriteAdapter = new TabFavoriteAdapter(getSupportFragmentManager(), this);
+        ViewPager viewPager = activityMainBinding.viewpagerFavorite;
+        TabFavoriteAdapter tabFavoriteAdapter = new TabFavoriteAdapter(getSupportFragmentManager(), this);
         viewPager.setAdapter(tabFavoriteAdapter);
         tabLayout.setupWithViewPager(viewPager);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
