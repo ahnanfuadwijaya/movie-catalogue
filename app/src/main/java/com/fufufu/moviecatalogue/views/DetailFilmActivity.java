@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import com.fufufu.moviecatalogue.R;
@@ -19,7 +20,7 @@ import com.fufufu.moviecatalogue.viewmodels.FavoriteFilmViewModel;
 import java.util.Locale;
 import java.util.Objects;
 
-public class DetailFilmActivity extends AppCompatActivity {
+public class DetailFilmActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         loadLocale();

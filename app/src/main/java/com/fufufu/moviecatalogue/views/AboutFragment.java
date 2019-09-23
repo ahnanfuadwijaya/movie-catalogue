@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.fufufu.moviecatalogue.R;
 import com.fufufu.moviecatalogue.databinding.FragmentAboutBinding;
 import com.fufufu.moviecatalogue.viewmodels.AboutViewModel;
@@ -23,7 +25,7 @@ public class AboutFragment extends Fragment {
 
         Objects.requireNonNull(getActivity()).setTitle(getResources().getString(R.string.fragment_about_me_title));
         FragmentAboutBinding fragmentAboutBinding = FragmentAboutBinding.inflate(inflater, container, false);
-        AboutViewModel aboutViewModel = new AboutViewModel();
+        AboutViewModel aboutViewModel = ViewModelProviders.of(this).get(AboutViewModel.class);
         aboutViewModel.setData();
         fragmentAboutBinding.setAbout(aboutViewModel.getData());
         return fragmentAboutBinding.getRoot();

@@ -45,6 +45,7 @@ public class FilmFragment extends Fragment {
                 }
             }
         });
+
         filmAdapter = new FilmAdapter();
         recyclerView.setAdapter(filmAdapter);
         getFilms();
