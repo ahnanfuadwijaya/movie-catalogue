@@ -22,6 +22,7 @@ import java.util.concurrent.Callable;
 
 public class FavoriteFilmContentProvider extends ContentProvider {
     public static final String AUTHORITY = "com.fufufu.favoritefilm.providers";
+    public static final Uri URI_FAVORITE_FILM = Uri.parse("content://" + AUTHORITY + "/" + FavoriteFilm.TABLE_NAME);
     private static final int FAVORITE_FILM = 1;
     private static final int FAVORITE_FILM_ID = 2;
     private static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);

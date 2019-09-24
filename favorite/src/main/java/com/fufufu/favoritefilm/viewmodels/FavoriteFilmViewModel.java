@@ -5,14 +5,20 @@ import android.database.Cursor;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.fufufu.favoritefilm.models.FavoriteFilm;
 import com.fufufu.favoritefilm.repository.Repository;
+
+import java.util.ArrayList;
+
+import static android.provider.BaseColumns._ID;
 
 
 public class FavoriteFilmViewModel extends AndroidViewModel {
     private Repository favoriteFilmRepository;
     private Cursor allFavoriteFilms;
+    private MutableLiveData<ArrayList<FavoriteFilm>> allFavoriteFilmsLiveData = new MutableLiveData<>();
 
     public FavoriteFilmViewModel(Application application) {
         super(application);
@@ -46,5 +52,25 @@ public class FavoriteFilmViewModel extends AndroidViewModel {
 
     public LiveData<Boolean> isLoading() {
         return favoriteFilmRepository.getLoading();
+    }
+
+    public LiveData<ArrayList<FavoriteFilm>> getAllFavoriteFilmsLiveData() {
+        return allFavoriteFilmsLiveData;
+    }
+
+    public void setAllFavoriteFilmsLiveData(Cursor cursor) {
+        this.allFavoriteFilmsLiveData.setValue(mapCursorToArrayList(cursor));
+    }
+
+    private static ArrayList<FavoriteFilm> mapCursorToArrayList(Cursor cursor){
+        ArrayList<FavoriteFilm> favoriteFilms = new ArrayList<>();
+        while (cursor.moveToFirst()){
+            long id = cursor.getInt(cursor.getColumnIndexOrThrow(_ID));
+            String title = cursor.getString(cursor.getColumnIndexOrThrow("title"));
+            String posterPath = cursor.getString(cursor.getColumnIndexOrThrow("posterPath"));
+            Float voteAverage = cursor.getFloat(cursor.getColumnIndexOrThrow("voteAverage"));
+            favoriteFilms.add(new FavoriteFilm(id, posterPath, title, voteAverage));
+        }
+        return favoriteFilms;
     }
 }
