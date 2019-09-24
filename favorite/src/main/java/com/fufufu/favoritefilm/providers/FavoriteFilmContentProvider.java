@@ -119,9 +119,9 @@ public class FavoriteFilmContentProvider extends ContentProvider {
                     return 0;
                 }
                 FavoriteFilmDao favoriteFilmDao = FavoriteFilmDatabase.getInstance(context).favoriteFilmDao();
-                final int count = favoriteFilmDao.updateFavoriteFilm(FavoriteFilm.fromContentValues(contentValues));
+                final int id = favoriteFilmDao.updateFavoriteFilm(FavoriteFilm.fromContentValues(contentValues));
                 context.getContentResolver().notifyChange(uri, null);
-                return count;
+                return id;
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
         }

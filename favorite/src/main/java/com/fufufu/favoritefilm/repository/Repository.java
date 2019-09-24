@@ -24,11 +24,11 @@ import static android.provider.BaseColumns._ID;
 public class Repository {
     private Context context;
     private FavoriteFilmDao favoriteFilmDao;
-    private Cursor favoriteFilmListCursor;
     private FavoriteTvShowDao favoriteTvShowDao;
     private LiveData<List<FavoriteTvShow>> favoriteTvShowList;
     private static MutableLiveData<Boolean> mutableIsLoading = new MutableLiveData<>();
     private MutableLiveData<ArrayList<FavoriteFilm>> favoriteFilmList = new MutableLiveData<>();
+    private Cursor favoriteFilmsCursor;
 
     public MutableLiveData<Boolean> getLoading() {
         return mutableIsLoading;
@@ -38,9 +38,7 @@ public class Repository {
         FavoriteFilmDatabase favoriteFilmDatabase = FavoriteFilmDatabase.getInstance(application);
         this.context = application.getApplicationContext();
         favoriteFilmDao = favoriteFilmDatabase.favoriteFilmDao();
-        favoriteFilmListCursor = favoriteFilmDao.getAllFavoriteFilms();
         FavoriteTvShowDatabase favoriteTvShowDatabase = FavoriteTvShowDatabase.getInstance(application);
-
         favoriteTvShowDao = favoriteTvShowDatabase.favoriteTvShowDao();
         favoriteTvShowList = favoriteTvShowDao.getAllFavoriteTvShows();
         mutableIsLoading.setValue(true);
@@ -58,10 +56,14 @@ public class Repository {
         new DeleteFavoriteFilmAsyncTask(favoriteFilmDao).execute(id);
     }
 
-    public MutableLiveData<ArrayList<FavoriteFilm>> getAllFavoriteFilms() {
-        favoriteFilmList.setValue(mapCursorToArrayList(favoriteFilmListCursor));
-        mutableIsLoading.setValue(false);
-        return favoriteFilmList;
+    public Cursor getAllFavoriteFilms() {
+        mutableIsLoading.setValue(true);
+        try {
+            return new GetAllFavoriteFilmsAsyncTask(favoriteFilmDao).execute().get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public Cursor getFavoriteFilm(int id) {
@@ -104,7 +106,7 @@ public class Repository {
         }
     }
 
-    private static class GetAllFavoriteFilmsAsyncTask extends AsyncTask<Void, Void, Void> {
+    private static class GetAllFavoriteFilmsAsyncTask extends AsyncTask<Void, Void, Cursor> {
         private FavoriteFilmDao favoriteFilmDao;
 
         GetAllFavoriteFilmsAsyncTask(FavoriteFilmDao favoriteFilmDao) {
@@ -112,9 +114,8 @@ public class Repository {
         }
 
         @Override
-        protected Void doInBackground(Void... voids) {
-            favoriteFilmDao.getAllFavoriteFilms();
-            return null;
+        protected Cursor doInBackground(Void... voids) {
+            return favoriteFilmDao.getAllFavoriteFilms();
         }
     }
 

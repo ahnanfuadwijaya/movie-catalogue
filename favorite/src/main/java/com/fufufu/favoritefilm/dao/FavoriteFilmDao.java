@@ -12,6 +12,7 @@ import androidx.room.Update;
 
 import com.fufufu.favoritefilm.models.FavoriteFilm;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Dao
@@ -32,7 +33,7 @@ public interface FavoriteFilmDao {
     @Update
     int updateFavoriteFilm(FavoriteFilm favoriteFilm);
 
-    @Delete
+    @Query("DELETE FROM favorite_film_table WHERE id = :id")
     int deleteFavoriteFilm(long id);
 
     @Query("DELETE FROM favorite_film_table")
