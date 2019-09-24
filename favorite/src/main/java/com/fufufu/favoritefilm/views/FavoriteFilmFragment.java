@@ -26,6 +26,7 @@ import com.fufufu.favoritefilm.providers.FavoriteFilmContentProvider;
 import com.fufufu.favoritefilm.viewmodels.FavoriteFilmViewModel;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class FavoriteFilmFragment extends Fragment {
     private static final int LOADER_FAVORITE_FILM = 1;
@@ -38,7 +39,7 @@ public class FavoriteFilmFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         FragmentFavoriteFilmBinding fragmentFavoriteFilmBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_favorite_film, container, false);
@@ -52,7 +53,8 @@ public class FavoriteFilmFragment extends Fragment {
                 favoriteFilmAdapter.setFavoriteFilms(favoriteFilms);
             }
         });
-        return inflater.inflate(R.layout.fragment_favorite_film, container, false);
+        //Objects.requireNonNull(this.getActivity()).getSupportLoaderManager().initLoader(LOADER_FAVORITE_FILM, null, cursorLoaderCallbacks);
+        return fragmentFavoriteFilmBinding.getRoot();
     }
     private LoaderManager.LoaderCallbacks<Cursor> cursorLoaderCallbacks = new LoaderManager.LoaderCallbacks<Cursor>() {
         @NonNull

@@ -36,6 +36,11 @@ public abstract class FavoriteFilmDatabase extends RoomDatabase {
         }
     };
 
+    @Override
+    public void close() {
+        super.close();
+    }
+
     private static class PopulateDatabaseAsync extends AsyncTask<Void, Void, Void> {
         private FavoriteFilmDao favoriteFilmDao;
 

@@ -50,7 +50,7 @@ public class FavoriteFilmAdapter extends RecyclerView.Adapter<FavoriteFilmAdapte
         holder.favoriteFilmListItemBinding.removeFromFavoriteFilm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                favoriteFilmViewModel.deleteFavoriteFilm(favoriteFilm);
+                favoriteFilmViewModel.deleteFavoriteFilm(favoriteFilm.getId());
             }
         });
     }

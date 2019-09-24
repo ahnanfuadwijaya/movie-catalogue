@@ -23,7 +23,7 @@ public class FavoriteFilmViewModel extends AndroidViewModel {
     public FavoriteFilmViewModel(Application application) {
         super(application);
         favoriteFilmRepository = new Repository(application);
-        allFavoriteFilms = favoriteFilmRepository.getAllFavoriteFilms();
+        allFavoriteFilmsLiveData = favoriteFilmRepository.getAllFavoriteFilms();
     }
 
     public void insertFavoriteFilm(FavoriteFilm favoriteFilm) {
@@ -42,8 +42,8 @@ public class FavoriteFilmViewModel extends AndroidViewModel {
         favoriteFilmRepository.updateFavoriteFilm(favoriteFilm);
     }
 
-    public void deleteFavoriteFilm(FavoriteFilm favoriteFilm) {
-        favoriteFilmRepository.deleteFavoriteFilm(favoriteFilm);
+    public void deleteFavoriteFilm(Long id) {
+        favoriteFilmRepository.deleteFavoriteFilm(id);
     }
 
     public void deleteAllFavoriteFilms() {

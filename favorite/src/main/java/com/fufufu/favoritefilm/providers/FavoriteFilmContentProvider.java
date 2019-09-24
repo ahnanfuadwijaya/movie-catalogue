@@ -23,11 +23,11 @@ import java.util.concurrent.Callable;
 public class FavoriteFilmContentProvider extends ContentProvider {
     public static final String AUTHORITY = "com.fufufu.favoritefilm.providers";
     public static final Uri URI_FAVORITE_FILM = Uri.parse("content://" + AUTHORITY + "/" + FavoriteFilm.TABLE_NAME);
-    private static final int FAVORITE_FILM = 1;
+    private static final int FAVORITE_FILMS = 1;
     private static final int FAVORITE_FILM_ID = 2;
     private static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
     static {
-        uriMatcher.addURI(AUTHORITY, FavoriteFilm.TABLE_NAME, FAVORITE_FILM);
+        uriMatcher.addURI(AUTHORITY, FavoriteFilm.TABLE_NAME, FAVORITE_FILMS);
         uriMatcher.addURI(AUTHORITY, FavoriteFilm.TABLE_NAME + "/*", FAVORITE_FILM_ID);
     }
 
@@ -39,14 +39,14 @@ public class FavoriteFilmContentProvider extends ContentProvider {
     @Override
     public Cursor query(@NonNull Uri uri, String[] strings, String s, String[] strings1, String s1) {
         final int code = uriMatcher.match(uri);
-        if (code == FAVORITE_FILM || code == FAVORITE_FILM_ID) {
+        if (code == FAVORITE_FILMS || code == FAVORITE_FILM_ID) {
             final Context context = getContext();
             if (context == null) {
                 return null;
             }
             FavoriteFilmDao favoriteFilmDao = FavoriteFilmDatabase.getInstance(context).favoriteFilmDao();
             final Cursor cursor;
-            if (code == FAVORITE_FILM) {
+            if (code == FAVORITE_FILMS) {
                 cursor = favoriteFilmDao.getAllFavoriteFilms();
             } else {
                 cursor = favoriteFilmDao.getFilm(ContentUris.parseId(uri));
@@ -61,7 +61,7 @@ public class FavoriteFilmContentProvider extends ContentProvider {
     @Override
     public String getType(@NonNull Uri uri) {
         switch (uriMatcher.match(uri)) {
-            case FAVORITE_FILM:
+            case FAVORITE_FILMS:
                 return "vnd.android.cursor.dir/" + AUTHORITY + "." + FavoriteFilm.TABLE_NAME;
             case FAVORITE_FILM_ID:
                 return "vnd.android.cursor.item/" + AUTHORITY + "." + FavoriteFilm.TABLE_NAME;
@@ -73,13 +73,13 @@ public class FavoriteFilmContentProvider extends ContentProvider {
     @Override
     public Uri insert(@NonNull Uri uri, ContentValues contentValues) {
         switch (uriMatcher.match(uri)) {
-            case FAVORITE_FILM:
+            case FAVORITE_FILMS:
                 final Context context = getContext();
                 if (context == null) {
                     return null;
                 }
-                final long id = FavoriteFilmDatabase.getInstance(context).favoriteFilmDao()
-                        .insertFavoriteFilm(FavoriteFilm.fromContentValues(contentValues));
+                FavoriteFilmDao favoriteFilmDao = FavoriteFilmDatabase.getInstance(context).favoriteFilmDao();
+                final long id = favoriteFilmDao.insertFavoriteFilm(FavoriteFilm.fromContentValues(contentValues));
                 context.getContentResolver().notifyChange(uri, null);
                 return ContentUris.withAppendedId(uri, id);
             case FAVORITE_FILM_ID:
@@ -92,17 +92,17 @@ public class FavoriteFilmContentProvider extends ContentProvider {
     @Override
     public int delete(@NonNull Uri uri, String s, String[] strings) {
         switch (uriMatcher.match(uri)) {
-            case FAVORITE_FILM:
+            case FAVORITE_FILMS:
                 throw new IllegalArgumentException("Invalid URI, cannot update without ID" + uri);
             case FAVORITE_FILM_ID:
                 final Context context = getContext();
                 if (context == null) {
                     return 0;
                 }
-                final int count = FavoriteFilmDatabase.getInstance(context).favoriteFilmDao()
-                        .deleteFavoriteFilm(ContentUris.parseId(uri));
+                FavoriteFilmDao favoriteFilmDao = FavoriteFilmDatabase.getInstance(context).favoriteFilmDao();
+                final int id = favoriteFilmDao.deleteFavoriteFilm(ContentUris.parseId(uri));
                 context.getContentResolver().notifyChange(uri, null);
-                return count;
+                return id;
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
         }
@@ -111,17 +111,15 @@ public class FavoriteFilmContentProvider extends ContentProvider {
     @Override
     public int update(@NonNull Uri uri, ContentValues contentValues, String s, String[] strings) {
         switch (uriMatcher.match(uri)) {
-            case FAVORITE_FILM:
+            case FAVORITE_FILMS:
                 throw new IllegalArgumentException("Invalid URI, cannot update without ID" + uri);
             case FAVORITE_FILM_ID:
                 final Context context = getContext();
                 if (context == null) {
                     return 0;
                 }
-                final FavoriteFilm favoriteFilm = FavoriteFilm.fromContentValues(contentValues);
-                favoriteFilm.setId(ContentUris.parseId(uri));
-                final int count = FavoriteFilmDatabase.getInstance(context).favoriteFilmDao()
-                        .updateFavoriteFilm(favoriteFilm);
+                FavoriteFilmDao favoriteFilmDao = FavoriteFilmDatabase.getInstance(context).favoriteFilmDao();
+                final int count = favoriteFilmDao.updateFavoriteFilm(FavoriteFilm.fromContentValues(contentValues));
                 context.getContentResolver().notifyChange(uri, null);
                 return count;
             default:
@@ -148,7 +146,7 @@ public class FavoriteFilmContentProvider extends ContentProvider {
     @Override
     public int bulkInsert(@NonNull Uri uri, @NonNull ContentValues[] values) {
         switch (uriMatcher.match(uri)) {
-            case FAVORITE_FILM:
+            case FAVORITE_FILMS:
                 final Context context = getContext();
                 if (context == null) {
                     return 0;

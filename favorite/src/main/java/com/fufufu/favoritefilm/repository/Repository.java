@@ -1,12 +1,10 @@
 package com.fufufu.favoritefilm.repository;
 
 import android.app.Application;
+import android.content.Context;
 import android.database.Cursor;
 import android.os.AsyncTask;
-import android.text.TextUtils;
-import android.util.Log;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -17,15 +15,20 @@ import com.fufufu.favoritefilm.database.FavoriteTvShowDatabase;
 import com.fufufu.favoritefilm.models.FavoriteFilm;
 import com.fufufu.favoritefilm.models.FavoriteTvShow;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import static android.provider.BaseColumns._ID;
+
 public class Repository {
+    private Context context;
     private FavoriteFilmDao favoriteFilmDao;
-    private Cursor favoriteFilmList;
+    private Cursor favoriteFilmListCursor;
     private FavoriteTvShowDao favoriteTvShowDao;
     private LiveData<List<FavoriteTvShow>> favoriteTvShowList;
     private static MutableLiveData<Boolean> mutableIsLoading = new MutableLiveData<>();
+    private MutableLiveData<ArrayList<FavoriteFilm>> favoriteFilmList = new MutableLiveData<>();
 
     public MutableLiveData<Boolean> getLoading() {
         return mutableIsLoading;
@@ -33,9 +36,9 @@ public class Repository {
 
     public Repository(Application application) {
         FavoriteFilmDatabase favoriteFilmDatabase = FavoriteFilmDatabase.getInstance(application);
-
+        this.context = application.getApplicationContext();
         favoriteFilmDao = favoriteFilmDatabase.favoriteFilmDao();
-        favoriteFilmList = favoriteFilmDao.getAllFavoriteFilms();
+        favoriteFilmListCursor = favoriteFilmDao.getAllFavoriteFilms();
         FavoriteTvShowDatabase favoriteTvShowDatabase = FavoriteTvShowDatabase.getInstance(application);
 
         favoriteTvShowDao = favoriteTvShowDatabase.favoriteTvShowDao();
@@ -51,11 +54,12 @@ public class Repository {
         new UpdateFavoriteFilmAsyncTask(favoriteFilmDao).execute(favoriteFilm);
     }
 
-    public void deleteFavoriteFilm(FavoriteFilm favoriteFilm) {
-        new DeleteFavoriteFilmAsyncTask(favoriteFilmDao).execute(favoriteFilm);
+    public void deleteFavoriteFilm(Long id) {
+        new DeleteFavoriteFilmAsyncTask(favoriteFilmDao).execute(id);
     }
 
-    public Cursor getAllFavoriteFilms() {
+    public MutableLiveData<ArrayList<FavoriteFilm>> getAllFavoriteFilms() {
+        favoriteFilmList.setValue(mapCursorToArrayList(favoriteFilmListCursor));
         mutableIsLoading.setValue(false);
         return favoriteFilmList;
     }
@@ -64,9 +68,7 @@ public class Repository {
         mutableIsLoading.setValue(true);
         try {
             return new GetFavoriteFilmAsyncTask(favoriteFilmDao).execute(id).get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
         return null;
@@ -74,6 +76,18 @@ public class Repository {
 
     public void deleteAllFavoriteFilms() {
         new DeleteAllFavoriteFilmsAsyncTask(favoriteFilmDao).execute();
+    }
+
+    public static ArrayList<FavoriteFilm> mapCursorToArrayList(Cursor cursor){
+        ArrayList<FavoriteFilm> favoriteFilms = new ArrayList<>();
+        while (cursor.moveToFirst()){
+            long id = cursor.getInt(cursor.getColumnIndexOrThrow(_ID));
+            String title = cursor.getString(cursor.getColumnIndexOrThrow("title"));
+            String posterPath = cursor.getString(cursor.getColumnIndexOrThrow("posterPath"));
+            Float voteAverage = cursor.getFloat(cursor.getColumnIndexOrThrow("voteAverage"));
+            favoriteFilms.add(new FavoriteFilm(id, posterPath, title, voteAverage));
+        }
+        return favoriteFilms;
     }
 
     private static class InsertFavoriteFilmAsyncTask extends AsyncTask<FavoriteFilm, Void, Void> {
@@ -137,7 +151,7 @@ public class Repository {
         }
     }
 
-    private static class DeleteFavoriteFilmAsyncTask extends AsyncTask<FavoriteFilm, Void, Void> {
+    private static class DeleteFavoriteFilmAsyncTask extends AsyncTask<Long, Void, Void> {
         private FavoriteFilmDao favoriteFilmDao;
 
         DeleteFavoriteFilmAsyncTask(FavoriteFilmDao favoriteFilmDao) {
@@ -145,7 +159,7 @@ public class Repository {
         }
 
         @Override
-        protected Void doInBackground(FavoriteFilm... favoriteFilms) {
+        protected Void doInBackground(Long... favoriteFilms) {
             favoriteFilmDao.deleteFavoriteFilm(favoriteFilms[0]);
             return null;
         }
