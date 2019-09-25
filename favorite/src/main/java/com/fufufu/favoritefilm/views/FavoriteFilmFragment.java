@@ -53,32 +53,6 @@ public class FavoriteFilmFragment extends Fragment {
                 favoriteFilmAdapter.setFavoriteFilms(favoriteFilms);
             }
         });
-        //Objects.requireNonNull(this.getActivity()).getSupportLoaderManager().initLoader(LOADER_FAVORITE_FILM, null, cursorLoaderCallbacks);
         return fragmentFavoriteFilmBinding.getRoot();
     }
-    private LoaderManager.LoaderCallbacks<Cursor> cursorLoaderCallbacks = new LoaderManager.LoaderCallbacks<Cursor>() {
-        @NonNull
-        @Override
-        public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
-            if (id == LOADER_FAVORITE_FILM) {
-                return new CursorLoader(requireContext(), FavoriteFilmContentProvider.URI_FAVORITE_FILM,
-                        new String[]{FavoriteFilm.COLUMN_ID, FavoriteFilm.COLUMN_POSTER_PATH, FavoriteFilm.COLUMN_TITLE, FavoriteFilm.COLUMN_VOTE_AVERAGE}, null, null, null);
-            }
-            throw new IllegalArgumentException();
-        }
-
-        @Override
-        public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
-            if (loader.getId() == LOADER_FAVORITE_FILM) {
-                favoriteFilmViewModel.setAllFavoriteFilmsLiveData(data);
-            }
-        }
-
-        @Override
-        public void onLoaderReset(@NonNull Loader<Cursor> loader) {
-            if (loader.getId() == LOADER_FAVORITE_FILM) {
-                favoriteFilmViewModel.setAllFavoriteFilmsLiveData(null);
-            }
-        }
-    };
 }
