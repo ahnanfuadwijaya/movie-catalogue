@@ -14,6 +14,7 @@ import androidx.loader.app.LoaderManager;
 import androidx.loader.content.CursorLoader;
 import androidx.loader.content.Loader;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,10 +45,18 @@ public class FavoriteFilmFragment extends Fragment {
         // Inflate the layout for this fragment
         FragmentFavoriteFilmBinding fragmentFavoriteFilmBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_favorite_film, container, false);
         favoriteFilmViewModel = ViewModelProviders.of(this).get(FavoriteFilmViewModel.class);
+        if(Objects.requireNonNull(favoriteFilmViewModel.getAllFavoriteFilms().getValue().size() == 0)){
+            Log.d("Cursor", "kosong");
+        }
+        else {
+            //Log.d("Title", favoriteFilmViewModel.getAllFavoriteFilmsLiveData().getValue().get(0).getTitle());
+            Log.d("Cursor", "tidak kosong");
+            Log.d("Title[0]", favoriteFilmViewModel.getAllFavoriteFilms().getValue().get(0).getTitle());
+        }
         favoriteFilmAdapter = new FavoriteFilmAdapter(this);
         fragmentFavoriteFilmBinding.rvFavoriteFilmList.setAdapter(favoriteFilmAdapter);
 
-        favoriteFilmViewModel.getAllFavoriteFilmsLiveData().observe(getViewLifecycleOwner(), new Observer<ArrayList<FavoriteFilm>>() {
+        favoriteFilmViewModel.getAllFavoriteFilms().observe(getViewLifecycleOwner(), new Observer<ArrayList<FavoriteFilm>>() {
             @Override
             public void onChanged(ArrayList<FavoriteFilm> favoriteFilms) {
                 favoriteFilmAdapter.setFavoriteFilms(favoriteFilms);

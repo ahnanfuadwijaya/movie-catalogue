@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -30,6 +31,7 @@ public class Repository {
     private MutableLiveData<ArrayList<FavoriteFilm>> favoriteFilmList = new MutableLiveData<>();
     private Cursor favoriteFilmsCursor;
 
+
     public MutableLiveData<Boolean> getLoading() {
         return mutableIsLoading;
     }
@@ -41,6 +43,7 @@ public class Repository {
         FavoriteTvShowDatabase favoriteTvShowDatabase = FavoriteTvShowDatabase.getInstance(application);
         favoriteTvShowDao = favoriteTvShowDatabase.favoriteTvShowDao();
         favoriteTvShowList = favoriteTvShowDao.getAllFavoriteTvShows();
+        favoriteFilmsCursor = null;
         mutableIsLoading.setValue(true);
     }
 
@@ -58,11 +61,14 @@ public class Repository {
 
     public Cursor getAllFavoriteFilms() {
         mutableIsLoading.setValue(true);
+        Log.d("getAllFavorite Repo", "executed");
         try {
-            return new GetAllFavoriteFilmsAsyncTask(favoriteFilmDao).execute().get();
+            favoriteFilmsCursor = new GetAllFavoriteFilmsAsyncTask(favoriteFilmDao).execute().get();
+            return favoriteFilmsCursor;
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
+
         return null;
     }
 
@@ -78,18 +84,6 @@ public class Repository {
 
     public void deleteAllFavoriteFilms() {
         new DeleteAllFavoriteFilmsAsyncTask(favoriteFilmDao).execute();
-    }
-
-    public static ArrayList<FavoriteFilm> mapCursorToArrayList(Cursor cursor){
-        ArrayList<FavoriteFilm> favoriteFilms = new ArrayList<>();
-        while (cursor.moveToFirst()){
-            long id = cursor.getInt(cursor.getColumnIndexOrThrow(_ID));
-            String title = cursor.getString(cursor.getColumnIndexOrThrow("title"));
-            String posterPath = cursor.getString(cursor.getColumnIndexOrThrow("posterPath"));
-            Float voteAverage = cursor.getFloat(cursor.getColumnIndexOrThrow("voteAverage"));
-            favoriteFilms.add(new FavoriteFilm(id, posterPath, title, voteAverage));
-        }
-        return favoriteFilms;
     }
 
     private static class InsertFavoriteFilmAsyncTask extends AsyncTask<FavoriteFilm, Void, Void> {

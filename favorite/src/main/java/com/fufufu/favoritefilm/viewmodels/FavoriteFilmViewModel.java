@@ -2,6 +2,7 @@ package com.fufufu.favoritefilm.viewmodels;
 
 import android.app.Application;
 import android.database.Cursor;
+import android.util.Log;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -11,66 +12,62 @@ import com.fufufu.favoritefilm.models.FavoriteFilm;
 import com.fufufu.favoritefilm.repository.Repository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static android.provider.BaseColumns._ID;
 
-
 public class FavoriteFilmViewModel extends AndroidViewModel {
-    private Repository favoriteFilmRepository;
+    private Repository repository;
     private Cursor allFavoriteFilms;
-    private MutableLiveData<ArrayList<FavoriteFilm>> allFavoriteFilmsLiveData = new MutableLiveData<>();
+    private MutableLiveData<ArrayList<FavoriteFilm>> arrayListLiveData = new MutableLiveData<>();
 
     public FavoriteFilmViewModel(Application application) {
         super(application);
-        favoriteFilmRepository = new Repository(application);
-        allFavoriteFilms = favoriteFilmRepository.getAllFavoriteFilms();
+        repository = new Repository(application);
+        allFavoriteFilms = repository.getAllFavoriteFilms();
     }
 
     public void insertFavoriteFilm(FavoriteFilm favoriteFilm) {
-        favoriteFilmRepository.insertFavoriteFilm(favoriteFilm);
+        repository.insertFavoriteFilm(favoriteFilm);
     }
 
-    public Cursor getAllFavoriteFilms() {
-        return allFavoriteFilms;
+    public LiveData<ArrayList<FavoriteFilm>> getAllFavoriteFilms() {
+        mapCursorToArrayList(allFavoriteFilms);
+        return arrayListLiveData;
+    }
+    private void mapCursorToArrayList(Cursor cursor){
+        ArrayList<FavoriteFilm> favoriteFilms = new ArrayList<>();
+        if(cursor.moveToFirst()){
+            do{
+                long id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+                String title = cursor.getString(cursor.getColumnIndexOrThrow("title"));
+                String posterPath = cursor.getString(cursor.getColumnIndexOrThrow("posterPath"));
+                Float voteAverage = cursor.getFloat(cursor.getColumnIndexOrThrow("voteAverage"));
+                favoriteFilms.add(new FavoriteFilm(id, posterPath, title, voteAverage));
+                Log.d("Crsrmapping,item:title", title);
+                cursor.moveToNext();
+            }while (cursor.moveToNext());
+        }
+        arrayListLiveData.setValue(favoriteFilms);
     }
 
     public Cursor getFavoriteFilm(int id) {
-        return favoriteFilmRepository.getFavoriteFilm(id);
+        return repository.getFavoriteFilm(id);
     }
 
     public void updateFavoriteFilm(FavoriteFilm favoriteFilm) {
-        favoriteFilmRepository.updateFavoriteFilm(favoriteFilm);
+        repository.updateFavoriteFilm(favoriteFilm);
     }
 
-    public void deleteFavoriteFilm(Long id) {
-        favoriteFilmRepository.deleteFavoriteFilm(id);
+    public void deleteFavoriteFilm(long id) {
+        repository.deleteFavoriteFilm(id);
     }
 
     public void deleteAllFavoriteFilms() {
-        favoriteFilmRepository.deleteAllFavoriteFilms();
+        repository.deleteAllFavoriteFilms();
     }
 
     public LiveData<Boolean> isLoading() {
-        return favoriteFilmRepository.getLoading();
-    }
-
-    public LiveData<ArrayList<FavoriteFilm>> getAllFavoriteFilmsLiveData() {
-        return allFavoriteFilmsLiveData;
-    }
-
-    public void setAllFavoriteFilmsLiveData(Cursor cursor) {
-        this.allFavoriteFilmsLiveData.setValue(mapCursorToArrayList(cursor));
-    }
-
-    private static ArrayList<FavoriteFilm> mapCursorToArrayList(Cursor cursor){
-        ArrayList<FavoriteFilm> favoriteFilms = new ArrayList<>();
-        while (cursor.moveToFirst()){
-            long id = cursor.getInt(cursor.getColumnIndexOrThrow(_ID));
-            String title = cursor.getString(cursor.getColumnIndexOrThrow("title"));
-            String posterPath = cursor.getString(cursor.getColumnIndexOrThrow("posterPath"));
-            Float voteAverage = cursor.getFloat(cursor.getColumnIndexOrThrow("voteAverage"));
-            favoriteFilms.add(new FavoriteFilm(id, posterPath, title, voteAverage));
-        }
-        return favoriteFilms;
+        return repository.getLoading();
     }
 }

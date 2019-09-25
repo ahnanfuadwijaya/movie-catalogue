@@ -2,6 +2,7 @@ package com.fufufu.favoritefilm.database;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -20,11 +21,13 @@ public abstract class FavoriteFilmDatabase extends RoomDatabase {
 
     public static synchronized FavoriteFilmDatabase getInstance(Context context) {
         if (instance == null) {
-            instance = Room.databaseBuilder(context, FavoriteFilmDatabase.class, "favorite_film_database")
-                    .addCallback(roomCallback)
+            instance = Room.databaseBuilder(context.getApplicationContext(), FavoriteFilmDatabase.class, "favorite_film_database")
                     .fallbackToDestructiveMigration()
+                    .addCallback(roomCallback)
                     .build();
+            Log.d("instance DB", "null");
         }
+        Log.d("DB getInstance", "Executed");
         return instance;
     }
 
@@ -32,6 +35,7 @@ public abstract class FavoriteFilmDatabase extends RoomDatabase {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
+            Log.d("onCreate callback", "executed");
             new PopulateDatabaseAsync(instance).execute();
         }
     };
@@ -50,7 +54,13 @@ public abstract class FavoriteFilmDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            favoriteFilmDao.getAllFavoriteFilms();
+            FavoriteFilm favoriteFilm = new FavoriteFilm();
+            favoriteFilm.setId(1234);
+            favoriteFilm.setTitle("Tes Favorite");
+            favoriteFilm.setPosterPath("sdfhsfh");
+            favoriteFilm.setVoteAverage(7.0f);
+            favoriteFilmDao.insertFavoriteFilm(favoriteFilm);
+            Log.d("Populate DB", "executed");
             return null;
         }
     }
