@@ -29,6 +29,7 @@ import com.fufufu.favoritefilm.models.FavoriteFilm;
 import com.fufufu.favoritefilm.viewmodels.FavoriteFilmViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class FavoriteFilmFragment extends Fragment {
@@ -43,18 +44,17 @@ public class FavoriteFilmFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        FragmentFavoriteFilmBinding fragmentFavoriteFilmBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_favorite_film, container, false);
+        final FragmentFavoriteFilmBinding fragmentFavoriteFilmBinding = FragmentFavoriteFilmBinding.inflate(inflater, container, false);
         RecyclerView recyclerView = fragmentFavoriteFilmBinding.rvFavoriteFilmList;
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
         final ProgressBar progressBar = fragmentFavoriteFilmBinding.progressBarFavoriteFilm;
-        favoriteFilmViewModel = ViewModelProviders.of(this).get(FavoriteFilmViewModel.class);
+        FavoriteFilmViewModel favoriteFilmViewModel = ViewModelProviders.of(this).get(FavoriteFilmViewModel.class);
         favoriteFilmAdapter = new FavoriteFilmAdapter(this);
         recyclerView.setAdapter(favoriteFilmAdapter);
-        favoriteFilmViewModel.getAllFavoriteFilms().observe(getViewLifecycleOwner(), new Observer<ArrayList<FavoriteFilm>>() {
+        favoriteFilmViewModel.getAllFavoriteFilms().observe(this, new Observer<List<FavoriteFilm>>() {
             @Override
-            public void onChanged(ArrayList<FavoriteFilm> favoriteFilms) {
+            public void onChanged(List<FavoriteFilm> favoriteFilms) {
                 favoriteFilmAdapter.setFavoriteFilms(favoriteFilms);
             }
         });

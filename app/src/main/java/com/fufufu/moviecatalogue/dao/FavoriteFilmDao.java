@@ -1,5 +1,7 @@
 package com.fufufu.moviecatalogue.dao;
 
+import android.database.Cursor;
+
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -14,19 +16,22 @@ import java.util.List;
 public interface FavoriteFilmDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertFavoriteFilm(FavoriteFilm favoriteFilm);
+    long insertFavoriteFilm(FavoriteFilm favoriteFilm);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    long[] insertAllFavoriteFilms(FavoriteFilm[] favoriteFilms);
 
     @Query("SELECT * FROM favorite_film_table")
-    LiveData<List<FavoriteFilm>> getAllFavoriteFilms();
+    Cursor getAllFavoriteFilms();
 
     @Query("SELECT * FROM favorite_film_table WHERE favorite_film_table.id IS :id")
-    FavoriteFilm getFilm(int id);
+    Cursor getFilm(long id);
 
     @Update
-    void updateFavoriteFilm(FavoriteFilm favoriteFilm);
+    int updateFavoriteFilm(FavoriteFilm favoriteFilm);
 
-    @Delete
-    void deleteFavoriteFilm(FavoriteFilm favoriteFilm);
+    @Query("DELETE FROM favorite_film_table WHERE id = :id")
+    int deleteFavoriteFilm(long id);
 
     @Query("DELETE FROM favorite_film_table")
     void deleteAllFavoriteFilms();

@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <permission android:name="com.fufufu.moviecatalogue.READ_DATABASE" android:protectionLevel="normal" />
+    <permission android:name="com.fufufu.moviecatalogue.WRITE_DATABASE" android:protectionLevel="normal" />
 
     <application
         android:allowBackup="true"
@@ -41,6 +43,13 @@
         <meta-data
             android:name="android.app.searchable"
             android:resource="@layout/searchable" />
+
+        <provider
+            android:authorities="com.fufufu.moviecatalogue"
+            android:name=".provider.NoteProvider"
+            android:exported="true"
+            android:readPermission="com.fufufu.moviecatalogue.READ_DATABASE"
+            android:writePermission="com.fufufu.moviecatalogue.WRITE_DATABASE" />
     </application>
 
 </manifest>

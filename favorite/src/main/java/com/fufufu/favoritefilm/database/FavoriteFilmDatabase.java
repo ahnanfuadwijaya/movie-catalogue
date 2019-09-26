@@ -55,10 +55,10 @@ public abstract class FavoriteFilmDatabase extends RoomDatabase {
         @Override
         protected Void doInBackground(Void... voids) {
             FavoriteFilm favoriteFilm = new FavoriteFilm();
-            favoriteFilm.setId(1234);
-            favoriteFilm.setTitle("Tes Favorite");
-            favoriteFilm.setPosterPath("sdfhsfh");
-            favoriteFilm.setVoteAverage(7.0f);
+            favoriteFilm.setId(475557);
+            favoriteFilm.setTitle("Joker");
+            favoriteFilm.setPosterPath("/lbGzEyESjANpOeD48aROlc3X7aa.jpg");
+            favoriteFilm.setVoteAverage(46.333f);
             favoriteFilmDao.insertFavoriteFilm(favoriteFilm);
             Log.d("Populate DB", "executed");
             return null;

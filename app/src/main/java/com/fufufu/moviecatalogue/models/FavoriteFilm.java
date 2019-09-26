@@ -9,6 +9,7 @@ import java.text.DecimalFormat;
 
 @Entity(tableName = "favorite_film_table")
 public class FavoriteFilm {
+    public static String TABLE_NAME = "favorite_film_table";
     @PrimaryKey
     private int id;
     private String posterPath;

@@ -46,15 +46,10 @@ public class Repository {
         favoriteFilmsCursor = null;
         mutableIsLoading.setValue(true);
         FavoriteFilm favoriteFilm = new FavoriteFilm();
-        favoriteFilm.setId(234);
-        favoriteFilm.setVoteAverage(4.78f);
-        favoriteFilm.setPosterPath("dfgi");
-        favoriteFilm.setTitle("Title Repo2");
-        insertFavoriteFilm(favoriteFilm);
-        favoriteFilm.setId(235);
-        favoriteFilm.setVoteAverage(4.68f);
-        favoriteFilm.setPosterPath("dfgwi");
-        favoriteFilm.setTitle("Title Repo3");
+        favoriteFilm.setId(605934);
+        favoriteFilm.setVoteAverage(19.851f);
+        favoriteFilm.setPosterPath("/2NQ4JkTj0vCGbHpTVW0Pkau6xhF.jpg");
+        favoriteFilm.setTitle("I Remember Ashes");
         insertFavoriteFilm(favoriteFilm);
     }
 
