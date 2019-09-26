@@ -46,7 +46,7 @@
 
         <provider
             android:authorities="com.fufufu.moviecatalogue"
-            android:name=".provider.NoteProvider"
+            android:name=".provider.FavoriteFilmContentProvider"
             android:exported="true"
             android:readPermission="com.fufufu.moviecatalogue.READ_DATABASE"
             android:writePermission="com.fufufu.moviecatalogue.WRITE_DATABASE" />
