@@ -1,5 +1,7 @@
 package com.fufufu.moviecatalogue.models;
 
+import android.content.ContentValues;
+import android.provider.BaseColumns;
 import android.widget.TextView;
 import androidx.databinding.BindingAdapter;
 import androidx.room.Entity;
@@ -10,13 +12,18 @@ import java.text.DecimalFormat;
 @Entity(tableName = "favorite_film_table")
 public class FavoriteFilm {
     public static String TABLE_NAME = "favorite_film_table";
+    public static final String COLUMN_ID = "id";
+    public static final String COLUMN_POSTER_PATH = "posterPath";
+    public static final String COLUMN_TITLE = "title";
+    public static final String COLUMN_VOTE_AVERAGE = "voteAverage";
+
     @PrimaryKey
-    private int id;
+    private long id;
     private String posterPath;
     private String title;
     private Float voteAverage;
 
-    public FavoriteFilm(int id, String posterPath, String title, Float voteAverage) {
+    public FavoriteFilm(long id, String posterPath, String title, Float voteAverage) {
         this.id = id;
         this.posterPath = posterPath;
         this.title = title;
@@ -27,7 +34,7 @@ public class FavoriteFilm {
     public FavoriteFilm() {
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -43,7 +50,7 @@ public class FavoriteFilm {
         this.voteAverage = voteAverage;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -63,5 +70,22 @@ public class FavoriteFilm {
     public static void voteFilmAverageValue(TextView textView, Float voteAverage) {
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
         textView.setText(decimalFormat.format(voteAverage));
+    }
+
+    public static FavoriteFilm fromContentValues(ContentValues values) {
+        final FavoriteFilm favoriteFilm = new FavoriteFilm();
+        if (values.containsKey(COLUMN_ID)) {
+            favoriteFilm.setId(values.getAsLong(COLUMN_ID));
+        }
+        if (values.containsKey(COLUMN_POSTER_PATH)) {
+            favoriteFilm.setPosterPath(values.getAsString(COLUMN_POSTER_PATH));
+        }
+        if (values.containsKey(COLUMN_TITLE)) {
+            favoriteFilm.setTitle(values.getAsString(COLUMN_TITLE));
+        }
+        if (values.containsKey(COLUMN_VOTE_AVERAGE)) {
+            favoriteFilm.setVoteAverage(values.getAsFloat(COLUMN_VOTE_AVERAGE));
+        }
+        return favoriteFilm;
     }
 }
