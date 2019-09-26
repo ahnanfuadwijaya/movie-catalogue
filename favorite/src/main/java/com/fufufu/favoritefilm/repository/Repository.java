@@ -45,6 +45,17 @@ public class Repository {
         favoriteTvShowList = favoriteTvShowDao.getAllFavoriteTvShows();
         favoriteFilmsCursor = null;
         mutableIsLoading.setValue(true);
+        FavoriteFilm favoriteFilm = new FavoriteFilm();
+        favoriteFilm.setId(234);
+        favoriteFilm.setVoteAverage(4.78f);
+        favoriteFilm.setPosterPath("dfgi");
+        favoriteFilm.setTitle("Title Repo2");
+        insertFavoriteFilm(favoriteFilm);
+        favoriteFilm.setId(235);
+        favoriteFilm.setVoteAverage(4.68f);
+        favoriteFilm.setPosterPath("dfgwi");
+        favoriteFilm.setTitle("Title Repo3");
+        insertFavoriteFilm(favoriteFilm);
     }
 
     public void insertFavoriteFilm(FavoriteFilm favoriteFilm) {
@@ -68,7 +79,7 @@ public class Repository {
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
-
+        mutableIsLoading.setValue(false);
         return null;
     }
 

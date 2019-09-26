@@ -57,11 +57,7 @@ public class FavoriteFilmAdapter extends RecyclerView.Adapter<FavoriteFilmAdapte
 
     @Override
     public int getItemCount() {
-        if (favoriteFilms != null) {
-            return favoriteFilms.size();
-        } else {
-            return 0;
-        }
+        return favoriteFilms.size();
     }
 
     public void setFavoriteFilms(List<FavoriteFilm> favoriteFilms) {
