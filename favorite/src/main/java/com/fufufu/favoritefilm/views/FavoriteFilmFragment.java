@@ -1,7 +1,11 @@
 package com.fufufu.favoritefilm.views;
 
 
+import android.content.ContentProviderClient;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -43,8 +47,31 @@ public class FavoriteFilmFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         final FragmentFavoriteFilmBinding fragmentFavoriteFilmBinding = FragmentFavoriteFilmBinding.inflate(inflater, container, false);
+
+        Context applicationContext = MainActivity.getContextOfApplication();
+
+        ContentResolver contentResolver = applicationContext.getContentResolver();
+        String[] projection = new String[]{"id", "title", "voteAverage", "posterPath"};
+        String selection = null;
+        String[] selectionArguments = null;
+        String sortOrder = null;
+
+        String AUTHORITY = "com.fufufu.moviecatalogue";
+        String URL = "content://" + AUTHORITY + "/" + FavoriteFilm.TABLE_NAME;
+        Uri uri = Uri.parse(URL);
+        String myMimeType = contentResolver.getType(uri);
+        Log.d("mimeTypeCR", myMimeType != null ? myMimeType : "null");
+
+        try (Cursor cursor = contentResolver.query(uri, projection, selection, selectionArguments, sortOrder)) {
+            if (cursor != null) {
+                while (cursor.moveToNext()) {
+                    Log.d("Cursor", "info:");
+                    Log.d("size", String.valueOf(cursor.getCount()));
+                }
+            }
+        }
+
         RecyclerView recyclerView = fragmentFavoriteFilmBinding.rvFavoriteFilmList;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);

@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.fufufu.favoritefilm">
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.fufufu.moviecatalogue.READ_DATABASE"/>
+    <uses-permission android:name="com.fufufu.moviecatalogue.WRITE_DATABASE"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
