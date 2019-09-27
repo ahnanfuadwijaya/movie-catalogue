@@ -3,18 +3,13 @@ package com.fufufu.favoritefilm.viewmodels;
 import android.app.Application;
 import android.database.Cursor;
 import android.util.Log;
-
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-
 import com.fufufu.favoritefilm.models.FavoriteFilm;
 import com.fufufu.favoritefilm.repository.Repository;
-
 import java.util.ArrayList;
-import java.util.List;
 
-import static android.provider.BaseColumns._ID;
 
 public class FavoriteFilmViewModel extends AndroidViewModel {
     private Repository repository;

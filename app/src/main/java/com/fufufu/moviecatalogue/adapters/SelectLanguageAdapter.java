@@ -55,6 +55,7 @@ public class SelectLanguageAdapter extends RecyclerView.Adapter<SelectLanguageAd
                 }
 
                 moveWithDataIntent.putExtra("langId", langId);
+                moveWithDataIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 view.getContext().startActivity(moveWithDataIntent);
             }
         });

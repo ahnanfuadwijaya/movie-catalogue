@@ -35,27 +35,33 @@ public class FavoriteFilmRepository {
 
     public MutableLiveData<Cursor> getFavoriteFilmListCursor(){
         favoriteFilmListCursor.setValue(favoriteFilmList);
+        mutableIsLoading.setValue(false);
         return favoriteFilmListCursor;
     }
     public void insertFavoriteFilm(FavoriteFilm favoriteFilm) {
         new InsertFavoriteFilmAsyncTask(favoriteFilmDao).execute(favoriteFilm);
+        mutableIsLoading.setValue(false);
     }
 
     public void updateFavoriteFilm(FavoriteFilm favoriteFilm) {
         new UpdateFavoriteFilmAsyncTask(favoriteFilmDao).execute(favoriteFilm);
+        mutableIsLoading.setValue(false);
     }
 
     public void deleteFavoriteFilm(Long favoriteFilm) {
         new DeleteFavoriteFilmAsyncTask(favoriteFilmDao).execute(favoriteFilm);
+        mutableIsLoading.setValue(false);
     }
 
     public Cursor getAllFavoriteFilms() {
-        mutableIsLoading.setValue(false);
         try {
             favoriteFilmList = new GetAllFavoriteFilmsAsyncTask(favoriteFilmDao).execute().get();
             return favoriteFilmList;
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
+        }
+        finally {
+            mutableIsLoading.setValue(false);
         }
         return null;
     }
@@ -67,11 +73,15 @@ public class FavoriteFilmRepository {
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
+        finally {
+            mutableIsLoading.setValue(false);
+        }
         return null;
     }
 
     public void deleteAllFavoriteFilms() {
         new DeleteAllFavoriteFilmsAsyncTask(favoriteFilmDao).execute();
+        mutableIsLoading.setValue(false);
     }
 
     private static class InsertFavoriteFilmAsyncTask extends AsyncTask<FavoriteFilm, Void, Void> {
