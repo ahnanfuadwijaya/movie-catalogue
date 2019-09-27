@@ -2,6 +2,7 @@ package com.fufufu.moviecatalogue.views;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,12 +40,26 @@ public class FavoriteFilmFragment extends Fragment {
         FavoriteFilmViewModel favoriteFilmViewModel = ViewModelProviders.of(this).get(FavoriteFilmViewModel.class);
         favoriteFilmAdapter = new FavoriteFilmAdapter(this);
         recyclerView.setAdapter(favoriteFilmAdapter);
-        favoriteFilmViewModel.getAllFavoriteFilms().observe(this, new Observer<ArrayList<FavoriteFilm>>() {
+        favoriteFilmViewModel.getAllFavoriteFilms().observe(this, new Observer<Cursor>() {
             @Override
-            public void onChanged(ArrayList<FavoriteFilm> favoriteFilms) {
+            public void onChanged(Cursor cursor) {
+                Log.d("cursor size", String.valueOf(cursor.getCount()));
+                ArrayList<FavoriteFilm> favoriteFilms = new ArrayList<>();
+                if(cursor.moveToFirst()){
+                    do{
+                        long id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+                        String title = cursor.getString(cursor.getColumnIndexOrThrow("title"));
+                        String posterPath = cursor.getString(cursor.getColumnIndexOrThrow("posterPath"));
+                        Float voteAverage = cursor.getFloat(cursor.getColumnIndexOrThrow("voteAverage"));
+                        favoriteFilms.add(new FavoriteFilm(id, posterPath, title, voteAverage));
+                        Log.d("Crsrmapping,item:title", title);
+                    }while (cursor.moveToNext());
+                }
                 favoriteFilmAdapter.setFavoriteFilms(favoriteFilms);
             }
         });
+
+
         favoriteFilmViewModel.isLoading().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {

@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
@@ -51,6 +53,8 @@ public class FavoriteFilmAdapter extends RecyclerView.Adapter<FavoriteFilmAdapte
             @Override
             public void onClick(View view) {
                 favoriteFilmViewModel.deleteFavoriteFilm(favoriteFilm.getId());
+                notifyDataSetChanged();
+                Toast.makeText(view.getContext(), "Delete executed", Toast.LENGTH_LONG).show();
             }
         });
     }

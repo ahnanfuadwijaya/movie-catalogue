@@ -15,6 +15,7 @@ import java.util.concurrent.ExecutionException;
 public class FavoriteFilmRepository {
     private FavoriteFilmDao favoriteFilmDao;
     private Cursor favoriteFilmList;
+    private MutableLiveData<Cursor> favoriteFilmListCursor = new MutableLiveData<>();
     private static MutableLiveData<Boolean> mutableIsLoading = new MutableLiveData<>();
 
     public MutableLiveData<Boolean> getLoading() {
@@ -25,9 +26,17 @@ public class FavoriteFilmRepository {
         FavoriteFilmDatabase favoriteFilmDatabase = FavoriteFilmDatabase.getInstance(application);
         mutableIsLoading.setValue(true);
         favoriteFilmDao = favoriteFilmDatabase.favoriteFilmDao();
-        //favoriteFilmList = favoriteFilmDao.getAllFavoriteFilms();
+        try {
+            favoriteFilmList = new GetAllFavoriteFilmsAsyncTask(favoriteFilmDao).execute().get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
+    public MutableLiveData<Cursor> getFavoriteFilmListCursor(){
+        favoriteFilmListCursor.setValue(favoriteFilmList);
+        return favoriteFilmListCursor;
+    }
     public void insertFavoriteFilm(FavoriteFilm favoriteFilm) {
         new InsertFavoriteFilmAsyncTask(favoriteFilmDao).execute(favoriteFilm);
     }
@@ -43,7 +52,8 @@ public class FavoriteFilmRepository {
     public Cursor getAllFavoriteFilms() {
         mutableIsLoading.setValue(false);
         try {
-            return new GetAllFavoriteFilmsAsyncTask(favoriteFilmDao).execute().get();
+            favoriteFilmList = new GetAllFavoriteFilmsAsyncTask(favoriteFilmDao).execute().get();
+            return favoriteFilmList;
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
