@@ -37,7 +37,7 @@ public class FavoriteFilmAdapter extends RecyclerView.Adapter<FavoriteFilmAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FavoriteFilmAdapter.FilmHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final FavoriteFilmAdapter.FilmHolder holder, final int position) {
         final FavoriteFilm favoriteFilm = favoriteFilms.get(position);
         holder.favoriteFilmListItemBinding.setFavoriteFilm(favoriteFilm);
         holder.favoriteFilmListItemBinding.filmCardview.setOnClickListener(new View.OnClickListener() {
@@ -53,8 +53,9 @@ public class FavoriteFilmAdapter extends RecyclerView.Adapter<FavoriteFilmAdapte
             @Override
             public void onClick(View view) {
                 favoriteFilmViewModel.deleteFavoriteFilm(favoriteFilm.getId());
+                favoriteFilms.remove(position);
                 notifyDataSetChanged();
-                Toast.makeText(view.getContext(), "Delete executed", Toast.LENGTH_LONG).show();
+                Toast.makeText(view.getContext(), "Removed", Toast.LENGTH_LONG).show();
             }
         });
     }
