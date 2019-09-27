@@ -48,30 +48,6 @@ public class FavoriteFilmFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final FragmentFavoriteFilmBinding fragmentFavoriteFilmBinding = FragmentFavoriteFilmBinding.inflate(inflater, container, false);
-
-        Context applicationContext = MainActivity.getContextOfApplication();
-
-        ContentResolver contentResolver = applicationContext.getContentResolver();
-        String[] projection = new String[]{"id", "title", "voteAverage", "posterPath"};
-        String selection = null;
-        String[] selectionArguments = null;
-        String sortOrder = null;
-
-        String AUTHORITY = "com.fufufu.moviecatalogue";
-        String URL = "content://" + AUTHORITY + "/" + FavoriteFilm.TABLE_NAME;
-        Uri uri = Uri.parse(URL);
-        String myMimeType = contentResolver.getType(uri);
-        Log.d("mimeTypeCR", myMimeType != null ? myMimeType : "null");
-
-        try (Cursor cursor = contentResolver.query(uri, projection, selection, selectionArguments, sortOrder)) {
-            if (cursor != null) {
-                while (cursor.moveToNext()) {
-                    Log.d("Cursor", "info:");
-                    Log.d("size", String.valueOf(cursor.getCount()));
-                }
-            }
-        }
-
         RecyclerView recyclerView = fragmentFavoriteFilmBinding.rvFavoriteFilmList;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);

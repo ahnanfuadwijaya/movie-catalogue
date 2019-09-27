@@ -24,7 +24,12 @@ public class FavoriteFilmViewModel extends AndroidViewModel {
     public FavoriteFilmViewModel(Application application) {
         super(application);
         repository = new Repository(application);
+        allFavoriteFilms = null;
         allFavoriteFilms = repository.getAllFavoriteFilms();
+        if(allFavoriteFilms != null){
+            Log.d("allFavoriteFilms", "not null");
+            Log.d("size", String.valueOf(allFavoriteFilms.getCount()));
+        }
     }
 
     public void insertFavoriteFilm(FavoriteFilm favoriteFilm) {
@@ -35,20 +40,23 @@ public class FavoriteFilmViewModel extends AndroidViewModel {
         mapCursorToArrayList(allFavoriteFilms);
         return arrayListLiveData;
     }
+
     private void mapCursorToArrayList(Cursor cursor){
-        ArrayList<FavoriteFilm> favoriteFilms = new ArrayList<>();
-        if(cursor.moveToFirst()){
-            do{
-                long id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
-                String title = cursor.getString(cursor.getColumnIndexOrThrow("title"));
-                String posterPath = cursor.getString(cursor.getColumnIndexOrThrow("posterPath"));
-                Float voteAverage = cursor.getFloat(cursor.getColumnIndexOrThrow("voteAverage"));
-                favoriteFilms.add(new FavoriteFilm(id, posterPath, title, voteAverage));
-                Log.d("Crsrmapping,item:title", title);
-                cursor.moveToNext();
-            }while (cursor.moveToNext());
+        if(cursor != null){
+            ArrayList<FavoriteFilm> favoriteFilms = new ArrayList<>();
+            if(cursor.moveToFirst()){
+                do{
+                    long id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+                    String title = cursor.getString(cursor.getColumnIndexOrThrow("title"));
+                    String posterPath = cursor.getString(cursor.getColumnIndexOrThrow("posterPath"));
+                    Float voteAverage = cursor.getFloat(cursor.getColumnIndexOrThrow("voteAverage"));
+                    favoriteFilms.add(new FavoriteFilm(id, posterPath, title, voteAverage));
+                    Log.d("Crsrmapping,item:title", title);
+                }while (cursor.moveToNext());
+                cursor.close();
+            }
+            arrayListLiveData.setValue(favoriteFilms);
         }
-        arrayListLiveData.setValue(favoriteFilms);
     }
 
     public Cursor getFavoriteFilm(int id) {

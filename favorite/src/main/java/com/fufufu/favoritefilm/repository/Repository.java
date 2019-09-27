@@ -1,8 +1,10 @@
 package com.fufufu.favoritefilm.repository;
 
 import android.app.Application;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -15,6 +17,7 @@ import com.fufufu.favoritefilm.database.FavoriteFilmDatabase;
 import com.fufufu.favoritefilm.database.FavoriteTvShowDatabase;
 import com.fufufu.favoritefilm.models.FavoriteFilm;
 import com.fufufu.favoritefilm.models.FavoriteTvShow;
+import com.fufufu.favoritefilm.views.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,15 +69,25 @@ public class Repository {
     }
 
     public Cursor getAllFavoriteFilms() {
-        mutableIsLoading.setValue(true);
         Log.d("getAllFavorite Repo", "executed");
-        try {
-            favoriteFilmsCursor = new GetAllFavoriteFilmsAsyncTask(favoriteFilmDao).execute().get();
-            return favoriteFilmsCursor;
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
-        }
+        mutableIsLoading.setValue(true);
+        Context applicationContext = MainActivity.getContextOfApplication();
+        ContentResolver contentResolver = applicationContext.getContentResolver();
+        String[] projection = new String[]{"id", "title", "voteAverage", "posterPath"};
+        String selection = null;
+        String[] selectionArguments = null;
+        String sortOrder = null;
+        String AUTHORITY = "com.fufufu.moviecatalogue";
+        String URL = "content://" + AUTHORITY + "/" + FavoriteFilm.TABLE_NAME;
+        Uri uri = Uri.parse(URL);
+        String myMimeType = contentResolver.getType(uri);
+        Log.d("mimeTypeCR", myMimeType != null ? myMimeType : "null");
+        favoriteFilmsCursor = contentResolver.query(uri, projection, selection, selectionArguments, sortOrder);
         mutableIsLoading.setValue(false);
+        if(favoriteFilmsCursor != null){
+            return favoriteFilmsCursor;
+        }
+        Log.d("Return", "null");
         return null;
     }
 
