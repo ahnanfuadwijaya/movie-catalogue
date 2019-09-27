@@ -25,7 +25,7 @@ public class DetailFilmActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         loadLocale();
         super.onCreate(savedInstanceState);
-        final int filmId = getIntent().getIntExtra("filmId", 0);
+        final long filmId = getIntent().getLongExtra("filmId", 0);
         final DetailFilmViewModel detailFilmViewModel = ViewModelProviders.of(this).get(DetailFilmViewModel.class);
         final FavoriteFilmViewModel favoriteFilmViewModel = ViewModelProviders.of(this).get(FavoriteFilmViewModel.class);
         final ActivityDetailFilmBinding activityDetailFilmBinding = DataBindingUtil.setContentView(this, R.layout.activity_detail_film);

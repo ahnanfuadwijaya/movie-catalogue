@@ -25,7 +25,7 @@ public class FavoriteFilmRepository {
         FavoriteFilmDatabase favoriteFilmDatabase = FavoriteFilmDatabase.getInstance(application);
         mutableIsLoading.setValue(true);
         favoriteFilmDao = favoriteFilmDatabase.favoriteFilmDao();
-        favoriteFilmList = favoriteFilmDao.getAllFavoriteFilms();
+        //favoriteFilmList = favoriteFilmDao.getAllFavoriteFilms();
     }
 
     public void insertFavoriteFilm(FavoriteFilm favoriteFilm) {
@@ -42,16 +42,19 @@ public class FavoriteFilmRepository {
 
     public Cursor getAllFavoriteFilms() {
         mutableIsLoading.setValue(false);
-        return favoriteFilmList;
+        try {
+            return new GetAllFavoriteFilmsAsyncTask(favoriteFilmDao).execute().get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    public Cursor getFavoriteFilm(int id) {
+    public Cursor getFavoriteFilm(long id) {
         mutableIsLoading.setValue(true);
         try {
             return new GetFavoriteFilmAsyncTask(favoriteFilmDao).execute(id).get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
         return null;
@@ -75,7 +78,7 @@ public class FavoriteFilmRepository {
         }
     }
 
-    private static class GetAllFavoriteFilmsAsyncTask extends AsyncTask<Void, Void, Void> {
+    private static class GetAllFavoriteFilmsAsyncTask extends AsyncTask<Void, Void, Cursor> {
         private FavoriteFilmDao favoriteFilmDao;
 
         GetAllFavoriteFilmsAsyncTask(FavoriteFilmDao favoriteFilmDao) {
@@ -83,13 +86,12 @@ public class FavoriteFilmRepository {
         }
 
         @Override
-        protected Void doInBackground(Void... voids) {
-            favoriteFilmDao.getAllFavoriteFilms();
-            return null;
+        protected Cursor doInBackground(Void... voids) {
+            return favoriteFilmDao.getAllFavoriteFilms();
         }
     }
 
-    private static class GetFavoriteFilmAsyncTask extends AsyncTask<Integer, Void, Cursor> {
+    private static class GetFavoriteFilmAsyncTask extends AsyncTask<Long, Void, Cursor> {
         private FavoriteFilmDao favoriteFilmDao;
 
         GetFavoriteFilmAsyncTask(FavoriteFilmDao favoriteFilmDao) {
@@ -97,8 +99,8 @@ public class FavoriteFilmRepository {
         }
 
         @Override
-        protected Cursor doInBackground(Integer... integers) {
-            return favoriteFilmDao.getFilm(integers[0]);
+        protected Cursor doInBackground(Long... longs) {
+            return favoriteFilmDao.getFilm(longs[0]);
         }
 
         @Override

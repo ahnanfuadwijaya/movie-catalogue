@@ -14,7 +14,7 @@ public class Film implements Parcelable {
     private final String posterBaseUrl = "https://image.tmdb.org/t/p/w500";
     @SerializedName("id")
     @Expose
-    private int id;
+    private long id;
     @SerializedName("poster_path")
     @Expose
     private String posterPath;
@@ -34,7 +34,7 @@ public class Film implements Parcelable {
     @Expose
     private Float voteAverage;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -95,7 +95,7 @@ public class Film implements Parcelable {
     }
 
     protected Film(Parcel in) {
-        id = in.readInt();
+        id = in.readLong();
         posterPath = in.readString();
         overview = in.readString();
         releaseDate = in.readString();
@@ -127,7 +127,7 @@ public class Film implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(id);
+        parcel.writeLong(id);
         parcel.writeString(posterPath);
         parcel.writeString(overview);
         parcel.writeString(releaseDate);

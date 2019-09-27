@@ -84,7 +84,7 @@ public class ReleaseTodayIntentService extends IntentService {
                     intent.setAction(String.valueOf(films.get(i).getId()));
 
                     //PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, DetailFilmActivity.class), 0);
-                    PendingIntent contentIntent = PendingIntent.getActivity(this, films.get(i).getId(), intent, PendingIntent.FLAG_ONE_SHOT);
+                    PendingIntent contentIntent = PendingIntent.getActivity(this, (int)films.get(i).getId(), intent, PendingIntent.FLAG_ONE_SHOT);
 
                     Log.d("Path", films.get(i).getPosterPath());
 
@@ -122,7 +122,7 @@ public class ReleaseTodayIntentService extends IntentService {
                         notificationManager.createNotificationChannel(channel);
                     }
                     Notification notification = builder.build();
-                    notificationManager.notify(films.get(i).getId(), notification);
+                    notificationManager.notify((int)films.get(i).getId(), notification);
                 }
 
             Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);

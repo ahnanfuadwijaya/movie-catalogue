@@ -25,7 +25,7 @@ public interface FilmDataService {
 
     @GET("movie/{film_id}?api_key="+API_KEY)
     Call<Film> getDetailFilm(
-            @Path("film_id") int filmId,
+            @Path("film_id") long filmId,
             @Query("language") String lang);
 
     @GET("search/movie?api_key="+API_KEY)

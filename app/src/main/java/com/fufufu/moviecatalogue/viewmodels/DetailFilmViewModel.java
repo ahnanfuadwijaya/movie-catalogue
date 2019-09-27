@@ -19,7 +19,7 @@ public class DetailFilmViewModel extends AndroidViewModel {
         repository = new Repository();
     }
 
-    public MutableLiveData<Film> getFilm(int id) {
+    public MutableLiveData<Film> getFilm(long id) {
         String langPref = "Language";
         SharedPreferences prefs = getApplication().getSharedPreferences("CommonPrefs", Activity.MODE_PRIVATE);
         String language = prefs.getString(langPref, "");

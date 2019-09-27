@@ -1,6 +1,7 @@
 package com.fufufu.moviecatalogue.adapters;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,13 +43,14 @@ public class FavoriteFilmAdapter extends RecyclerView.Adapter<FavoriteFilmAdapte
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), DetailFilmActivity.class);
                 intent.putExtra("filmId", favoriteFilm.getId());
+                Log.d("filmId", String.valueOf(favoriteFilm.getId()));
                 view.getContext().startActivity(intent);
             }
         });
         holder.favoriteFilmListItemBinding.removeFromFavoriteFilm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                favoriteFilmViewModel.deleteFavoriteFilm(favoriteFilm);
+                favoriteFilmViewModel.deleteFavoriteFilm(favoriteFilm.getId());
             }
         });
     }

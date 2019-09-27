@@ -1,5 +1,6 @@
 package com.fufufu.moviecatalogue.views;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,8 @@ import com.fufufu.moviecatalogue.adapters.FavoriteFilmAdapter;
 import com.fufufu.moviecatalogue.databinding.FragmentFavoriteFilmBinding;
 import com.fufufu.moviecatalogue.models.FavoriteFilm;
 import com.fufufu.moviecatalogue.viewmodels.FavoriteFilmViewModel;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class FavoriteFilmFragment extends Fragment {
@@ -36,9 +39,9 @@ public class FavoriteFilmFragment extends Fragment {
         FavoriteFilmViewModel favoriteFilmViewModel = ViewModelProviders.of(this).get(FavoriteFilmViewModel.class);
         favoriteFilmAdapter = new FavoriteFilmAdapter(this);
         recyclerView.setAdapter(favoriteFilmAdapter);
-        favoriteFilmViewModel.getAllFavoriteFilms().observe(this, new Observer<List<FavoriteFilm>>() {
+        favoriteFilmViewModel.getAllFavoriteFilms().observe(this, new Observer<ArrayList<FavoriteFilm>>() {
             @Override
-            public void onChanged(List<FavoriteFilm> favoriteFilms) {
+            public void onChanged(ArrayList<FavoriteFilm> favoriteFilms) {
                 favoriteFilmAdapter.setFavoriteFilms(favoriteFilms);
             }
         });

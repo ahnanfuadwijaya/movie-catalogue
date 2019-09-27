@@ -85,7 +85,7 @@ public class Repository {
         return mutableFilmResult;
     }
 
-    public MutableLiveData<Film> getDetailFilmFromApi(int filmId, String lang) {
+    public MutableLiveData<Film> getDetailFilmFromApi(long filmId, String lang) {
         FilmDataService userDataService = RetrofitClient.getFilmService();
         Call<Film> call = userDataService.getDetailFilm(filmId, lang);
         call.enqueue(new Callback<Film>() {
