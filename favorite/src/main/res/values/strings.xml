@@ -21,6 +21,50 @@
     <string name="more_bottom_nav_title">More</string>
 
     // tab title
+    <string name="detail_film_poster_tag">Film Poster</string>
+    <string name="detail_film_poster_film_description_tag">Film Film Description</string>
+    <string name="detail_film_original_title_tag">Original Title</string>
+
+    // detail film tag
+    <string name="detail_film_genre_tag">Genre</string>
+    <string name="detail_film_score_tag">Score</string>
+    <string name="detail_film_overview_tag">Overview</string>
+    <string name="detail_film_release_date_tag">Release Date</string>
+    <string name="detail_film_add_to_favorite_film">Add to Favorite Film</string>
+    <string name="detail_film_toast_add_to_favorite_film">Add to Favorite</string>
+    <string name="remove_from_favorite_film">Remove</string>
+    <string name="detail_tv_show_poster_tag">Tv Show Poster</string>
+    <string name="detail_tv_show_poster_description_tag">TV Show Poster Description</string>
+
+    // favorite film tag
+    <string name="detail_tv_show_original_name_tag">Original Name</string>
+
+    // detail tv show
+    <string name="detail_tv_show_genre_tag">Genre</string>
+    <string name="detail_tv_show_score_tag">Score</string>
+    <string name="detail_tv_show_overview_tag">Overview</string>
+    <string name="detail_tv_show_first_air_date_tag">First Air Date</string>
+    <string name="detail_tv_show_add_to_favorite_tv_show">Add to Favorite TV Show</string>
+    <string name="detail_tv_show_toast_add_to_favorite_tv_show">Add to Favorite</string>
+    <string name="remove_from_favorite_tv_show">Remove</string>
+    <string name="language">Language</string>
+    <string name="language_select">Select Language</string>
+
+    // favorite tv show tag
+    <string name="language_icon_description">Language icon</string>
+
+    // language tag
+    <string name="language_english">English</string>
+    <string name="language_indonesia">Indonesia</string>
+    <string name="daily_reminder_tag">Daily Reminder</string>
+    <string name="daily_reminder_description">Get daily notification to check the app</string>
+    <string name="release_today_remainder_tag">Release Today Remainder</string>
+
+    // language list
+    <string name="release_today_description">Get daily notification of film and TV show list released today</string>
+
+    //reminder
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string-array name="tab_home_title">
         <item>Popular Film</item>
         <item>Popular TV Show</item>
@@ -34,53 +78,9 @@
         <item>TV Show</item>
     </string-array>
 
-    // detail film tag
-    <string name="detail_film_poster_tag">Film Poster</string>
-    <string name="detail_film_poster_film_description_tag">Film Film Description</string>
-    <string name="detail_film_original_title_tag">Original Title</string>
-    <string name="detail_film_genre_tag">Genre</string>
-    <string name="detail_film_score_tag">Score</string>
-    <string name="detail_film_overview_tag">Overview</string>
-    <string name="detail_film_release_date_tag">Release Date</string>
-    <string name="detail_film_add_to_favorite_film">Add to Favorite Film</string>
-    <string name="detail_film_toast_add_to_favorite_film">Add to Favorite</string>
-
-    // favorite film tag
-    <string name="remove_from_favorite_film">Remove</string>
-
-    // detail tv show
-    <string name="detail_tv_show_poster_tag">Tv Show Poster</string>
-    <string name="detail_tv_show_poster_description_tag">TV Show Poster Description</string>
-    <string name="detail_tv_show_original_name_tag">Original Name</string>
-    <string name="detail_tv_show_genre_tag">Genre</string>
-    <string name="detail_tv_show_score_tag">Score</string>
-    <string name="detail_tv_show_overview_tag">Overview</string>
-    <string name="detail_tv_show_first_air_date_tag">First Air Date</string>
-    <string name="detail_tv_show_add_to_favorite_tv_show">Add to Favorite TV Show</string>
-    <string name="detail_tv_show_toast_add_to_favorite_tv_show">Add to Favorite</string>
-
-    // favorite tv show tag
-    <string name="remove_from_favorite_tv_show">Remove</string>
-
-    // language tag
-    <string name="language">Language</string>
-    <string name="language_select">Select Language</string>
-    <string name="language_icon_description">Language icon</string>
-    <string name="language_english">English</string>
-    <string name="language_indonesia">Indonesia</string>
-
-    // language list
+    <!-- TODO: Remove or change this placeholder text -->
     <string-array name="language_list">
         <item>English</item>
         <item>Indonesian</item>
     </string-array>
-
-    //reminder
-    <string name="daily_reminder_tag">Daily Reminder</string>
-    <string name="daily_reminder_description">Get daily notification to check the app</string>
-    <string name="release_today_remainder_tag">Release Today Remainder</string>
-    <string name="release_today_description">Get daily notification of film and TV show list released today</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

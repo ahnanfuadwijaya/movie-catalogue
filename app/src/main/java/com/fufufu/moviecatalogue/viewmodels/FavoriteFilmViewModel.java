@@ -2,7 +2,6 @@ package com.fufufu.moviecatalogue.viewmodels;
 
 import android.app.Application;
 import android.database.Cursor;
-import android.util.Log;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -10,10 +9,6 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.fufufu.moviecatalogue.models.FavoriteFilm;
 import com.fufufu.moviecatalogue.models.FavoriteFilmRepository;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 public class FavoriteFilmViewModel extends AndroidViewModel {
     private FavoriteFilmRepository favoriteFilmRepository;

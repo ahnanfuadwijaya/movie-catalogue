@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -17,11 +18,18 @@ import com.fufufu.favoritefilm.database.FavoriteFilmDatabase;
 import com.fufufu.favoritefilm.database.FavoriteTvShowDatabase;
 import com.fufufu.favoritefilm.models.FavoriteFilm;
 import com.fufufu.favoritefilm.models.FavoriteTvShow;
+import com.fufufu.favoritefilm.models.Film;
+import com.fufufu.favoritefilm.network.FilmDataService;
+import com.fufufu.favoritefilm.network.RetrofitClient;
 import com.fufufu.favoritefilm.views.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static android.provider.BaseColumns._ID;
 
@@ -33,6 +41,7 @@ public class Repository {
     private static MutableLiveData<Boolean> mutableIsLoading = new MutableLiveData<>();
     private MutableLiveData<ArrayList<FavoriteFilm>> favoriteFilmList = new MutableLiveData<>();
     private Cursor favoriteFilmsCursor;
+    private MutableLiveData<Film> detailFilm = new MutableLiveData<>();
 
 
     public MutableLiveData<Boolean> getLoading() {
@@ -54,6 +63,27 @@ public class Repository {
         favoriteFilm.setPosterPath("/2NQ4JkTj0vCGbHpTVW0Pkau6xhF.jpg");
         favoriteFilm.setTitle("I Remember Ashes");
         insertFavoriteFilm(favoriteFilm);
+    }
+
+    public MutableLiveData<Film> getDetailFilmFromApi(long filmId, String lang) {
+        FilmDataService userDataService = RetrofitClient.getFilmService();
+        Call<Film> call = userDataService.getDetailFilm(filmId, lang);
+        call.enqueue(new Callback<Film>() {
+            @Override
+            public void onResponse(@NonNull Call<Film> call, @NonNull Response<Film> response) {
+                mutableIsLoading.setValue(true);
+                if (response.body() != null) {
+                    detailFilm.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Film> call, @NonNull Throwable t) {
+
+            }
+        });
+        mutableIsLoading.setValue(false);
+        return detailFilm;
     }
 
     public void insertFavoriteFilm(FavoriteFilm favoriteFilm) {
@@ -91,7 +121,7 @@ public class Repository {
         return null;
     }
 
-    public Cursor getFavoriteFilm(int id) {
+    public Cursor getFavoriteFilm(long id) {
         mutableIsLoading.setValue(true);
         try {
             return new GetFavoriteFilmAsyncTask(favoriteFilmDao).execute(id).get();
@@ -132,7 +162,7 @@ public class Repository {
         }
     }
 
-    private static class GetFavoriteFilmAsyncTask extends AsyncTask<Integer, Void, Cursor> {
+    private static class GetFavoriteFilmAsyncTask extends AsyncTask<Long, Void, Cursor> {
         private FavoriteFilmDao favoriteFilmDao;
 
         GetFavoriteFilmAsyncTask(FavoriteFilmDao favoriteFilmDao) {
@@ -140,8 +170,8 @@ public class Repository {
         }
 
         @Override
-        protected Cursor doInBackground(Integer... integers) {
-            return favoriteFilmDao.getFilm(integers[0]);
+        protected Cursor doInBackground(Long... longs) {
+            return favoriteFilmDao.getFilm(longs[0]);
         }
 
         @Override

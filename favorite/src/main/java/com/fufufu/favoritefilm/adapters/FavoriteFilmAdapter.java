@@ -14,6 +14,7 @@ import com.fufufu.favoritefilm.R;
 import com.fufufu.favoritefilm.databinding.FavoriteFilmListItemBinding;
 import com.fufufu.favoritefilm.models.FavoriteFilm;
 import com.fufufu.favoritefilm.viewmodels.FavoriteFilmViewModel;
+import com.fufufu.favoritefilm.views.DetailFilmActivity;
 import com.fufufu.favoritefilm.views.FavoriteFilmFragment;
 
 import java.util.List;
@@ -42,9 +43,9 @@ public class FavoriteFilmAdapter extends RecyclerView.Adapter<FavoriteFilmAdapte
         holder.favoriteFilmListItemBinding.filmCardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Intent intent = new Intent(view.getContext(), DetailFilmActivity.class);
+                Intent intent = new Intent(view.getContext(), DetailFilmActivity.class);
                 intent.putExtra("filmId", favoriteFilm.getId());
-                view.getContext().startActivity(intent);*/
+                view.getContext().startActivity(intent);
             }
         });
         holder.favoriteFilmListItemBinding.removeFromFavoriteFilm.setOnClickListener(new View.OnClickListener() {

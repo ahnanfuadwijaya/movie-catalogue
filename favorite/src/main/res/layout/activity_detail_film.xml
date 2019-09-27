@@ -1,0 +1,161 @@
+<layout
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="film"
+            type="com.fufufu.favoritefilm.models.Film" />
+    </data>
+    <ScrollView
+        android:id="@+id/activity_detail_film"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ProgressBar
+                android:id="@+id/progress_bar_detail_film"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:indeterminate="true"
+                android:visibility="visible"
+                bind:layout_constraintEnd_toEndOf="parent"
+                bind:layout_constraintStart_toStartOf="parent"
+                bind:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_overview_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="24dp"
+                android:text="@{film.overview}"
+                android:textSize="14sp"
+                app:layout_constrainedWidth="true"
+                bind:layout_constraintBottom_toBottomOf="parent"
+                bind:layout_constraintEnd_toEndOf="parent"
+                bind:layout_constraintStart_toStartOf="@+id/tv_score_value"
+                bind:layout_constraintTop_toTopOf="@+id/tv_overview_tag"
+                tools:text="Overview Value" />
+
+            <TextView
+                android:id="@+id/tv_original_title_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/detail_film_original_title_tag"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                app:layout_constrainedWidth="true"
+                bind:layout_constraintStart_toStartOf="@+id/tv_title"
+                bind:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@{film.title}"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                app:layout_constrainedWidth="true"
+                bind:layout_constraintStart_toStartOf="parent"
+                bind:layout_constraintTop_toBottomOf="@+id/imageView"
+                tools:text="Title" />
+
+            <TextView
+                android:id="@+id/tv_original_title_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:text="@{film.originalTitle}"
+                android:textSize="14sp"
+                app:layout_constrainedWidth="true"
+                bind:layout_constraintStart_toEndOf="@+id/tv_original_title_tag"
+                bind:layout_constraintTop_toTopOf="@+id/tv_original_title_tag"
+                tools:text="Genre Value" />
+
+            <TextView
+                android:id="@+id/tv_overview_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/detail_film_overview_tag"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                app:layout_constrainedWidth="true"
+                bind:layout_constraintStart_toStartOf="@+id/tv_score_tag"
+                bind:layout_constraintTop_toBottomOf="@+id/tv_score_value" />
+
+            <TextView
+                android:id="@+id/tv_release_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/detail_film_release_date_tag"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                app:layout_constrainedWidth="true"
+                bind:layout_constraintStart_toStartOf="@+id/tv_original_title_tag"
+                bind:layout_constraintTop_toBottomOf="@+id/tv_original_title_value" />
+
+            <TextView
+                android:id="@+id/tv_release_date_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{film.releaseDate}"
+                android:textSize="14sp"
+                bind:layout_constraintStart_toStartOf="@+id/tv_original_title_value"
+                bind:layout_constraintTop_toTopOf="@+id/tv_release_date"
+                tools:text="Release Date" />
+
+            <TextView
+                android:id="@+id/tv_score_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/detail_film_score_tag"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                app:layout_constrainedWidth="true"
+                bind:layout_constraintStart_toStartOf="@+id/tv_release_date"
+                bind:layout_constraintTop_toBottomOf="@+id/tv_release_date_value"
+                tools:text="Score" />
+
+            <TextView
+                android:id="@+id/tv_score_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{film.voteAverage}"
+                android:textSize="14sp"
+                bind:layout_constraintStart_toStartOf="@+id/tv_release_date_value"
+                bind:layout_constraintTop_toTopOf="@+id/tv_score_tag"
+                tools:text="8.0" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="289dp"
+                android:layout_height="421dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="@string/detail_film_poster_film_description_tag"
+                bind:filmPoster="@{film.posterPath}"
+                bind:layout_constraintEnd_toEndOf="parent"
+                bind:layout_constraintStart_toStartOf="parent"
+                bind:layout_constraintTop_toBottomOf="@+id/progress_bar_detail_film"
+                tools:srcCompat="@tools:sample/avatars[1]" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

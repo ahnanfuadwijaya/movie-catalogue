@@ -27,6 +27,10 @@ public class FavoriteFilmViewModel extends AndroidViewModel {
         }
     }
 
+    public Cursor getFavoriteFilm(long id) {
+        return repository.getFavoriteFilm(id);
+    }
+
     public void insertFavoriteFilm(FavoriteFilm favoriteFilm) {
         repository.insertFavoriteFilm(favoriteFilm);
     }
