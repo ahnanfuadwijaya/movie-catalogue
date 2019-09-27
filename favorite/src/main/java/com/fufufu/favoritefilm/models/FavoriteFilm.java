@@ -78,7 +78,7 @@ public class FavoriteFilm {
         textView.setText(decimalFormat.format(voteAverage));
     }
 
-    @BindingAdapter("filmPoster")
+    @BindingAdapter("favoriteFilmPoster")
     public static void loadImage(ImageView imageView, String imageURL) {
         Glide.with(imageView.getContext())
                 .setDefaultRequestOptions(new RequestOptions().centerInside())

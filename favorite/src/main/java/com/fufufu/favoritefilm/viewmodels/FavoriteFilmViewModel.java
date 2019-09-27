@@ -27,14 +27,6 @@ public class FavoriteFilmViewModel extends AndroidViewModel {
         }
     }
 
-    public Cursor getFavoriteFilm(long id) {
-        return repository.getFavoriteFilm(id);
-    }
-
-    public void insertFavoriteFilm(FavoriteFilm favoriteFilm) {
-        repository.insertFavoriteFilm(favoriteFilm);
-    }
-
     public LiveData<ArrayList<FavoriteFilm>> getAllFavoriteFilms() {
         mapCursorToArrayList(allFavoriteFilms);
         return arrayListLiveData;
@@ -58,20 +50,8 @@ public class FavoriteFilmViewModel extends AndroidViewModel {
         }
     }
 
-    public Cursor getFavoriteFilm(int id) {
-        return repository.getFavoriteFilm(id);
-    }
-
-    public void updateFavoriteFilm(FavoriteFilm favoriteFilm) {
-        repository.updateFavoriteFilm(favoriteFilm);
-    }
-
     public void deleteFavoriteFilm(long id) {
         repository.deleteFavoriteFilm(id);
-    }
-
-    public void deleteAllFavoriteFilms() {
-        repository.deleteAllFavoriteFilms();
     }
 
     public LiveData<Boolean> isLoading() {

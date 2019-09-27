@@ -64,7 +64,7 @@ public class FavoriteFilmFragment extends Fragment {
         favoriteFilmViewModel.isLoading().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
-                if (aBoolean) {
+                if (aBoolean == null) {
                     progressBar.setVisibility(View.VISIBLE);
                 } else {
                     progressBar.setVisibility(View.GONE);

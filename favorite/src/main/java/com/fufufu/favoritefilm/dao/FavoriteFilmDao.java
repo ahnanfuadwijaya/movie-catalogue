@@ -12,9 +12,6 @@ import androidx.room.Update;
 
 import com.fufufu.favoritefilm.models.FavoriteFilm;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Dao
 public interface FavoriteFilmDao {
 

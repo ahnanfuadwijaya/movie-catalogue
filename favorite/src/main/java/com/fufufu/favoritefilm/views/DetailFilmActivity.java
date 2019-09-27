@@ -28,7 +28,7 @@ public class DetailFilmActivity extends AppCompatActivity {
         detailFilmViewModel.isLoading().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
-                if (!aBoolean) {
+                if (aBoolean == null) {
                     activityDetailFilmBinding.progressBarDetailFilm.setVisibility(View.VISIBLE);
                 } else {
                     activityDetailFilmBinding.progressBarDetailFilm.setVisibility(View.GONE);

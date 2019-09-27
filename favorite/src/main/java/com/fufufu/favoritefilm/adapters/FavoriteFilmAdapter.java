@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -37,7 +38,7 @@ public class FavoriteFilmAdapter extends RecyclerView.Adapter<FavoriteFilmAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FavoriteFilmAdapter.FilmHolder holder, int position) {
+    public void onBindViewHolder(@NonNull FavoriteFilmAdapter.FilmHolder holder, final int position) {
         final FavoriteFilm favoriteFilm = favoriteFilms.get(position);
         holder.favoriteFilmListItemBinding.setFavoriteFilm(favoriteFilm);
         holder.favoriteFilmListItemBinding.filmCardview.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +53,9 @@ public class FavoriteFilmAdapter extends RecyclerView.Adapter<FavoriteFilmAdapte
             @Override
             public void onClick(View view) {
                 favoriteFilmViewModel.deleteFavoriteFilm(favoriteFilm.getId());
+                favoriteFilms.remove(position);
+                notifyDataSetChanged();
+                Toast.makeText(view.getContext(), "Removed", Toast.LENGTH_SHORT).show();
             }
         });
     }
