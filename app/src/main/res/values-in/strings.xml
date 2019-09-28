@@ -84,4 +84,6 @@
     //widget
     <string name="favoritefilmwidget_text">FAVORIT BANNER</string>
     <string name="empty_text">TIDAK ADA DATA</string>
+    <string name="favorite_film">Favorite Film</string>
+    <string name="favorite_tv_show">Favorite TV Show</string>
 </resources>

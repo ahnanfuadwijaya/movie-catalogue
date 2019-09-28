@@ -10,14 +10,14 @@
         android:weightSum="10">
 
         <StackView
-            android:id="@+id/favorite_film_widget_stack_view"
+            android:id="@+id/favorite_tv_show_widget_stack_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="8.5"
             android:loopViews="true" />
 
         <TextView
-            android:id="@+id/favorite_film_widget_banner_text"
+            android:id="@+id/favorite_tv_show_widget_banner_text"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:gravity="center"
@@ -25,14 +25,14 @@
             android:background="#1A1F1F"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            android:text="@string/favorite_film"
+            android:text="@string/favorite_tv_show"
             android:textColor="#ffffff"
             android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>
 
     <TextView
-        android:id="@+id/favorite_film_widget_empty_view"
+        android:id="@+id/favorite_tv_show_widget_empty_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"

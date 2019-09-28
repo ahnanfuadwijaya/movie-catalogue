@@ -71,6 +71,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="empty_text">NO DATA</string>
+    <string name="favorite_film">Favorite Film</string>
+    <string name="favorite_tv_show">Favorite TV Show</string>
     <string-array name="tab_home_title">
         <item>Popular Film</item>
         <item>Popular TV Show</item>

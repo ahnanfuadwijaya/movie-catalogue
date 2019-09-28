@@ -98,16 +98,15 @@ public class StackFilmRemoteViewsFactory implements RemoteViewsService.RemoteVie
                     .submit(512, 512)
                     .get();
 
-            rv.setImageViewBitmap(R.id.imageView, bitmap);
+            rv.setImageViewBitmap(R.id.iv_favorite_film_widget, bitmap);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         Bundle extras = new Bundle();
-        extras.putInt(FavoriteFilmWidget.EXTRA_ITEM, i);
         Intent fillInIntent = new Intent();
         fillInIntent.putExtras(extras);
-        rv.setOnClickFillInIntent(R.id.imageView, fillInIntent);
+        rv.setOnClickFillInIntent(R.id.iv_favorite_film_widget, fillInIntent);
 
 
 

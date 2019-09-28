@@ -15,7 +15,7 @@ import com.fufufu.moviecatalogue.R;
 /**
  * Implementation of App Widget functionality.
  */
-public class FavoriteFilmWidget extends AppWidgetProvider {
+public class FavoriteTvShowWidget extends AppWidgetProvider {
     private static final String TOAST_ACTION = "REFRESH";
 
     @Override
@@ -24,8 +24,8 @@ public class FavoriteFilmWidget extends AppWidgetProvider {
             if (intent.getAction().equals(TOAST_ACTION)) {
                 Toast.makeText(context, "Refresh", Toast.LENGTH_SHORT).show();
                 AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-                ComponentName componentName = new ComponentName(context, FavoriteFilmWidget.class);
-                appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetManager.getAppWidgetIds(componentName), R.id.favorite_film_widget_stack_view);
+                ComponentName componentName = new ComponentName(context, FavoriteTvShowWidget.class);
+                appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetManager.getAppWidgetIds(componentName), R.id.favorite_tv_show_widget_stack_view);
             }
         }
         super.onReceive(context, intent);
@@ -34,18 +34,18 @@ public class FavoriteFilmWidget extends AppWidgetProvider {
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
-        Intent intent = new Intent(context, StackWidgetService.class);
+        Intent intent = new Intent(context, StackTvShowWidgetService.class);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
         intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.favorite_film_widget);
-        views.setRemoteAdapter(R.id.favorite_film_widget_stack_view, intent);
-        views.setEmptyView(R.id.favorite_film_widget_stack_view, R.id.favorite_film_widget_empty_view);
-        Intent toastIntent = new Intent(context, FavoriteFilmWidget.class);
-        toastIntent.setAction(FavoriteFilmWidget.TOAST_ACTION);
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.favorite_tv_show_widget);
+        views.setRemoteAdapter(R.id.favorite_tv_show_widget_stack_view, intent);
+        views.setEmptyView(R.id.favorite_tv_show_widget_stack_view, R.id.favorite_tv_show_widget_empty_view);
+        Intent toastIntent = new Intent(context, FavoriteTvShowWidget.class);
+        toastIntent.setAction(FavoriteTvShowWidget.TOAST_ACTION);
         toastIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
         intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
         PendingIntent toastPendingIntent = PendingIntent.getBroadcast(context, 0, toastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        views.setPendingIntentTemplate(R.id.favorite_film_widget_stack_view, toastPendingIntent);
+        views.setPendingIntentTemplate(R.id.favorite_tv_show_widget_stack_view, toastPendingIntent);
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 

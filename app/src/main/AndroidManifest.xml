@@ -3,18 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.fufufu.moviecatalogue">
 
-    <permission
-        android:name="com.fufufu.moviecatalogue.WRITE_DATABASE"
-        android:protectionLevel="normal" />
-    <permission
-        android:name="com.fufufu.moviecatalogue.READ_DATABASE"
-        android:protectionLevel="normal" />
-
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -56,6 +44,15 @@
             android:multiprocess="true"
             android:readPermission="com.fufufu.moviecatalogue.READ_DATABASE"
             android:writePermission="com.fufufu.moviecatalogue.WRITE_DATABASE" />
+        <receiver android:name=".widgets.FavoriteTvShowWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/favorite_tv_show_widget_info" />
+        </receiver>
 
         <receiver android:name=".widgets.FavoriteFilmWidget">
             <intent-filter>
@@ -66,7 +63,6 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/favorite_film_widget_info" />
         </receiver>
-
         <receiver
             android:name=".services.DailyReminder"
             android:enabled="true" />
@@ -76,10 +72,23 @@
             android:enabled="true"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
-
         <service
             android:name=".widgets.StackWidgetService"
-            android:permission="android.permission.BIND_REMOTEVIEWS"
-            />
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+        <service
+            android:name=".widgets.StackTvShowWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
     </application>
+    <permission
+        android:name="com.fufufu.moviecatalogue.READ_DATABASE"
+        android:protectionLevel="normal" />
+
+    <permission
+        android:name="com.fufufu.moviecatalogue.WRITE_DATABASE"
+        android:protectionLevel="normal" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
 </manifest>
