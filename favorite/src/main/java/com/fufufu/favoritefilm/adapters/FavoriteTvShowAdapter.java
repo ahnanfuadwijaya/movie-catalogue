@@ -19,6 +19,7 @@ import com.fufufu.favoritefilm.models.FavoriteTvShow;
 import com.fufufu.favoritefilm.viewmodels.FavoriteFilmViewModel;
 import com.fufufu.favoritefilm.viewmodels.FavoriteTvShowViewModel;
 import com.fufufu.favoritefilm.views.DetailFilmActivity;
+import com.fufufu.favoritefilm.views.DetailTvShowActivity;
 import com.fufufu.favoritefilm.views.FavoriteTvShowFragment;
 
 import java.util.List;
@@ -47,9 +48,9 @@ public class FavoriteTvShowAdapter extends RecyclerView.Adapter<FavoriteTvShowAd
         holder.favoriteTvShowListItemBinding.tvShowCardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Intent intent = new Intent(view.getContext(), DetailTvShowActivity.class);
+                Intent intent = new Intent(view.getContext(), DetailTvShowActivity.class);
                 intent.putExtra("tvShowId", favoriteTvShow.getId());
-                view.getContext().startActivity(intent);*/
+                view.getContext().startActivity(intent);
             }
         });
         holder.favoriteTvShowListItemBinding.removeFromFavoriteTvShow.setOnClickListener(new View.OnClickListener() {

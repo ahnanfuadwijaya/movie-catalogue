@@ -23,15 +23,15 @@ public class TvShow implements Parcelable {
     @SerializedName("overview")
     @Expose
     private String overview;
-    @SerializedName("release_date")
+    @SerializedName("first_air_date")
     @Expose
-    private String releaseDate;
+    private String firstAirDate;
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("original_title")
+    @SerializedName("original_name")
     @Expose
-    private String originalTitle;
+    private String originalName;
     @SerializedName("vote_average")
     @Expose
     private Float voteAverage;
@@ -40,9 +40,9 @@ public class TvShow implements Parcelable {
         id = in.readLong();
         posterPath = in.readString();
         overview = in.readString();
-        releaseDate = in.readString();
+        firstAirDate = in.readString();
         name = in.readString();
-        originalTitle = in.readString();
+        originalName = in.readString();
         if (in.readByte() == 0) {
             voteAverage = null;
         } else {
@@ -75,7 +75,7 @@ public class TvShow implements Parcelable {
     }
 
     public String getPosterPath() {
-        return posterPath;
+        return posterBaseUrl+posterPath;
     }
 
     public void setPosterPath(String posterPath) {
@@ -90,12 +90,12 @@ public class TvShow implements Parcelable {
         this.overview = overview;
     }
 
-    public String getReleaseDate() {
-        return releaseDate;
+    public String getFirstAirDate() {
+        return firstAirDate;
     }
 
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
+    public void setFirstAirDate(String firstAirDate) {
+        this.firstAirDate = firstAirDate;
     }
 
     public String getName() {
@@ -106,16 +106,16 @@ public class TvShow implements Parcelable {
         this.name = name;
     }
 
-    public String getOriginalTitle() {
-        return originalTitle;
+    public String getOriginalName() {
+        return originalName;
     }
 
-    public void setOriginalTitle(String originalTitle) {
-        this.originalTitle = originalTitle;
+    public void setOriginalName(String originalTitle) {
+        this.originalName = originalTitle;
     }
 
-    public Float getVoteAverage() {
-        return voteAverage;
+    public String getVoteAverage() {
+        return voteAverage.toString();
     }
 
     public void setVoteAverage(Float voteAverage) {
@@ -133,9 +133,9 @@ public class TvShow implements Parcelable {
         parcel.writeLong(id);
         parcel.writeString(posterPath);
         parcel.writeString(overview);
-        parcel.writeString(releaseDate);
+        parcel.writeString(firstAirDate);
         parcel.writeString(name);
-        parcel.writeString(originalTitle);
+        parcel.writeString(originalName);
         if (voteAverage == null) {
             parcel.writeByte((byte) 0);
         } else {

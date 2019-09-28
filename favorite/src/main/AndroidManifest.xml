@@ -3,11 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.fufufu.favoritefilm">
 
-    <uses-permission android:name="com.fufufu.moviecatalogue.READ_DATABASE" />
-    <uses-permission android:name="com.fufufu.moviecatalogue.WRITE_DATABASE" />
-
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:fullBackupContent="@xml/backup_descriptor"
@@ -17,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".views.DetailFilmActivity"/>
+        <activity android:name=".views.DetailTvShowActivity"></activity>
+        <activity android:name=".views.DetailFilmActivity" />
         <activity android:name=".views.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,4 +22,9 @@
             </intent-filter>
         </activity>
     </application>
+    <uses-permission android:name="com.fufufu.moviecatalogue.WRITE_DATABASE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="com.fufufu.moviecatalogue.READ_DATABASE" />
+
 </manifest>

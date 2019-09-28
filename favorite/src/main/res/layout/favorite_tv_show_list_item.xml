@@ -27,7 +27,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:contentDescription="@string/detail_tv_show_poster_description_tag"
-                bind:tvShowPoster="@{favoriteTvShow.posterPath}"
+                bind:favoriteTvShowPoster="@{favoriteTvShow.posterPath}"
                 bind:layout_constraintBottom_toBottomOf="parent"
                 bind:layout_constraintStart_toStartOf="parent"
                 bind:layout_constraintTop_toTopOf="parent" />
@@ -37,10 +37,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="12dp"
                 android:text="@{favoriteTvShow.name}"
                 android:textColor="@android:color/black"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 bind:layout_constraintStart_toEndOf="@+id/iv_poster"
                 bind:layout_constraintTop_toTopOf="@+id/iv_poster"
                 tools:text="Judul Tv Show" />
@@ -52,9 +51,11 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/detail_tv_show_score_tag"
                 android:textColor="@android:color/black"
-                android:textSize="16sp"
+                android:textSize="14sp"
+                bind:layout_constraintBottom_toTopOf="@+id/remove_from_favorite_tv_show"
                 bind:layout_constraintStart_toStartOf="@+id/tv_favorite_tv_show_name"
-                bind:layout_constraintTop_toBottomOf="@+id/tv_favorite_tv_show_name" />
+                bind:layout_constraintTop_toBottomOf="@+id/tv_favorite_tv_show_name"
+                bind:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/tv_favorite_tv_show_score_value"
@@ -62,36 +63,22 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:textColor="@android:color/black"
-                android:textSize="16sp"
-                tools:text="7.9"
-                bind:voteTvShowAverageValue="@{favoriteTvShow.voteAverage}"
+                android:textSize="14sp"
                 bind:layout_constraintStart_toEndOf="@+id/tv_favorite_tv_show_score_tag"
-                bind:layout_constraintTop_toTopOf="@+id/tv_favorite_tv_show_score_tag" />
+                bind:layout_constraintTop_toTopOf="@+id/tv_favorite_tv_show_score_tag"
+                bind:voteTvShowAverageValue="@{favoriteTvShow.voteAverage}"
+                tools:text="7.9" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/remove_from_favorite_tv_show"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="8dp"
                 android:background="@drawable/border"
                 android:orientation="horizontal"
-                bind:layout_constraintBottom_toBottomOf="@+id/iv_poster"
+                bind:layout_constraintBottom_toBottomOf="parent"
                 bind:layout_constraintStart_toEndOf="@+id/iv_poster">
-
-                <TextView
-                    android:id="@+id/tv_remove_favorite_tv_show"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="@string/remove_from_favorite_tv_show"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp"
-                    bind:layout_constraintBottom_toBottomOf="parent"
-                    bind:layout_constraintStart_toStartOf="parent"
-                    bind:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/iv_remove_favorite_tv_show"
@@ -106,6 +93,20 @@
                     bind:layout_constraintBottom_toBottomOf="parent"
                     bind:layout_constraintEnd_toEndOf="parent"
                     bind:layout_constraintStart_toEndOf="@+id/tv_remove_favorite_tv_show"
+                    bind:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_remove_favorite_tv_show"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/remove_from_favorite_tv_show"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp"
+                    bind:layout_constraintBottom_toBottomOf="parent"
+                    bind:layout_constraintStart_toStartOf="parent"
                     bind:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
