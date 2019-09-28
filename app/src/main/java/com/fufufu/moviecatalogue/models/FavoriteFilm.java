@@ -11,7 +11,7 @@ import java.text.DecimalFormat;
 
 @Entity(tableName = "favorite_film_table")
 public class FavoriteFilm {
-    public static String TABLE_NAME = "favorite_film_table";
+    public static final String TABLE_NAME = "favorite_film_table";
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_POSTER_PATH = "posterPath";
     public static final String COLUMN_TITLE = "title";

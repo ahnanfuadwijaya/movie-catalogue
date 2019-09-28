@@ -36,7 +36,7 @@ public class FavoriteFilmViewModel extends AndroidViewModel {
         favoriteFilmRepository.updateFavoriteFilm(favoriteFilm);
     }
 
-    public void deleteFavoriteFilm(Long favoriteFilm) {
+    public void deleteFavoriteFilm(long favoriteFilm) {
         favoriteFilmRepository.deleteFavoriteFilm(favoriteFilm);
     }
 

@@ -77,7 +77,7 @@
                 android:layout_width="289dp"
                 android:layout_height="421dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="8dp"
                 android:contentDescription="@string/detail_tv_show_poster_description_tag"
                 bind:layout_constraintEnd_toEndOf="parent"

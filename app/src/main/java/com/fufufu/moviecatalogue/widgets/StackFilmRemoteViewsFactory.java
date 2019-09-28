@@ -1,20 +1,16 @@
-package com.fufufu.moviecatalogue;
+package com.fufufu.moviecatalogue.widgets;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Binder;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import com.bumptech.glide.Glide;
+import com.fufufu.moviecatalogue.R;
 import com.fufufu.moviecatalogue.dao.FavoriteFilmDao;
 import com.fufufu.moviecatalogue.database.FavoriteFilmDatabase;
 import com.fufufu.moviecatalogue.models.FavoriteFilm;

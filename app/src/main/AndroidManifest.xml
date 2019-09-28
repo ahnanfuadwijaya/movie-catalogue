@@ -37,7 +37,7 @@
             android:readPermission="com.fufufu.moviecatalogue.READ_DATABASE"
             android:writePermission="com.fufufu.moviecatalogue.WRITE_DATABASE" />
 
-        <receiver android:name=".FavoriteFilmWidget">
+        <receiver android:name=".widgets.FavoriteFilmWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -58,7 +58,7 @@
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <service
-            android:name=".StackWidgetService"
+            android:name=".widgets.StackWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS"
             />
     </application>

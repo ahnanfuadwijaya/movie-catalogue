@@ -1,6 +1,7 @@
 package com.fufufu.moviecatalogue.models;
 
 import android.app.Application;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -11,7 +12,8 @@ import java.util.concurrent.ExecutionException;
 
 public class FavoriteTvShowRepository {
     private FavoriteTvShowDao favoriteTvShowDao;
-    private LiveData<List<FavoriteTvShow>> favoriteTvShowList;
+    private Cursor favoriteTvShowList;
+    private MutableLiveData<Cursor> favoriteTvShowCursor = new MutableLiveData<>();
     private static MutableLiveData<Boolean> mutableIsLoading = new MutableLiveData<>();
 
     public MutableLiveData<Boolean> getLoading() {
@@ -22,7 +24,11 @@ public class FavoriteTvShowRepository {
         FavoriteTvShowDatabase favoriteFilmDatabase = FavoriteTvShowDatabase.getInstance(application);
         mutableIsLoading.setValue(true);
         favoriteTvShowDao = favoriteFilmDatabase.favoriteTvShowDao();
-        favoriteTvShowList = favoriteTvShowDao.getAllFavoriteTvShows();
+        try {
+            favoriteTvShowList = new GetAllFavoriteTvShowsAsyncTask(favoriteTvShowDao).execute().get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void insertFavoriteTvShow(FavoriteTvShow favoriteTvShow) {
@@ -33,22 +39,26 @@ public class FavoriteTvShowRepository {
         new FavoriteTvShowRepository.UpdateFavoriteTvShowAsyncTask(favoriteTvShowDao).execute(favoriteTvShow);
     }
 
-    public void deleteFavoriteTvShow(FavoriteTvShow favoriteTvShow) {
+    public void deleteFavoriteTvShow(Long favoriteTvShow) {
         new FavoriteTvShowRepository.DeleteFavoriteTvShowAsyncTask(favoriteTvShowDao).execute(favoriteTvShow);
     }
 
-    public LiveData<List<FavoriteTvShow>> getAllFavoriteTvShows() {
+    public MutableLiveData<Cursor> getAllFavoriteTvShowCursor(){
+        favoriteTvShowCursor.setValue(favoriteTvShowList);
+        mutableIsLoading.setValue(false);
+        return favoriteTvShowCursor;
+    }
+
+    public Cursor getAllFavoriteTvShows() {
         mutableIsLoading.setValue(false);
         return favoriteTvShowList;
     }
 
-    public FavoriteTvShow getFavoriteTvShow(int id) {
+    public Cursor getFavoriteTvShow(long id) {
         mutableIsLoading.setValue(true);
         try {
             return new FavoriteTvShowRepository.GetFavoriteTvShowsAsyncTask(favoriteTvShowDao).execute(id).get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
         return null;
@@ -72,7 +82,7 @@ public class FavoriteTvShowRepository {
         }
     }
 
-    private static class GetAllFavoriteTvShowsAsyncTask extends AsyncTask<Void, Void, Void> {
+    private static class GetAllFavoriteTvShowsAsyncTask extends AsyncTask<Void, Void, Cursor> {
         private FavoriteTvShowDao favoriteTvShowDao;
 
         GetAllFavoriteTvShowsAsyncTask(FavoriteTvShowDao favoriteTvShowDao) {
@@ -80,13 +90,12 @@ public class FavoriteTvShowRepository {
         }
 
         @Override
-        protected Void doInBackground(Void... voids) {
-            favoriteTvShowDao.getAllFavoriteTvShows();
-            return null;
+        protected Cursor doInBackground(Void... voids) {
+            return favoriteTvShowDao.getAllFavoriteTvShows();
         }
     }
 
-    private static class GetFavoriteTvShowsAsyncTask extends AsyncTask<Integer, Void, FavoriteTvShow> {
+    private static class GetFavoriteTvShowsAsyncTask extends AsyncTask<Long, Void, Cursor> {
         private FavoriteTvShowDao favoriteTvShowDao;
 
         GetFavoriteTvShowsAsyncTask(FavoriteTvShowDao favoriteTvShowDao) {
@@ -94,12 +103,12 @@ public class FavoriteTvShowRepository {
         }
 
         @Override
-        protected FavoriteTvShow doInBackground(Integer... integers) {
-            return favoriteTvShowDao.getTvShow(integers[0]);
+        protected Cursor doInBackground(Long... longs) {
+            return favoriteTvShowDao.getTvShow(longs[0]);
         }
 
         @Override
-        protected void onPostExecute(FavoriteTvShow favoriteTvShow) {
+        protected void onPostExecute(Cursor favoriteTvShow) {
             super.onPostExecute(favoriteTvShow);
             mutableIsLoading.postValue(false);
         }
@@ -119,7 +128,7 @@ public class FavoriteTvShowRepository {
         }
     }
 
-    private static class DeleteFavoriteTvShowAsyncTask extends AsyncTask<FavoriteTvShow, Void, Void> {
+    private static class DeleteFavoriteTvShowAsyncTask extends AsyncTask<Long, Void, Void> {
         private FavoriteTvShowDao favoriteTvShowDao;
 
         DeleteFavoriteTvShowAsyncTask(FavoriteTvShowDao favoriteTvShowDao) {
@@ -127,7 +136,7 @@ public class FavoriteTvShowRepository {
         }
 
         @Override
-        protected Void doInBackground(FavoriteTvShow... favoriteTvShows) {
+        protected Void doInBackground(Long... favoriteTvShows) {
             favoriteTvShowDao.deleteFavoriteTvShow(favoriteTvShows[0]);
             return null;
         }

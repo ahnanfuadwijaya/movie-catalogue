@@ -48,7 +48,7 @@ public class FavoriteTvShowAdapter extends RecyclerView.Adapter<FavoriteTvShowAd
         holder.favoriteTvShowListItemBinding.removeFromFavoriteTvShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                favoriteTvShowViewModel.deleteFavoriteTvShow(favoriteTvShow);
+                favoriteTvShowViewModel.deleteFavoriteTvShow(favoriteTvShow.getId());
             }
         });
     }

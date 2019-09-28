@@ -39,7 +39,7 @@ public class DetailTvShowActivity extends AppCompatActivity {
                 }
             }
         });
-        if (favoriteTvShowViewModel.getFavoriteTvShow(tvShowId) != null) {
+        if (favoriteTvShowViewModel.getFavoriteTvShow(tvShowId).getCount() != 0) {
             Drawable favorite = getResources().getDrawable(R.drawable.ic_favorite_red_24dp, null);
             favorite.setBounds(8, 0, 0, 0);
             activityDetailTvShowBinding.btnAddToFavorite.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, favorite, null);

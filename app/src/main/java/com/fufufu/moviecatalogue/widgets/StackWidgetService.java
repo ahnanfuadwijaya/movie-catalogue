@@ -1,4 +1,4 @@
-package com.fufufu.moviecatalogue;
+package com.fufufu.moviecatalogue.widgets;
 
 import android.content.Intent;
 import android.widget.RemoteViewsService;

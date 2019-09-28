@@ -53,19 +53,6 @@ public class FavoriteFilmRepository {
         mutableIsLoading.setValue(false);
     }
 
-    public Cursor getAllFavoriteFilms() {
-        try {
-            favoriteFilmList = new GetAllFavoriteFilmsAsyncTask(favoriteFilmDao).execute().get();
-            return favoriteFilmList;
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
-        }
-        finally {
-            mutableIsLoading.setValue(false);
-        }
-        return null;
-    }
-
     public Cursor getFavoriteFilm(long id) {
         mutableIsLoading.setValue(true);
         try {
