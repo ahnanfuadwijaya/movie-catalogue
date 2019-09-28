@@ -50,7 +50,6 @@ public class Repository {
     private String URL;
     private Uri uri;
     private String myMimeType;
-
     private ContentResolver contentResolver;
 
     public MutableLiveData<Boolean> getLoading() {

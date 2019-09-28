@@ -3,12 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.fufufu.moviecatalogue">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <permission android:name="com.fufufu.moviecatalogue.READ_DATABASE" android:protectionLevel="normal" />
-    <permission android:name="com.fufufu.moviecatalogue.WRITE_DATABASE" android:protectionLevel="normal" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,14 +10,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".views.SetLanguageActivity" />
 
-        <activity android:name="com.fufufu.moviecatalogue.views.SetLanguageActivity" />
-        <activity android:name="com.fufufu.moviecatalogue.views.SettingActivity" />
-        <activity android:name="com.fufufu.moviecatalogue.views.DetailTvShowActivity" />
-        <activity android:name="com.fufufu.moviecatalogue.views.DetailFilmActivity" />
+        <activity android:name=".views.SettingActivity" />
+        <activity android:name=".views.DetailTvShowActivity" />
+        <activity android:name=".views.DetailFilmActivity" />
         <activity
-            android:name="com.fufufu.moviecatalogue.views.MainActivity"
+            android:name=".views.MainActivity"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,26 +25,53 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <receiver
-            android:name="com.fufufu.moviecatalogue.services.DailyReminder"
-            android:enabled="true" />
-        <service
-            android:name="com.fufufu.moviecatalogue.services.ReleaseTodayIntentService"
-            android:enabled="true"
-            android:exported="true"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
         <meta-data
             android:name="android.app.searchable"
             android:resource="@layout/searchable" />
 
         <provider
+            android:name=".provider.FavoriteFilmContentProvider"
             android:authorities="com.fufufu.moviecatalogue"
-            android:name="com.fufufu.moviecatalogue.provider.FavoriteFilmContentProvider"
             android:exported="true"
             android:multiprocess="true"
             android:readPermission="com.fufufu.moviecatalogue.READ_DATABASE"
             android:writePermission="com.fufufu.moviecatalogue.WRITE_DATABASE" />
+
+        <receiver android:name=".FavoriteFilmWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/favorite_film_widget_info" />
+        </receiver>
+
+        <receiver
+            android:name=".services.DailyReminder"
+            android:enabled="true" />
+
+        <service
+            android:name=".services.ReleaseTodayIntentService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <service
+            android:name=".StackWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS"
+            />
     </application>
+    <permission
+        android:name="com.fufufu.moviecatalogue.WRITE_DATABASE"
+        android:protectionLevel="normal" />
+
+    <permission
+        android:name="com.fufufu.moviecatalogue.READ_DATABASE"
+        android:protectionLevel="normal" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
 
 </manifest>

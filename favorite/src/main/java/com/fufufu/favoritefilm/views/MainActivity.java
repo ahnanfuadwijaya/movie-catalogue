@@ -10,17 +10,11 @@ import androidx.loader.content.Loader;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 
 import com.fufufu.favoritefilm.R;
-import com.fufufu.favoritefilm.adapters.FavoriteFilmAdapter;
 import com.fufufu.favoritefilm.adapters.TabFavoriteAdapter;
 import com.fufufu.favoritefilm.databinding.ActivityMainBinding;
-import com.fufufu.favoritefilm.models.FavoriteFilm;
-import com.fufufu.favoritefilm.providers.FavoriteFilmContentProvider;
-import com.fufufu.favoritefilm.viewmodels.FavoriteFilmViewModel;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {

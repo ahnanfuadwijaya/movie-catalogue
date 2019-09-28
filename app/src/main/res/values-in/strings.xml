@@ -80,4 +80,8 @@
     <string name="daily_reminder_description">Menampilkan notifikasi harian untuk melihat aplikasi</string>
     <string name="release_today_remainder_tag">Pengingat Rilis Hari Ini</string>
     <string name="release_today_description">Menampilkan notifikasi harian informasi film dan serial tv yang rilis hari ini</string>
+
+    //widget
+    <string name="favoritefilmwidget_text">FAVORIT BANNER</string>
+    <string name="empty_text">TIDAK ADA DATA</string>
 </resources>
