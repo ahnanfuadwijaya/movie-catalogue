@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.concurrent.Callable;
 
 public class FavoriteTvShowContentProvider extends ContentProvider {
-    public static final String AUTHORITY = "com.fufufu.moviecatalogue";
+    public static final String AUTHORITY = "com.fufufu.moviecatalogue.favoritetvshow";
     public static final String URL = "content://" + AUTHORITY + "/" + FavoriteTvShow.TABLE_NAME;
     public static final Uri CONTENT_URI = Uri.parse(URL);
     private static final int FAVORITE_TV_SHOW = 1;

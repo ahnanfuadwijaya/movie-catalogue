@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.concurrent.Callable;
 
 public class FavoriteFilmContentProvider extends ContentProvider {
-    public static final String AUTHORITY = "com.fufufu.moviecatalogue";
+    public static final String AUTHORITY = "com.fufufu.moviecatalogue.favoritefilm";
     public static final String URL = "content://" + AUTHORITY + "/" + FavoriteFilm.TABLE_NAME;
     public static final Uri CONTENT_URI = Uri.parse(URL);
     private static final int FAVORITE_FILMS = 1;

@@ -1,5 +1,6 @@
 package com.fufufu.favoritefilm.models;
 
+import android.content.ContentValues;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,13 +17,19 @@ import java.text.DecimalFormat;
 
 @Entity(tableName = "favorite_tv_show_table")
 public class FavoriteTvShow {
+    public static String TABLE_NAME = "favorite_tv_show_table";
+    public static final String COLUMN_ID = "id";
+    public static final String COLUMN_POSTER_PATH = "posterPath";
+    public static final String COLUMN_NAME = "name";
+    public static final String COLUMN_VOTE_AVERAGE = "voteAverage";
+
     @PrimaryKey
-    private int id;
+    private long id;
     private String posterPath;
     private String name;
     private Float voteAverage;
 
-    public FavoriteTvShow(int id, String posterPath, String name, Float voteAverage) {
+    public FavoriteTvShow(long id, String posterPath, String name, Float voteAverage) {
         this.id = id;
         this.posterPath = posterPath;
         this.name = name;
@@ -33,7 +40,7 @@ public class FavoriteTvShow {
     public FavoriteTvShow() {
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -49,7 +56,7 @@ public class FavoriteTvShow {
         this.voteAverage = voteAverage;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -71,12 +78,29 @@ public class FavoriteTvShow {
         textView.setText(decimalFormat.format(voteAverage));
     }
 
-    @BindingAdapter("tvShowPoster")
+    @BindingAdapter("favoriteTvShowPoster")
     public static void loadImage(ImageView imageView, String imageURL) {
         Glide.with(imageView.getContext())
                 .setDefaultRequestOptions(new RequestOptions().centerInside())
                 .load(imageURL)
                 .placeholder(R.drawable.loading)
                 .into(imageView);
+    }
+
+    public static FavoriteTvShow fromContentValues(ContentValues values) {
+        final FavoriteTvShow favoriteTvShow = new FavoriteTvShow();
+        if (values.containsKey(COLUMN_ID)) {
+            favoriteTvShow.setId(values.getAsLong(COLUMN_ID));
+        }
+        if (values.containsKey(COLUMN_POSTER_PATH)) {
+            favoriteTvShow.setPosterPath(values.getAsString(COLUMN_POSTER_PATH));
+        }
+        if (values.containsKey(COLUMN_NAME)) {
+            favoriteTvShow.setName(values.getAsString(COLUMN_NAME));
+        }
+        if (values.containsKey(COLUMN_VOTE_AVERAGE)) {
+            favoriteTvShow.setVoteAverage(values.getAsFloat(COLUMN_VOTE_AVERAGE));
+        }
+        return favoriteTvShow;
     }
 }

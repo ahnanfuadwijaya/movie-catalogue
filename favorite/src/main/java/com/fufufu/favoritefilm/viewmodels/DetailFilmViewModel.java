@@ -18,7 +18,7 @@ public class DetailFilmViewModel extends AndroidViewModel {
 
     public DetailFilmViewModel(@NonNull Application application) {
         super(application);
-        repository = new Repository(application);
+        repository = new Repository();
     }
 
     public MutableLiveData<Film> getFilm(long id) {

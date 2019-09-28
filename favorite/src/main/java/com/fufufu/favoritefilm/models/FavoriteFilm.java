@@ -19,14 +19,15 @@ import java.text.DecimalFormat;
 @Entity(tableName = "favorite_film_table")
 public class FavoriteFilm {
     public static String TABLE_NAME = "favorite_film_table";
-    public static final String COLUMN_ID = BaseColumns._ID;
+    public static final String COLUMN_ID = "id";
+    public static final String COLUMN_POSTER_PATH = "posterPath";
+    public static final String COLUMN_TITLE = "title";
+    public static final String COLUMN_VOTE_AVERAGE = "voteAverage";
+
     @PrimaryKey
     private long id;
-    public static final String COLUMN_POSTER_PATH = "posterPath";
     private String posterPath;
-    public static final String COLUMN_TITLE = "title";
     private String title;
-    public static final String COLUMN_VOTE_AVERAGE = "voteAverage";
     private Float voteAverage;
 
     public FavoriteFilm(long id, String posterPath, String title, Float voteAverage) {

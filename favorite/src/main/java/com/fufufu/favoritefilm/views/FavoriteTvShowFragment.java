@@ -4,18 +4,33 @@ package com.fufufu.favoritefilm.views;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.fufufu.favoritefilm.R;
+import com.fufufu.favoritefilm.adapters.FavoriteFilmAdapter;
+import com.fufufu.favoritefilm.adapters.FavoriteTvShowAdapter;
+import com.fufufu.favoritefilm.databinding.FragmentFavoriteFilmBinding;
+import com.fufufu.favoritefilm.databinding.FragmentFavoriteTvShowBinding;
+import com.fufufu.favoritefilm.models.FavoriteFilm;
+import com.fufufu.favoritefilm.models.FavoriteTvShow;
+import com.fufufu.favoritefilm.viewmodels.FavoriteFilmViewModel;
+import com.fufufu.favoritefilm.viewmodels.FavoriteTvShowViewModel;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class FavoriteTvShowFragment extends Fragment {
-
+    private FavoriteTvShowAdapter favoriteTvShowAdapter;
 
     public FavoriteTvShowFragment() {
         // Required empty public constructor
@@ -25,8 +40,31 @@ public class FavoriteTvShowFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favorite_tv_show, container, false);
+        final FragmentFavoriteTvShowBinding fragmentFavoriteTvShowBinding = FragmentFavoriteTvShowBinding.inflate(inflater, container, false);
+        RecyclerView recyclerView = fragmentFavoriteTvShowBinding.rvFavoriteTvShowList;
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setHasFixedSize(true);
+        final ProgressBar progressBar = fragmentFavoriteTvShowBinding.progressBarFavoriteTvShow;
+        FavoriteTvShowViewModel favoriteTvShowViewModel = ViewModelProviders.of(this).get(FavoriteTvShowViewModel.class);
+        favoriteTvShowAdapter = new FavoriteTvShowAdapter(this);
+        recyclerView.setAdapter(favoriteTvShowAdapter);
+        favoriteTvShowViewModel.getAllFavoriteTvShows().observe(this, new Observer<List<FavoriteTvShow>>() {
+            @Override
+            public void onChanged(List<FavoriteTvShow> favoriteTvShows) {
+                favoriteTvShowAdapter.setFavoriteTvShows(favoriteTvShows);
+            }
+        });
+        favoriteTvShowViewModel.isLoading().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean == null) {
+                    progressBar.setVisibility(View.VISIBLE);
+                } else {
+                    progressBar.setVisibility(View.GONE);
+                }
+            }
+        });
+        return fragmentFavoriteTvShowBinding.getRoot();
     }
 
 }

@@ -5,6 +5,7 @@
 
     <uses-permission android:name="com.fufufu.moviecatalogue.READ_DATABASE" />
     <uses-permission android:name="com.fufufu.moviecatalogue.WRITE_DATABASE" />
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application

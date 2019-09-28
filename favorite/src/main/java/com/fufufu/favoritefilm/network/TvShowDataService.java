@@ -12,6 +12,6 @@ public interface TvShowDataService {
     String API_KEY = BuildConfig.API_KEY;
     @GET("tv/{tv_id}?api_key="+API_KEY)
     Call<TvShow> getDetailTvShow(
-            @Path("tv_id") int tvId,
+            @Path("tv_id") long tvId,
             @Query("language") String lang);
 }
