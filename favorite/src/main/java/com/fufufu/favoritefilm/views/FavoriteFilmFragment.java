@@ -1,47 +1,26 @@
 package com.fufufu.favoritefilm.views;
 
-
-import android.content.ContentProviderClient;
-import android.content.ContentResolver;
-import android.content.Context;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.loader.app.LoaderManager;
-import androidx.loader.content.CursorLoader;
-import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-
-import com.fufufu.favoritefilm.R;
 import com.fufufu.favoritefilm.adapters.FavoriteFilmAdapter;
 import com.fufufu.favoritefilm.databinding.FragmentFavoriteFilmBinding;
 import com.fufufu.favoritefilm.models.FavoriteFilm;
 import com.fufufu.favoritefilm.viewmodels.FavoriteFilmViewModel;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class FavoriteFilmFragment extends Fragment {
     private FavoriteFilmAdapter favoriteFilmAdapter;
-    private FavoriteFilmViewModel favoriteFilmViewModel;
 
     public FavoriteFilmFragment() {
-        // Required empty public constructor
     }
 
     @Override

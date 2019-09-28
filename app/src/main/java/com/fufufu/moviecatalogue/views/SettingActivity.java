@@ -2,7 +2,6 @@ package com.fufufu.moviecatalogue.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -12,7 +11,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Toast;
-
 import com.fufufu.moviecatalogue.R;
 import com.fufufu.moviecatalogue.databinding.ActivitySettingBinding;
 import com.fufufu.moviecatalogue.services.DailyReminder;
@@ -60,13 +58,13 @@ public class SettingActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b){
                     savePreferenceDailyRemainder(true);
-                    dailyReminder.setReminder(getApplicationContext(), "Check out latest movies and tv shows today");
-                    Toast.makeText(getApplicationContext(), "Daily Reminder: On", Toast.LENGTH_LONG).show();
+                    dailyReminder.setReminder(getApplicationContext(), getString(R.string.daily_remainder_message));
+                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.toast_daily_remainder_on), Toast.LENGTH_LONG).show();
                 }
                 else {
                     savePreferenceDailyRemainder(false);
                     dailyReminder.cancelReminder(getApplicationContext());
-                    Toast.makeText(getApplicationContext(), "Daily Reminder: Off", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.toast_daily_remainder_off), Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -77,7 +75,6 @@ public class SettingActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b){
                     savePreferenceReleaseToday(true);
-
                     Calendar calendar = Calendar.getInstance();
                     calendar.set(Calendar.HOUR_OF_DAY, 8);
                     calendar.set(Calendar.MINUTE, 0);
@@ -90,8 +87,7 @@ public class SettingActivity extends AppCompatActivity {
                     if (alarmManager != null) {
                         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
                     }
-
-                    Toast.makeText(getApplicationContext(), "Release Today Reminder: On", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.toast_release_today_on), Toast.LENGTH_LONG).show();
                 }
                 else{
                     savePreferenceReleaseToday(false);
@@ -104,7 +100,7 @@ public class SettingActivity extends AppCompatActivity {
                         alarmManager.cancel(pendingIntent);
                     }
 
-                    Toast.makeText(getApplicationContext(), "Release Today Reminder: Off", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.toast_release_today_off), Toast.LENGTH_LONG).show();
                 }
             }
         });

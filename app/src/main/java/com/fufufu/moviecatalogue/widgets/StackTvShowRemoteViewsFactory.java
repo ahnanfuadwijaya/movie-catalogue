@@ -8,14 +8,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
-
 import com.bumptech.glide.Glide;
 import com.fufufu.moviecatalogue.R;
 import com.fufufu.moviecatalogue.dao.FavoriteTvShowDao;
 import com.fufufu.moviecatalogue.database.FavoriteTvShowDatabase;
-import com.fufufu.moviecatalogue.models.FavoriteFilm;
 import com.fufufu.moviecatalogue.models.FavoriteTvShow;
-
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 

@@ -2,11 +2,9 @@ package com.fufufu.moviecatalogue.viewmodels;
 
 import android.app.Application;
 import android.database.Cursor;
-
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-
 import com.fufufu.moviecatalogue.models.FavoriteFilm;
 import com.fufufu.moviecatalogue.models.FavoriteFilmRepository;
 
@@ -32,16 +30,8 @@ public class FavoriteFilmViewModel extends AndroidViewModel {
         return favoriteFilmRepository.getFavoriteFilm(id);
     }
 
-    public void updateFavoriteFilm(FavoriteFilm favoriteFilm) {
-        favoriteFilmRepository.updateFavoriteFilm(favoriteFilm);
-    }
-
     public void deleteFavoriteFilm(long favoriteFilm) {
         favoriteFilmRepository.deleteFavoriteFilm(favoriteFilm);
-    }
-
-    public void deleteAllFavoriteFilms() {
-        favoriteFilmRepository.deleteAllFavoriteFilms();
     }
 
     public LiveData<Boolean> isLoading() {

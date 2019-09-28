@@ -10,7 +10,6 @@ import retrofit2.http.Query;
 
 public interface FilmDataService {
     String API_KEY = BuildConfig.API_KEY;
-    //https://api.themoviedb.org/3/discover/movie?api_key=f240487696509310687e5998a34a405f&primary_release_date.gte=2019-09-14&primary_release_date.lte=2019-09-14
     @GET("discover/movie?api_key="+API_KEY)
     Call<FilmDBResponse> getFilms(
             @Query("language") String lang,

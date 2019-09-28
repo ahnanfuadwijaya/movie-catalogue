@@ -2,7 +2,6 @@ package com.fufufu.favoritefilm.network;
 
 import com.fufufu.favoritefilm.BuildConfig;
 import com.fufufu.favoritefilm.models.TvShow;
-
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;

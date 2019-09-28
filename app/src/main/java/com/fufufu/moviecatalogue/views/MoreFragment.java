@@ -1,28 +1,21 @@
 package com.fufufu.moviecatalogue.views;
 
-
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
-
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.fufufu.moviecatalogue.R;
 import com.fufufu.moviecatalogue.databinding.FragmentMoreBinding;
 import com.fufufu.moviecatalogue.viewmodels.AboutViewModel;
-
 import java.util.Objects;
 
 public class MoreFragment extends Fragment {
-
-
     public MoreFragment() {
         // Required empty public constructor
     }
@@ -53,5 +46,4 @@ public class MoreFragment extends Fragment {
         fragmentMoreBinding.setAbout(aboutViewModel.getData());
         return fragmentMoreBinding.getRoot();
     }
-
 }

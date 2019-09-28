@@ -3,13 +3,10 @@ package com.fufufu.favoritefilm.viewmodels;
 import android.app.Activity;
 import android.app.Application;
 import android.content.SharedPreferences;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-
-import com.fufufu.favoritefilm.models.Film;
 import com.fufufu.favoritefilm.models.TvShow;
 import com.fufufu.favoritefilm.repository.Repository;
 
@@ -19,7 +16,7 @@ public class DetailTvShowViewModel extends AndroidViewModel {
 
     public DetailTvShowViewModel(@NonNull Application application) {
         super(application);
-        repository = new Repository();
+        repository = new Repository(application);
     }
 
     public MutableLiveData<TvShow> getTvShow(long id) {

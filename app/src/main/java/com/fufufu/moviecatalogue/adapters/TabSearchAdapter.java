@@ -1,13 +1,11 @@
 package com.fufufu.moviecatalogue.adapters;
 
 import android.content.Context;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
-
 import com.fufufu.moviecatalogue.R;
 import com.fufufu.moviecatalogue.views.SearchFilmFragment;
 import com.fufufu.moviecatalogue.views.SearchTvShowFragment;

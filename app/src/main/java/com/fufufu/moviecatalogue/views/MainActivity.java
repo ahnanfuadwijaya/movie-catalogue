@@ -1,34 +1,22 @@
 package com.fufufu.moviecatalogue.views;
-
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.PopupMenu;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import com.fufufu.moviecatalogue.R;
 import com.fufufu.moviecatalogue.databinding.ActivityMainBinding;
-import com.fufufu.moviecatalogue.models.FavoriteFilm;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-    private ContentResolver contentResolver;
-    private FavoriteFilm favoriteFilm;
-
     public void loadLocale() {
         String langPref = "Language";
         SharedPreferences prefs = getSharedPreferences("CommonPrefs", AppCompatActivity.MODE_PRIVATE);
@@ -113,21 +101,6 @@ public class MainActivity extends AppCompatActivity {
             HomeFragment homeFragment = new HomeFragment();
             fragmentTransaction.replace(R.id.fragment_container, homeFragment);
             fragmentTransaction.commit();
-        }
-        contentResolver = getContentResolver();
-        Uri uri = getIntent().getData();
-        if(uri != null){
-            Cursor cursor = getContentResolver().query(uri, null, null, null, null);
-
-            if (cursor != null) {
-                if (cursor.moveToFirst()){
-                    favoriteFilm = new FavoriteFilm();
-                    String title;
-                    title = cursor.getString(cursor.getColumnIndexOrThrow("title"));
-                    Log.d("Title", title);
-                }
-                cursor.close();
-            }
         }
     }
 }

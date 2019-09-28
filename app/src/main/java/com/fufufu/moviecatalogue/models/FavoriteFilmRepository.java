@@ -3,13 +3,9 @@ package com.fufufu.moviecatalogue.models;
 import android.app.Application;
 import android.database.Cursor;
 import android.os.AsyncTask;
-import android.util.Log;
-
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.fufufu.moviecatalogue.dao.FavoriteFilmDao;
 import com.fufufu.moviecatalogue.database.FavoriteFilmDatabase;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class FavoriteFilmRepository {

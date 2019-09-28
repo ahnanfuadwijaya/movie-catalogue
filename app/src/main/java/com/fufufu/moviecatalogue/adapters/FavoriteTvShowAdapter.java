@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
@@ -34,7 +35,7 @@ public class FavoriteTvShowAdapter extends RecyclerView.Adapter<FavoriteTvShowAd
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TvShowHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TvShowHolder holder, final int position) {
         final FavoriteTvShow favoriteTvShow = favoriteTvShows.get(position);
         holder.favoriteTvShowListItemBinding.setFavoriteTvShow(favoriteTvShow);
         holder.favoriteTvShowListItemBinding.tvShowCardview.setOnClickListener(new View.OnClickListener() {
@@ -49,6 +50,9 @@ public class FavoriteTvShowAdapter extends RecyclerView.Adapter<FavoriteTvShowAd
             @Override
             public void onClick(View view) {
                 favoriteTvShowViewModel.deleteFavoriteTvShow(favoriteTvShow.getId());
+                favoriteTvShows.remove(position);
+                notifyDataSetChanged();
+                Toast.makeText(view.getContext(), view.getContext().getResources().getString(R.string.toast_removed), Toast.LENGTH_LONG).show();
             }
         });
     }

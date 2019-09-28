@@ -1,12 +1,10 @@
 package com.fufufu.moviecatalogue.adapters;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
@@ -45,7 +43,6 @@ public class FavoriteFilmAdapter extends RecyclerView.Adapter<FavoriteFilmAdapte
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), DetailFilmActivity.class);
                 intent.putExtra("filmId", favoriteFilm.getId());
-                Log.d("filmId", String.valueOf(favoriteFilm.getId()));
                 view.getContext().startActivity(intent);
             }
         });
@@ -55,7 +52,7 @@ public class FavoriteFilmAdapter extends RecyclerView.Adapter<FavoriteFilmAdapte
                 favoriteFilmViewModel.deleteFavoriteFilm(favoriteFilm.getId());
                 favoriteFilms.remove(position);
                 notifyDataSetChanged();
-                Toast.makeText(view.getContext(), "Removed", Toast.LENGTH_LONG).show();
+                Toast.makeText(view.getContext(), view.getContext().getResources().getString(R.string.toast_removed), Toast.LENGTH_LONG).show();
             }
         });
     }

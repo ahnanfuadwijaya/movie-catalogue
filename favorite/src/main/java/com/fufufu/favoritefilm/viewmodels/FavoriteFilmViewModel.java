@@ -2,14 +2,12 @@ package com.fufufu.favoritefilm.viewmodels;
 
 import android.app.Application;
 import android.database.Cursor;
-import android.util.Log;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.fufufu.favoritefilm.models.FavoriteFilm;
 import com.fufufu.favoritefilm.repository.Repository;
 import java.util.ArrayList;
-
 
 public class FavoriteFilmViewModel extends AndroidViewModel {
     private Repository repository;
@@ -18,13 +16,9 @@ public class FavoriteFilmViewModel extends AndroidViewModel {
 
     public FavoriteFilmViewModel(Application application) {
         super(application);
-        repository = new Repository();
+        repository = new Repository(application);
         allFavoriteFilms = null;
         allFavoriteFilms = repository.getAllFavoriteFilms();
-        if(allFavoriteFilms != null){
-            Log.d("allFavoriteFilms", "not null");
-            Log.d("size", String.valueOf(allFavoriteFilms.getCount()));
-        }
     }
 
     public LiveData<ArrayList<FavoriteFilm>> getAllFavoriteFilms() {
@@ -42,7 +36,6 @@ public class FavoriteFilmViewModel extends AndroidViewModel {
                     String posterPath = cursor.getString(cursor.getColumnIndexOrThrow("posterPath"));
                     Float voteAverage = cursor.getFloat(cursor.getColumnIndexOrThrow("voteAverage"));
                     favoriteFilms.add(new FavoriteFilm(id, posterPath, title, voteAverage));
-                    Log.d("Crsrmapping,item:title", title);
                 }while (cursor.moveToNext());
                 cursor.close();
             }

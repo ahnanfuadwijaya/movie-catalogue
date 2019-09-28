@@ -2,7 +2,6 @@ package com.fufufu.moviecatalogue.views;
 
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.fufufu.moviecatalogue.adapters.FavoriteTvShowAdapter;
 import com.fufufu.moviecatalogue.databinding.FragmentFavoriteTvShowBinding;
-import com.fufufu.moviecatalogue.models.FavoriteFilm;
 import com.fufufu.moviecatalogue.models.FavoriteTvShow;
 import com.fufufu.moviecatalogue.viewmodels.FavoriteTvShowViewModel;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class FavoriteTvShowFragment extends Fragment {
     private FavoriteTvShowAdapter favoriteTvShowAdapter;
@@ -32,7 +28,6 @@ public class FavoriteTvShowFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         final FragmentFavoriteTvShowBinding fragmentFavoriteTvShowBinding = FragmentFavoriteTvShowBinding.inflate(inflater, container, false);
         RecyclerView recyclerView = fragmentFavoriteTvShowBinding.rvFavoriteTvShowList;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -44,7 +39,6 @@ public class FavoriteTvShowFragment extends Fragment {
         favoriteTvShowViewModel.getAllFavoriteTvShows().observe(this, new Observer<Cursor>() {
             @Override
             public void onChanged(Cursor cursor) {
-                Log.d("cursor size", String.valueOf(cursor.getCount()));
                 ArrayList<FavoriteTvShow> favoriteTvShows = new ArrayList<>();
                 if(cursor.moveToFirst()){
                     do{
@@ -53,7 +47,6 @@ public class FavoriteTvShowFragment extends Fragment {
                         String posterPath = cursor.getString(cursor.getColumnIndexOrThrow("posterPath"));
                         Float voteAverage = cursor.getFloat(cursor.getColumnIndexOrThrow("voteAverage"));
                         favoriteTvShows.add(new FavoriteTvShow(id, posterPath, name, voteAverage));
-                        Log.d("Crsrmapping,item:title", name);
                     }while (cursor.moveToNext());
                 }
                 favoriteTvShowAdapter.setFavoriteTvShows(favoriteTvShows);

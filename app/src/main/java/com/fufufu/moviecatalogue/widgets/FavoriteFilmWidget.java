@@ -9,12 +9,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.widget.RemoteViews;
 import android.widget.Toast;
-
 import com.fufufu.moviecatalogue.R;
 
-/**
- * Implementation of App Widget functionality.
- */
 public class FavoriteFilmWidget extends AppWidgetProvider {
     private static final String TOAST_ACTION = "REFRESH";
 
@@ -22,7 +18,7 @@ public class FavoriteFilmWidget extends AppWidgetProvider {
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction() != null) {
             if (intent.getAction().equals(TOAST_ACTION)) {
-                Toast.makeText(context, "Refresh", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, context.getResources().getString(R.string.refresh), Toast.LENGTH_SHORT).show();
                 AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
                 ComponentName componentName = new ComponentName(context, FavoriteFilmWidget.class);
                 appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetManager.getAppWidgetIds(componentName), R.id.favorite_film_widget_stack_view);
@@ -51,7 +47,6 @@ public class FavoriteFilmWidget extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        // There may be multiple widgets active, so update all of them
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
         }
@@ -59,12 +54,10 @@ public class FavoriteFilmWidget extends AppWidgetProvider {
 
     @Override
     public void onEnabled(Context context) {
-        // Enter relevant functionality for when the first widget is created
     }
 
     @Override
     public void onDisabled(Context context) {
-        // Enter relevant functionality for when the last widget is disabled
     }
 }
 

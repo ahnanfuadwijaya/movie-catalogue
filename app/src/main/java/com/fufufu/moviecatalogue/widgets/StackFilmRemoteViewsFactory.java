@@ -8,7 +8,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
-
 import com.bumptech.glide.Glide;
 import com.fufufu.moviecatalogue.R;
 import com.fufufu.moviecatalogue.dao.FavoriteFilmDao;
@@ -26,7 +25,6 @@ public class StackFilmRemoteViewsFactory implements RemoteViewsService.RemoteVie
     StackFilmRemoteViewsFactory(Context context) {
         mContext = context;
         favoriteFilmDao = FavoriteFilmDatabase.getInstance(context).favoriteFilmDao();
-
     }
 
     private void getFromRepo(){
@@ -107,9 +105,6 @@ public class StackFilmRemoteViewsFactory implements RemoteViewsService.RemoteVie
         Intent fillInIntent = new Intent();
         fillInIntent.putExtras(extras);
         rv.setOnClickFillInIntent(R.id.iv_favorite_film_widget, fillInIntent);
-
-
-
         return rv;
     }
 

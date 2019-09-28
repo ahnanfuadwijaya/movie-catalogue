@@ -13,7 +13,7 @@ public class Language {
         return countryName;
     }
 
-    public void setCountryName(String countryName) {
+    void setCountryName(String countryName) {
         this.countryName = countryName;
     }
 
@@ -21,7 +21,7 @@ public class Language {
         return countryCode;
     }
 
-    public void setCountryCode(String countryCode) {
+    void setCountryCode(String countryCode) {
         this.countryCode = countryCode;
     }
 
@@ -29,7 +29,7 @@ public class Language {
         return languageName;
     }
 
-    public void setLanguageName(String languaeName) {
+    void setLanguageName(String languaeName) {
         this.languageName = languaeName;
     }
 }

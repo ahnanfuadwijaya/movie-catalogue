@@ -86,4 +86,12 @@
     <string name="empty_text">TIDAK ADA DATA</string>
     <string name="favorite_film">Favorite Film</string>
     <string name="favorite_tv_show">Favorite TV Show</string>
+    <string name="toast_removed">Dihapus</string>
+    <string name="daily_reminder_title">Pengingat Harian</string>
+    <string name="daily_remainder_message">Lihat Film dan Serial TV Rilis Hari Ini</string>
+    <string name="toast_daily_remainder_on">Pengingat Harian: On</string>
+    <string name="toast_daily_remainder_off">Pengingat Harian: Off</string>
+    <string name="toast_release_today_on">Pengingat Rilis Hari Ini: On</string>
+    <string name="toast_release_today_off">Pengingat Rilis Hari Ini: Off</string>
+    <string name="refresh">Diperbarui</string>
 </resources>

@@ -3,25 +3,22 @@ package com.fufufu.favoritefilm.models;
 import android.content.ContentValues;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.databinding.BindingAdapter;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.fufufu.favoritefilm.R;
-
 import java.text.DecimalFormat;
 
 @Entity(tableName = "favorite_tv_show_table")
 public class FavoriteTvShow {
     public static String TABLE_NAME = "favorite_tv_show_table";
-    public static final String COLUMN_ID = "id";
-    public static final String COLUMN_POSTER_PATH = "posterPath";
-    public static final String COLUMN_NAME = "name";
-    public static final String COLUMN_VOTE_AVERAGE = "voteAverage";
+    private static final String COLUMN_ID = "id";
+    private static final String COLUMN_POSTER_PATH = "posterPath";
+    private static final String COLUMN_NAME = "name";
+    private static final String COLUMN_VOTE_AVERAGE = "voteAverage";
 
     @PrimaryKey
     private long id;
@@ -37,7 +34,7 @@ public class FavoriteTvShow {
     }
 
     @Ignore
-    public FavoriteTvShow() {
+    private FavoriteTvShow() {
     }
 
     public void setId(long id) {

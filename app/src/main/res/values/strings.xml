@@ -64,15 +64,18 @@
     <string name="release_today_description">Get daily notification of film and TV show list released today</string>
 
     //reminder
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="appwidget_text">EXAMPLE</string>
-    <string name="add_widget">Add widget</string>
     <string name="favoritefilmwidget_text">FAVORITE BANNER</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="empty_text">NO DATA</string>
     <string name="favorite_film">Favorite Film</string>
     <string name="favorite_tv_show">Favorite TV Show</string>
+    <string name="toast_removed">Removed</string>
+    <string name="daily_reminder_title">Daily Reminder</string>
+    <string name="daily_remainder_message">Check out latest movies and tv shows today</string>
+    <string name="toast_daily_remainder_on">Daily Reminder: On</string>
+    <string name="toast_daily_remainder_off">Daily Reminder: Off</string>
+    <string name="toast_release_today_on">Release Today Reminder: On</string>
+    <string name="toast_release_today_off">Release Today Reminder: Off</string>
+    <string name="refresh">Refresh</string>
     <string-array name="tab_home_title">
         <item>Popular Film</item>
         <item>Popular TV Show</item>
@@ -81,8 +84,6 @@
         <item>Favorite Film</item>
         <item>Favorite TV Show</item>
     </string-array>
-
-
     // widget
     <string-array name="tab_search_title">
         <item>Film</item>

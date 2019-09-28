@@ -3,9 +3,7 @@ package com.fufufu.favoritefilm.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.widget.ImageView;
-
 import androidx.databinding.BindingAdapter;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.fufufu.favoritefilm.R;
@@ -36,7 +34,7 @@ public class TvShow implements Parcelable {
     @Expose
     private Float voteAverage;
 
-    protected TvShow(Parcel in) {
+    private TvShow(Parcel in) {
         id = in.readLong();
         posterPath = in.readString();
         overview = in.readString();

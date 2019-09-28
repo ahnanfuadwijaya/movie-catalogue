@@ -22,7 +22,6 @@ public class FavoriteFragment extends Fragment {
                              Bundle savedInstanceState) {
         Objects.requireNonNull(getActivity()).setTitle(getResources().getString(R.string.fragment_favorite_title));
         View view = inflater.inflate(R.layout.fragment_favorite, container, false);
-
         TabLayout tabLayout = view.findViewById(R.id.tab_favorite);
         final ViewPager viewPager = view.findViewById(R.id.viewpager_favorite);
         final TabFavoriteAdapter tabFavoriteAdapter = new TabFavoriteAdapter(getChildFragmentManager(), requireContext());

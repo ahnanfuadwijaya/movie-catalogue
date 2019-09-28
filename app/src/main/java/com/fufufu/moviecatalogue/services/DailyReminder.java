@@ -11,21 +11,15 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
-import android.util.Log;
 import android.widget.Toast;
-
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
-
 import com.fufufu.moviecatalogue.R;
-
 import java.util.Calendar;
 
 public class DailyReminder extends BroadcastReceiver {
     public static final String EXTRA_MESSAGE = "message";
     private final int ID_REMINDER = 956;
-    private String DATE_FORMAT = "yyyy-MM-dd";
-    private String TIME_FORMAT = "HH:mm";
 
     public DailyReminder(){
 
@@ -34,13 +28,9 @@ public class DailyReminder extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         String message = intent.getStringExtra(EXTRA_MESSAGE);
-        String title = "Daily Reminder";
-
+        String title = context.getString(R.string.daily_reminder_title);
         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
-        showReminderNotification(context, title, message, ID_REMINDER);
-
-        Log.d("onReceived", ".................");
-
+        showReminderNotification(context, title, message);
     }
 
     public void setReminder(Context context, String message){
@@ -52,8 +42,6 @@ public class DailyReminder extends BroadcastReceiver {
         calendar.set(Calendar.HOUR_OF_DAY, 7);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
-
-        Log.d("Calendar", calendar.getTime().toString());
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, ID_REMINDER, intent, 0);
         if (alarmManager != null) {
@@ -72,7 +60,7 @@ public class DailyReminder extends BroadcastReceiver {
         }
     }
 
-    private void showReminderNotification(Context context, String title, String message, int notifId) {
+    private void showReminderNotification(Context context, String title, String message) {
         String CHANNEL_ID = "Channel_dailyReminder_1";
         String CHANNEL_NAME = "DailyReminderChannel";
 
@@ -105,7 +93,7 @@ public class DailyReminder extends BroadcastReceiver {
         Notification notification = builder.build();
 
         if (notificationManagerCompat != null) {
-            notificationManagerCompat.notify(notifId, notification);
+            notificationManagerCompat.notify(ID_REMINDER, notification);
         }
     }
 }

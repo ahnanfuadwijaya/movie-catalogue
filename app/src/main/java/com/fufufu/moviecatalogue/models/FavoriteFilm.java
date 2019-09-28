@@ -1,7 +1,6 @@
 package com.fufufu.moviecatalogue.models;
 
 import android.content.ContentValues;
-import android.provider.BaseColumns;
 import android.widget.TextView;
 import androidx.databinding.BindingAdapter;
 import androidx.room.Entity;
@@ -12,10 +11,10 @@ import java.text.DecimalFormat;
 @Entity(tableName = "favorite_film_table")
 public class FavoriteFilm {
     public static final String TABLE_NAME = "favorite_film_table";
-    public static final String COLUMN_ID = "id";
-    public static final String COLUMN_POSTER_PATH = "posterPath";
-    public static final String COLUMN_TITLE = "title";
-    public static final String COLUMN_VOTE_AVERAGE = "voteAverage";
+    private static final String COLUMN_ID = "id";
+    private static final String COLUMN_POSTER_PATH = "posterPath";
+    private static final String COLUMN_TITLE = "title";
+    private static final String COLUMN_VOTE_AVERAGE = "voteAverage";
 
     @PrimaryKey
     private long id;

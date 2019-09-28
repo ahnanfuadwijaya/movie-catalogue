@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -13,7 +12,6 @@ import com.fufufu.favoritefilm.R;
 import com.fufufu.favoritefilm.databinding.ActivityDetailFilmBinding;
 import com.fufufu.favoritefilm.models.Film;
 import com.fufufu.favoritefilm.viewmodels.DetailFilmViewModel;
-
 import java.util.Locale;
 import java.util.Objects;
 

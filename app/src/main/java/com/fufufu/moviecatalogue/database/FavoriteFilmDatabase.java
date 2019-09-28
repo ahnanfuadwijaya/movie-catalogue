@@ -2,8 +2,6 @@ package com.fufufu.moviecatalogue.database;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
@@ -25,7 +23,6 @@ public abstract class FavoriteFilmDatabase extends RoomDatabase {
                     .fallbackToDestructiveMigration()
                     .build();
         }
-        Log.d("DB getInstance", "Executed");
         return instance;
     }
 
@@ -47,7 +44,6 @@ public abstract class FavoriteFilmDatabase extends RoomDatabase {
         @Override
         protected Void doInBackground(Void... voids) {
             favoriteFilmDao.getAllFavoriteFilms();
-            Log.d("Populate DB", "Executed");
             return null;
         }
     }

@@ -3,9 +3,7 @@ package com.fufufu.favoritefilm.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.widget.ImageView;
-
 import androidx.databinding.BindingAdapter;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.fufufu.favoritefilm.R;
@@ -13,7 +11,6 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Film implements Parcelable {
-    private final String posterBaseUrl = "https://image.tmdb.org/t/p/w500";
     @SerializedName("id")
     @Expose
     private long id;
@@ -45,6 +42,7 @@ public class Film implements Parcelable {
     }
 
     public String getPosterPath() {
+        String posterBaseUrl = "https://image.tmdb.org/t/p/w500";
         return posterBaseUrl + posterPath;
     }
 
@@ -96,7 +94,7 @@ public class Film implements Parcelable {
         return CREATOR;
     }
 
-    protected Film(Parcel in) {
+    private Film(Parcel in) {
         id = in.readLong();
         posterPath = in.readString();
         overview = in.readString();

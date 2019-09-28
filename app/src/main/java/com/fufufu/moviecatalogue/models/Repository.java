@@ -1,17 +1,12 @@
 package com.fufufu.moviecatalogue.models;
 
-import android.text.TextUtils;
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import com.fufufu.moviecatalogue.network.FilmDataService;
 import com.fufufu.moviecatalogue.network.RetrofitClient;
 import com.fufufu.moviecatalogue.network.TvShowDataService;
-
 import java.io.IOException;
 import java.util.ArrayList;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -61,7 +56,6 @@ public class Repository {
     public MutableLiveData<ArrayList<Film>> getFilmResult(String lang, String query) {
         FilmDataService userDataService = RetrofitClient.getFilmService();
         Call<FilmDBResponse> call = userDataService.getFilmResult(lang, query);
-        final String querySearch = query;
         call.enqueue(new Callback<FilmDBResponse>() {
             @Override
             public void onResponse(@NonNull Call<FilmDBResponse> call, @NonNull Response<FilmDBResponse> response) {
@@ -70,11 +64,7 @@ public class Repository {
                 if (filmDBResponse != null && filmDBResponse.getFilm() != null) {
                     films = filmDBResponse.getFilm();
                     mutableFilmResult.setValue(films);
-                    String listString = TextUtils.join(", ", films);
-                    Log.d("Isi film", listString);
                 }
-                Log.d("Repository", "Search "+querySearch);
-                Log.d("call.enqueue", response.raw().toString());
             }
 
             @Override
@@ -107,23 +97,19 @@ public class Repository {
     }
 
     public void setReleaseFilmToday(String lang, String primaryReleaseDateGte, String primaryReleaseDateLte){
-        Log.d("setReleaseFilmTodayRep", "executed");
         FilmDataService userDataService = RetrofitClient.getFilmService();
         Call<FilmDBResponse> call = userDataService.getReleaseFilmToday(lang, primaryReleaseDateGte, primaryReleaseDateLte);
         try {
             FilmDBResponse filmDBResponse = call.execute().body();
             if (filmDBResponse != null){
                 films = filmDBResponse.getFilm();
-                Log.d("films.size(), repo", String.valueOf(films.size()));
                 releaseFilmToday = films;
-                Log.d("releaseFilm.size",String.valueOf(releaseFilmToday.size()));
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
     public ArrayList<Film> getReleaseFilmToday() {
-        Log.d("getReleaseFilmTodayRep", "executed");
         return releaseFilmToday;
     }
 
@@ -144,7 +130,6 @@ public class Repository {
             @Override
             public void onFailure(@NonNull Call<TvShowDBResponse> call, @NonNull Throwable t) {
             }
-
         });
         mutableIsLoading.setValue(false);
         return mutableTvShowLiveData;
@@ -153,7 +138,6 @@ public class Repository {
     public MutableLiveData<ArrayList<TvShow>> getTvShowResult(String lang, String query) {
         TvShowDataService userDataService = RetrofitClient.getTvShowService();
         Call<TvShowDBResponse> call = userDataService.getTvShowResult(lang, query);
-        final String querySearch = query;
         call.enqueue(new Callback<TvShowDBResponse>() {
             @Override
             public void onResponse(@NonNull Call<TvShowDBResponse> call, @NonNull Response<TvShowDBResponse> response) {
@@ -162,11 +146,7 @@ public class Repository {
                 if (tvShowDBResponse != null && tvShowDBResponse.getTvShow() != null) {
                     tvShows = tvShowDBResponse.getTvShow();
                     mutableTvShowResult.setValue(tvShows);
-                    String listString = TextUtils.join(", ", tvShows);
-                    Log.d("Isi tv show", listString);
                 }
-                Log.d("Repository", "Search "+querySearch);
-                Log.d("call.enqueue", response.raw().toString());
             }
 
             @Override
@@ -191,7 +171,6 @@ public class Repository {
 
             @Override
             public void onFailure(@NonNull Call<TvShow> call, @NonNull Throwable t) {
-
             }
         });
         mutableIsLoading.setValue(false);

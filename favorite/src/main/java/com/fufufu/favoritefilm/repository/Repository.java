@@ -1,15 +1,11 @@
 package com.fufufu.favoritefilm.repository;
 
-import android.app.Application;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
-
 import com.fufufu.favoritefilm.models.FavoriteFilm;
 import com.fufufu.favoritefilm.models.FavoriteTvShow;
 import com.fufufu.favoritefilm.models.Film;
@@ -17,18 +13,17 @@ import com.fufufu.favoritefilm.models.TvShow;
 import com.fufufu.favoritefilm.network.FilmDataService;
 import com.fufufu.favoritefilm.network.RetrofitClient;
 import com.fufufu.favoritefilm.network.TvShowDataService;
-import com.fufufu.favoritefilm.views.MainActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Repository {
+    private Context context;
     private static MutableLiveData<Boolean> mutableIsLoading = new MutableLiveData<>();
     private Cursor favoriteFilmsCursor;
     private Cursor favoriteTvShowsCursor;
     private MutableLiveData<Film> detailFilm = new MutableLiveData<>();
     private MutableLiveData<TvShow> detailTvShow = new MutableLiveData<>();
-
     private String[] projection;
     private String selection = null;
     private String[] selectionArguments = null;
@@ -37,19 +32,18 @@ public class Repository {
     private String AUTHORITY;
     private final String FAVORITE_FILM_TABLE_NAME = FavoriteFilm.TABLE_NAME;
     private final String FAVORITE_TV_SHOW_TABLE_NAME = FavoriteTvShow.TABLE_NAME;
-    private String URL;
     private Uri uri;
-    private String myMimeType;
     private ContentResolver contentResolver;
+
+    public Repository(Context context) {
+        this.context = context;
+        mutableIsLoading.setValue(null);
+        favoriteFilmsCursor = null;
+        favoriteTvShowsCursor = null;
+    }
 
     public MutableLiveData<Boolean> getLoading() {
         return mutableIsLoading;
-    }
-
-    public Repository() {
-        mutableIsLoading.setValue(null);
-        favoriteFilmsCursor = null;
-
     }
 
     public MutableLiveData<Film> getDetailFilmFromApi(final long filmId, final String lang) {
@@ -80,19 +74,13 @@ public class Repository {
                 .authority(AUTHORITY)
                 .appendPath(FAVORITE_FILM_TABLE_NAME)
                 .build();
-        Context applicationContext = MainActivity.getContextOfApplication();
+        Context applicationContext = context.getApplicationContext();
         contentResolver = applicationContext.getContentResolver();
-        myMimeType = contentResolver.getType(uri);
-
-        Log.d("getAllFavorite Repo", "executed");
-        Log.d("mimeTypeCR", myMimeType != null ? myMimeType : "null");
         favoriteFilmsCursor = contentResolver.query(uri, projection, selection, selectionArguments, sortOrder);
         mutableIsLoading.setValue(true);
-        Log.d("Loading Fav Fil repo", String.valueOf(mutableIsLoading.getValue()));
         if(favoriteFilmsCursor != null){
             return favoriteFilmsCursor;
         }
-        Log.d("Return", "null");
         return null;
     }
 
@@ -135,19 +123,13 @@ public class Repository {
                 .authority(AUTHORITY)
                 .appendPath(FAVORITE_TV_SHOW_TABLE_NAME)
                 .build();
-        Context applicationContext = MainActivity.getContextOfApplication();
+        Context applicationContext = context.getApplicationContext();
         contentResolver = applicationContext.getContentResolver();
-        myMimeType = contentResolver.getType(uri);
-
-        Log.d("getAllFavoriteTvShowR", "executed");
-        Log.d("mimeTypeCR", myMimeType != null ? myMimeType : "null");
         favoriteTvShowsCursor = contentResolver.query(uri, projection, selection, selectionArguments, sortOrder);
         mutableIsLoading.setValue(true);
-        Log.d("Loading Fav Fil repo", String.valueOf(mutableIsLoading.getValue()));
         if(favoriteTvShowsCursor != null){
             return favoriteTvShowsCursor;
         }
-        Log.d("Return", "null");
         return null;
     }
 

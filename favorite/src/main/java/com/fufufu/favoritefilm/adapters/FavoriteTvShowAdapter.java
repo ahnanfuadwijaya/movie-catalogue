@@ -5,23 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.fufufu.favoritefilm.R;
-import com.fufufu.favoritefilm.databinding.FavoriteFilmListItemBinding;
 import com.fufufu.favoritefilm.databinding.FavoriteTvShowListItemBinding;
-import com.fufufu.favoritefilm.models.FavoriteFilm;
 import com.fufufu.favoritefilm.models.FavoriteTvShow;
-import com.fufufu.favoritefilm.viewmodels.FavoriteFilmViewModel;
 import com.fufufu.favoritefilm.viewmodels.FavoriteTvShowViewModel;
-import com.fufufu.favoritefilm.views.DetailFilmActivity;
 import com.fufufu.favoritefilm.views.DetailTvShowActivity;
 import com.fufufu.favoritefilm.views.FavoriteTvShowFragment;
-
 import java.util.List;
 
 public class FavoriteTvShowAdapter extends RecyclerView.Adapter<FavoriteTvShowAdapter.TvShowHolder> {
@@ -59,7 +52,7 @@ public class FavoriteTvShowAdapter extends RecyclerView.Adapter<FavoriteTvShowAd
                 favoriteTvShowViewModel.deleteFavoriteTvShow(favoriteTvShow.getId());
                 favoriteTvShows.remove(position);
                 notifyDataSetChanged();
-                Toast.makeText(view.getContext(), "Removed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), view.getContext().getResources().getString(R.string.toast_removed), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -74,9 +67,9 @@ public class FavoriteTvShowAdapter extends RecyclerView.Adapter<FavoriteTvShowAd
         notifyDataSetChanged();
     }
 
-    public class TvShowHolder extends RecyclerView.ViewHolder {
+    class TvShowHolder extends RecyclerView.ViewHolder {
         private FavoriteTvShowListItemBinding favoriteTvShowListItemBinding;
-        public TvShowHolder(@NonNull FavoriteTvShowListItemBinding favoriteTvShowListItemBinding) {
+        TvShowHolder(@NonNull FavoriteTvShowListItemBinding favoriteTvShowListItemBinding) {
             super(favoriteTvShowListItemBinding.getRoot());
             this.favoriteTvShowListItemBinding = favoriteTvShowListItemBinding;
         }

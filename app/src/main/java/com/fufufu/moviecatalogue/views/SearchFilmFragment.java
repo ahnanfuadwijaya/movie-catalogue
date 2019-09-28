@@ -1,9 +1,7 @@
 package com.fufufu.moviecatalogue.views;
 
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -12,27 +10,20 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.fufufu.moviecatalogue.R;
 import com.fufufu.moviecatalogue.adapters.FilmAdapter;
 import com.fufufu.moviecatalogue.databinding.FragmentSearchFilmBinding;
 import com.fufufu.moviecatalogue.models.Film;
 import com.fufufu.moviecatalogue.viewmodels.SearchFilmViewModel;
-
 import java.util.ArrayList;
 import java.util.Objects;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class SearchFilmFragment extends Fragment {
     private FragmentSearchFilmBinding fragmentSearchFilmBinding;
     private FilmAdapter filmAdapter;
@@ -41,7 +32,6 @@ public class SearchFilmFragment extends Fragment {
     private String query;
 
     public SearchFilmFragment() {
-        // Required empty public constructor
         lang = "";
         query = "";
     }
@@ -59,11 +49,9 @@ public class SearchFilmFragment extends Fragment {
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.action_search, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search_item);
-
         searchItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-
                 return false;
             }
         });
@@ -77,7 +65,6 @@ public class SearchFilmFragment extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-                Log.d("Search", s);
                 loadLocale();
                 query = s;
                 fragmentSearchFilmBinding.progressBarFilm.setVisibility(View.VISIBLE);
@@ -101,7 +88,7 @@ public class SearchFilmFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         fragmentSearchFilmBinding = FragmentSearchFilmBinding.inflate(inflater, container, false);

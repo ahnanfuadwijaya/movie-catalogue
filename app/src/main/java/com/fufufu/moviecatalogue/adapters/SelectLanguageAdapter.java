@@ -1,16 +1,12 @@
 package com.fufufu.moviecatalogue.adapters;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.fufufu.moviecatalogue.R;
 import com.fufufu.moviecatalogue.databinding.LanguageListItemBinding;
 import com.fufufu.moviecatalogue.views.MainActivity;
@@ -18,11 +14,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SelectLanguageAdapter extends RecyclerView.Adapter<SelectLanguageAdapter.SelectHolder> {
-    List<String> list;
+    private List<String> list;
 
     public SelectLanguageAdapter(String[] list){
         this.list = Arrays.asList(list);
-        Log.d("String", Arrays.toString(list));
     }
 
     @NonNull
@@ -39,21 +34,14 @@ public class SelectLanguageAdapter extends RecyclerView.Adapter<SelectLanguageAd
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), String.valueOf(getItemCount()), Toast.LENGTH_LONG).show();
-
-                //Reset Language
-
                 Intent moveWithDataIntent = new Intent(view.getContext(), MainActivity.class);
-
-                String langId = "en";
-                Log.d("langIdAdaper", item);
+                String langId;
                 if(item.equalsIgnoreCase("English")){
                     langId = "en";
                 }
                 else {
                     langId = "in";
                 }
-
                 moveWithDataIntent.putExtra("langId", langId);
                 moveWithDataIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 view.getContext().startActivity(moveWithDataIntent);

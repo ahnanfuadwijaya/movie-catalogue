@@ -5,12 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.fufufu.favoritefilm.R;
 import com.fufufu.favoritefilm.databinding.FavoriteFilmListItemBinding;
 import com.fufufu.favoritefilm.models.FavoriteFilm;
@@ -55,7 +53,7 @@ public class FavoriteFilmAdapter extends RecyclerView.Adapter<FavoriteFilmAdapte
                 favoriteFilmViewModel.deleteFavoriteFilm(favoriteFilm.getId());
                 favoriteFilms.remove(position);
                 notifyDataSetChanged();
-                Toast.makeText(view.getContext(), "Removed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), view.getContext().getResources().getString(R.string.toast_removed), Toast.LENGTH_SHORT).show();
             }
         });
     }

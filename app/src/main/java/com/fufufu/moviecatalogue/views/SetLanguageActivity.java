@@ -3,9 +3,7 @@ package com.fufufu.moviecatalogue.views;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.os.Bundle;
-
 import com.fufufu.moviecatalogue.R;
 import com.fufufu.moviecatalogue.adapters.SelectLanguageAdapter;
 import com.fufufu.moviecatalogue.databinding.ActivitySetLanguageBinding;
