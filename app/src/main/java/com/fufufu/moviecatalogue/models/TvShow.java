@@ -14,7 +14,7 @@ public class TvShow implements Parcelable {
     private final String posterBaseUrl = "https://image.tmdb.org/t/p/w500";
     @SerializedName("id")
     @Expose
-    private int id;
+    private long id;
     @SerializedName("poster_path")
     @Expose
     private String posterPath;
@@ -50,11 +50,11 @@ public class TvShow implements Parcelable {
         this.voteAverage = voteAverage;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -95,7 +95,7 @@ public class TvShow implements Parcelable {
     }
 
     protected TvShow(Parcel in) {
-        id = in.readInt();
+        id = in.readLong();
         posterPath = in.readString();
         overview = in.readString();
         firstAirDate = in.readString();
@@ -127,7 +127,7 @@ public class TvShow implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(id);
+        parcel.writeLong(id);
         parcel.writeString(posterPath);
         parcel.writeString(overview);
         parcel.writeString(firstAirDate);

@@ -25,7 +25,7 @@ public class DetailTvShowActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         loadLocale();
         super.onCreate(savedInstanceState);
-        final int tvShowId = getIntent().getIntExtra("tvShowId", 0);
+        final long tvShowId = getIntent().getLongExtra("tvShowId", 0);
         final DetailTvShowViewModel detailTvShowViewModel = ViewModelProviders.of(this).get(DetailTvShowViewModel.class);
         final FavoriteTvShowViewModel favoriteTvShowViewModel = ViewModelProviders.of(this).get(FavoriteTvShowViewModel.class);
         final ActivityDetailTvShowBinding activityDetailTvShowBinding = DataBindingUtil.setContentView(this, R.layout.activity_detail_tv_show);

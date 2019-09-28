@@ -20,7 +20,7 @@ public class DetailTvShowViewModel extends AndroidViewModel {
     }
 
 
-    public MutableLiveData<TvShow> getTvShow(int id) {
+    public MutableLiveData<TvShow> getTvShow(long id) {
         String langPref = "Language";
         SharedPreferences prefs = getApplication().getSharedPreferences("CommonPrefs", Activity.MODE_PRIVATE);
         String language = prefs.getString(langPref, "");

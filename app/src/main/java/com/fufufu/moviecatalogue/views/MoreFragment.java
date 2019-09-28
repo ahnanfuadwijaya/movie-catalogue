@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.fufufu.moviecatalogue.R;
 import com.fufufu.moviecatalogue.databinding.FragmentMoreBinding;
+import com.fufufu.moviecatalogue.viewmodels.AboutViewModel;
 
 import java.util.Objects;
 
@@ -44,9 +46,12 @@ public class MoreFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        final FragmentMoreBinding fragmentSettingBinding = FragmentMoreBinding.inflate(inflater, container, false);
+        final FragmentMoreBinding fragmentMoreBinding = FragmentMoreBinding.inflate(inflater, container, false);
         Objects.requireNonNull(getActivity()).setTitle(R.string.more_bottom_nav_title);
-        return fragmentSettingBinding.getRoot();
+        AboutViewModel aboutViewModel = ViewModelProviders.of(this).get(AboutViewModel.class);
+        aboutViewModel.setData();
+        fragmentMoreBinding.setAbout(aboutViewModel.getData());
+        return fragmentMoreBinding.getRoot();
     }
 
 }

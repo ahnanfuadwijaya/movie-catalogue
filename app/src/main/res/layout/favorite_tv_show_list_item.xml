@@ -34,12 +34,14 @@
 
             <TextView
                 android:id="@+id/tv_favorite_tv_show_name"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
+                android:layout_marginEnd="8dp"
                 android:text="@{favoriteTvShow.name}"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
+                bind:layout_constraintEnd_toEndOf="parent"
                 bind:layout_constraintStart_toEndOf="@+id/iv_poster"
                 bind:layout_constraintTop_toTopOf="@+id/iv_poster"
                 tools:text="Judul Tv Show" />

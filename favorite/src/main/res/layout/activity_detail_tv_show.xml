@@ -75,12 +75,14 @@
 
             <TextView
                 android:id="@+id/tv_original_name_value"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
+                android:layout_marginEnd="16dp"
                 android:text="@{tvShow.originalName}"
                 android:textSize="14sp"
                 app:layout_constrainedWidth="true"
+                bind:layout_constraintEnd_toEndOf="parent"
                 bind:layout_constraintStart_toEndOf="@+id/tv_original_name_tag"
                 bind:layout_constraintTop_toTopOf="@+id/tv_original_name_tag"
                 tools:text="Genre Value" />

@@ -177,7 +177,7 @@ public class Repository {
         return mutableTvShowResult;
     }
 
-    public MutableLiveData<TvShow> getDetailTvShowFromApi(int tvId, String lang) {
+    public MutableLiveData<TvShow> getDetailTvShowFromApi(long tvId, String lang) {
         TvShowDataService userDataService = RetrofitClient.getTvShowService();
         Call<TvShow> call = userDataService.getDetailTvShow(tvId, lang);
         call.enqueue(new Callback<TvShow>() {

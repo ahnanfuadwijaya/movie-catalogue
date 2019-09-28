@@ -17,7 +17,7 @@ public interface TvShowDataService {
 
     @GET("tv/{tv_id}?api_key="+API_KEY)
     Call<TvShow> getDetailTvShow(
-            @Path("tv_id") int tvId,
+            @Path("tv_id") long tvId,
             @Query("language") String lang);
 
     @GET("search/tv?api_key="+API_KEY)

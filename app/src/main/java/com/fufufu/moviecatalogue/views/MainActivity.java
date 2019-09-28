@@ -58,42 +58,17 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.action_language, menu);
-        return super.onCreateOptionsMenu(menu);
+       return true;
     }
 
 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.action_language){
-            View menuItemView = findViewById(R.id.action_language);
-            PopupMenu popupMenu = new PopupMenu(this, menuItemView);
-            popupMenu.inflate(R.menu.menu_language);
-            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem item) {
-                    if (item.getItemId() == R.id.menu_en) {
-                        changeLang("en");
-                        saveLocale("en");
-                    } else if (item.getItemId() == R.id.menu_indonesia) {
-                        changeLang("in");
-                        saveLocale("in");
-                    }
-                    finish();
-                    Intent refresh = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(refresh);
-                    return true;
-                }
-            });
-            popupMenu.show();
-        }
-        else if(item.getItemId() == R.id.action_setting){
+        if(item.getItemId() == R.id.action_setting){
             Intent intent = new Intent(this, SettingActivity.class);
             startActivity(intent);
         }
-
         return true;
     }
 
@@ -121,9 +96,6 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_favorite:
                         fragment = new FavoriteFragment();
-                        break;
-                    case R.id.nav_account:
-                        fragment = new AboutFragment();
                         break;
                     case R.id.nav_more:
                         fragment = new MoreFragment();
