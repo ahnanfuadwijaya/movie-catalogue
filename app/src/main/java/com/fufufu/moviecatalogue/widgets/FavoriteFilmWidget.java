@@ -32,6 +32,7 @@ public class FavoriteFilmWidget extends AppWidgetProvider {
 
         Intent intent = new Intent(context, StackWidgetService.class);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+        intent.setAction(TOAST_ACTION);
         intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.favorite_film_widget);
         views.setRemoteAdapter(R.id.favorite_film_widget_stack_view, intent);

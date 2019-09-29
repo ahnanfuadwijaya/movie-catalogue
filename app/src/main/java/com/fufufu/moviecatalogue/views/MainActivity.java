@@ -1,4 +1,5 @@
 package com.fufufu.moviecatalogue.views;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;

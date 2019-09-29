@@ -1,5 +1,8 @@
 package com.fufufu.moviecatalogue.adapters;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +18,8 @@ import com.fufufu.moviecatalogue.models.FavoriteTvShow;
 import com.fufufu.moviecatalogue.viewmodels.FavoriteTvShowViewModel;
 import com.fufufu.moviecatalogue.views.DetailTvShowActivity;
 import com.fufufu.moviecatalogue.views.FavoriteTvShowFragment;
+import com.fufufu.moviecatalogue.widgets.FavoriteTvShowWidget;
+
 import java.util.List;
 
 public class FavoriteTvShowAdapter extends RecyclerView.Adapter<FavoriteTvShowAdapter.TvShowHolder> {
@@ -53,6 +58,12 @@ public class FavoriteTvShowAdapter extends RecyclerView.Adapter<FavoriteTvShowAd
                 favoriteTvShows.remove(position);
                 notifyDataSetChanged();
                 Toast.makeText(view.getContext(), view.getContext().getResources().getString(R.string.toast_removed), Toast.LENGTH_LONG).show();
+
+                Context context = view.getContext().getApplicationContext();
+                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+                ComponentName componentName = new ComponentName(context, FavoriteTvShowWidget.class);
+                int[] appWidgetIds = appWidgetManager.getAppWidgetIds(componentName);
+                appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.favorite_tv_show_widget_stack_view);
             }
         });
     }

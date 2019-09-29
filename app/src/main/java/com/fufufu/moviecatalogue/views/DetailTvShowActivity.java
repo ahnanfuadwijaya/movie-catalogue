@@ -1,5 +1,8 @@
 package com.fufufu.moviecatalogue.views;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
@@ -16,6 +19,7 @@ import com.fufufu.moviecatalogue.models.FavoriteTvShow;
 import com.fufufu.moviecatalogue.models.TvShow;
 import com.fufufu.moviecatalogue.viewmodels.DetailTvShowViewModel;
 import com.fufufu.moviecatalogue.viewmodels.FavoriteTvShowViewModel;
+import com.fufufu.moviecatalogue.widgets.FavoriteTvShowWidget;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -63,12 +67,22 @@ public class DetailTvShowActivity extends AppCompatActivity {
                         Drawable favorite = getResources().getDrawable(R.drawable.ic_favorite_red_24dp, null);
                         favorite.setBounds(8, 0, 0, 0);
                         activityDetailTvShowBinding.btnAddToFavorite.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, favorite, null);
+
+                        updateFavoriteTvShowWidget();
                     }
                 });
             }
         });
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         activityDetailTvShowBinding.executePendingBindings();
+    }
+
+    private void updateFavoriteTvShowWidget(){
+        Context context = getApplicationContext();
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+        ComponentName componentName = new ComponentName(context, FavoriteTvShowWidget.class);
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(componentName);
+        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.favorite_tv_show_widget_stack_view);
     }
 
     public void loadLocale() {

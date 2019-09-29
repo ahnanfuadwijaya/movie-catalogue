@@ -1,5 +1,8 @@
 package com.fufufu.moviecatalogue.views;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
@@ -16,6 +19,8 @@ import com.fufufu.moviecatalogue.models.FavoriteFilm;
 import com.fufufu.moviecatalogue.models.Film;
 import com.fufufu.moviecatalogue.viewmodels.DetailFilmViewModel;
 import com.fufufu.moviecatalogue.viewmodels.FavoriteFilmViewModel;
+import com.fufufu.moviecatalogue.widgets.FavoriteFilmWidget;
+
 import java.util.Locale;
 import java.util.Objects;
 
@@ -58,16 +63,24 @@ public class DetailFilmActivity extends AppCompatActivity{
                         favoriteFilm.setTitle(film.getTitle());
                         favoriteFilmViewModel.insertFavoriteFilm(favoriteFilm);
                         Toast.makeText(getBaseContext(), getResources().getString(R.string.detail_film_toast_add_to_favorite_film), Toast.LENGTH_LONG).show();
-
                         Drawable favorite = getResources().getDrawable(R.drawable.ic_favorite_red_24dp, null);
                         favorite.setBounds(8, 0, 0, 0);
                         activityDetailFilmBinding.btnAddToFavorite.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, favorite, null);
+                        updateFavoriteFilmWidget();
                     }
                 });
             }
         });
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         activityDetailFilmBinding.executePendingBindings();
+    }
+
+    private void updateFavoriteFilmWidget(){
+        Context context = getApplicationContext();
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+        ComponentName componentName = new ComponentName(context, FavoriteFilmWidget.class);
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(componentName);
+        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.favorite_film_widget_stack_view);
     }
 
     public void loadLocale() {
