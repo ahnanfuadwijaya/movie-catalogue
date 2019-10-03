@@ -3,6 +3,8 @@ package com.fufufu.moviecatalogue.network;
 import com.fufufu.moviecatalogue.BuildConfig;
 import com.fufufu.moviecatalogue.models.Film;
 import com.fufufu.moviecatalogue.models.FilmDBResponse;
+import com.fufufu.moviecatalogue.models.GenreFilm;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -10,6 +12,10 @@ import retrofit2.http.Query;
 
 public interface FilmDataService {
     String API_KEY = BuildConfig.API_KEY;
+
+    @GET("genre/movie/list?api_key="+API_KEY)
+    Call<GenreFilm> getGenreFilm(@Query("language")String lang);
+
     @GET("discover/movie?api_key="+API_KEY)
     Call<FilmDBResponse> getFilms(
             @Query("language") String lang,
