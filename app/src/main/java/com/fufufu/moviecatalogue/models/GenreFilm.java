@@ -7,6 +7,9 @@ public class GenreFilm implements Parcelable {
     private long id;
     private String name;
 
+    public GenreFilm(){
+
+    }
 
     private GenreFilm(Parcel in) {
         id = in.readLong();
