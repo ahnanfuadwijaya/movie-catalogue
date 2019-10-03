@@ -3,8 +3,24 @@ package com.fufufu.moviecatalogue.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+@Entity(tableName = "genre_film_table")
 public class GenreFilm implements Parcelable {
+    public static final String tableName = "genre_film_table";
+    private static final String COLUMN_ID = "id";
+    private static final String COLUMN_NAME = "name";
+
+    @PrimaryKey
+    @SerializedName("id")
+    @Expose
     private long id;
+    @SerializedName("name")
+    @Expose
     private String name;
 
     public GenreFilm(){
