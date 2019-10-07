@@ -1,0 +1,47 @@
+AcademyViewModelTest:
+
+    Memuat Courses:
+
+        Memastikan data course tidak null.
+
+        Memastikan jumlah data course sesuai dengan yang diharapkan.
+
+BookmarkViewModelTest:
+
+    Memuat Bookmarks:
+
+        Memastikan data course tidak null.
+
+        Memastikan jumlah data course sesuai dengan yang diharapkan.
+
+DetailCourseViewModelTest:
+
+    Memuat Course:
+
+        Memastikan data course tidak null.
+
+        Memastikan data course sesuai dengan yang diharapkan.
+
+    Memuat Modules:
+
+        Memastikan data module tidak null.
+
+        Memastikan jumlah data module sesuai dengan yang diharapkan.
+
+CourseReaderViewModelTest:
+
+    Memuat Modules:
+
+        Memastikan data module tidak null.
+
+        Memastikan jumlah data module sesuai dengan yang diharapkan.
+
+    Memuat Module yang dipilih:
+
+        Memastikan data module tidak null.
+
+        Memastikan data content tidak null.
+
+        Memastikan value dari content tidak null.
+
+        Memastikan data content sesuai dengan yang diharapkan.
