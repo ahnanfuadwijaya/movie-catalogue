@@ -1,47 +1,82 @@
+AboutViewModelTest:
+
 AcademyViewModelTest:
 
-    Memuat Courses:
+    Memuat Data About:
 
-        Memastikan data course tidak null.
+        Memastikan data about tidak null.
 
-        Memastikan jumlah data course sesuai dengan yang diharapkan.
+        Memastikan data about sesuai dengan yang diharapkan.
 
-BookmarkViewModelTest:
+DetailFilmViewModelTest:
 
-    Memuat Bookmarks:
+    Memuat Detail Film:
 
-        Memastikan data course tidak null.
+	Memastikan data detail film tidak null.
 
-        Memastikan jumlah data course sesuai dengan yang diharapkan.
+        Memastikan data detail film sesuai dengan yang diharapkan.
 
-DetailCourseViewModelTest:
+DetailTvShowViewModelTest:
 
-    Memuat Course:
+    Memuat Detail Tv Show:
 
-        Memastikan data course tidak null.
+	Memastikan data detail tv show tidak null.
 
-        Memastikan data course sesuai dengan yang diharapkan.
+        Memastikan data detail tv show sesuai dengan yang diharapkan.
 
-    Memuat Modules:
+FavoriteFilmViewModelTest:
 
-        Memastikan data module tidak null.
+    Memuat Favorite Film:
 
-        Memastikan jumlah data module sesuai dengan yang diharapkan.
+	Memastikan data favorite film tidak null.
 
-CourseReaderViewModelTest:
+        Memastikan data favorite film sesuai dengan yang diharapkan.
 
-    Memuat Modules:
+        Memastikan jumlah data favorite film sesuai dengan yang diharapkan.
 
-        Memastikan data module tidak null.
+FavoriteTvShowViewModelTest:
 
-        Memastikan jumlah data module sesuai dengan yang diharapkan.
+    Memuat Favorite Tv Show:
 
-    Memuat Module yang dipilih:
+	Memastikan data favorite tv show tidak null.
 
-        Memastikan data module tidak null.
+        Memastikan data favorite tv show sesuai dengan yang diharapkan.
 
-        Memastikan data content tidak null.
+        Memastikan jumlah data favorite tv show sesuai dengan yang diharapkan.
 
-        Memastikan value dari content tidak null.
+FilmViewModelTest:
 
-        Memastikan data content sesuai dengan yang diharapkan.
+    Memuat Film:
+
+	Memastikan data film tidak null.
+
+        Memastikan data film sesuai dengan yang diharapkan.
+
+        Memastikan jumlah data film sesuai dengan yang diharapkan.
+
+TvShowViewModelTest:
+
+    Memuat Tv Show:
+
+	Memastikan data tv show tidak null.
+
+        Memastikan data tv show sesuai dengan yang diharapkan.
+
+        Memastikan jumlah data tv show sesuai dengan yang diharapkan.
+
+SearchFilmViewModelTest:
+
+    Memuat Pencarian Film:
+
+        Memastikan data pencarian film sesuai dengan yang diharapkan.
+
+        Memastikan jumlah data pencarian film sesuai dengan yang diharapkan.
+
+
+SearchTvShowViewModelTest:
+
+    Memuat Pencarian Tv Show:
+
+        Memastikan data pencarian tv show sesuai dengan yang diharapkan.
+
+        Memastikan jumlah data pencarian tv show sesuai dengan yang diharapkan.
